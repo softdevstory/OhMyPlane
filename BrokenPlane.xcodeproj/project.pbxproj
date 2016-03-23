@@ -14,6 +14,9 @@
 		A496E8E61CA228C800A448F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A496E8E41CA228C800A448F5 /* Main.storyboard */; };
 		A496E8E81CA228C900A448F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A496E8E71CA228C900A448F5 /* Assets.xcassets */; };
 		A496E8EB1CA228C900A448F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */; };
+		A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */; };
+		A496E8F71CA2500600A448F5 /* plane.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A496E8F61CA2500600A448F5 /* plane.atlas */; };
+		A496E8FA1CA250F600A448F5 /* PlaneEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8F91CA250F600A448F5 /* PlaneEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		A496E8E71CA228C900A448F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A496E8EA1CA228C900A448F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A496E8EC1CA228C900A448F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		A496E8F61CA2500600A448F5 /* plane.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = plane.atlas; sourceTree = "<group>"; };
+		A496E8F91CA250F600A448F5 /* PlaneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 		A496E8DB1CA228C800A448F5 /* BrokenPlane */ = {
 			isa = PBXGroup;
 			children = (
+				A496E8F81CA250E200A448F5 /* Entities */,
+				A496E8F51CA24FFC00A448F5 /* resources */,
+				A496E8F21CA23DAB00A448F5 /* Components */,
 				A496E8DC1CA228C800A448F5 /* AppDelegate.swift */,
 				A496E8DE1CA228C800A448F5 /* GameScene.sks */,
 				A496E8E01CA228C800A448F5 /* GameScene.swift */,
@@ -68,6 +77,30 @@
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 			);
 			path = BrokenPlane;
+			sourceTree = "<group>";
+		};
+		A496E8F21CA23DAB00A448F5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		A496E8F51CA24FFC00A448F5 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				A496E8F61CA2500600A448F5 /* plane.atlas */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		A496E8F81CA250E200A448F5 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A496E8F91CA250F600A448F5 /* PlaneEntity.swift */,
+			);
+			name = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +165,7 @@
 				A496E8DF1CA228C800A448F5 /* GameScene.sks in Resources */,
 				A496E8EB1CA228C900A448F5 /* LaunchScreen.storyboard in Resources */,
 				A496E8E81CA228C900A448F5 /* Assets.xcassets in Resources */,
+				A496E8F71CA2500600A448F5 /* plane.atlas in Resources */,
 				A496E8E61CA228C800A448F5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +179,8 @@
 			files = (
 				A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */,
 				A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */,
+				A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */,
+				A496E8FA1CA250F600A448F5 /* PlaneEntity.swift in Sources */,
 				A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

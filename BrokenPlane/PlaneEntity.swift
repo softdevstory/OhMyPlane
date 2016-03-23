@@ -19,7 +19,8 @@ enum PlaneType: String {
 class PlaneEntity: GKEntity {
     let planeType: PlaneType
     var spriteComponent: SpriteComponent!
-
+    var animationComponent: AnimationComponent!
+    
     init(planeType: PlaneType) {
         self.planeType = planeType
         super.init()
@@ -29,5 +30,17 @@ class PlaneEntity: GKEntity {
         
         spriteComponent = SpriteComponent(entity: self, texture: defaultTexture, size: defaultTexture.size())
         addComponent(spriteComponent)
+        
+        animationComponent = AnimationComponent(node: spriteComponent.node, animations: loadAnimations())
+        addComponent(animationComponent)
+    }
+    
+    private func loadAnimations() -> [AnimationState: Animation] {
+        let textureAtlas = SKTextureAtlas(named: "plane")
+        var animations = [AnimationState: Animation]()
+
+        animations[.Flying] = AnimationComponent.animationFromAtlas(textureAtlas, withImageIdentifier: "plane_\(planeType.rawValue)_", forAnimationState: .Flying, repeatTexturesForever: true)
+        
+        return animations
     }
 }

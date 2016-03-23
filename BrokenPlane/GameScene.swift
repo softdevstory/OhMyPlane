@@ -11,8 +11,17 @@ import GameplayKit
 
 class GameScene: SKScene {
 
+    var lastUpdateTimeInterval: NSTimeInterval = 0
+    let maximumUpdateDeltaTime: NSTimeInterval = 1.0 / 60.0
+    var lastDeltaTime: NSTimeInterval = 0
+    
     let backgroundLayer = SKNode()
     let spriteLayer = SKNode()
+    
+    lazy var componentSystems: [GKComponentSystem] = {
+        let animationSystem = GKComponentSystem(componentClass: AnimationComponent.self)
+        return [animationSystem]
+    }()
     
     override func didMoveToView(view: SKView) {
 
@@ -23,7 +32,7 @@ class GameScene: SKScene {
         background.anchorPoint = CGPoint.zero
         backgroundLayer.addChild(background)
         
-        addPlane(.Blue)
+        addPlane(.Yellow)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -31,7 +40,13 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        var deltaTime = currentTime - lastUpdateTimeInterval
+        deltaTime = deltaTime > maximumUpdateDeltaTime ? maximumUpdateDeltaTime : deltaTime
+        lastUpdateTimeInterval = currentTime
+        
+        for componentSystem in componentSystems {
+            componentSystem.updateWithDeltaTime(deltaTime)
+        }
     }
     
     // MARK: plane entity
@@ -41,13 +56,8 @@ class GameScene: SKScene {
         let planeNode = plane.spriteComponent.node
         planeNode.position = CGPoint(x: 500, y: 500)
         planeNode.zPosition = 100
-        
-        let textures: [SKTexture] = [SKTexture(imageNamed: "plane_\(planeType.rawValue)_01"),
-                                     SKTexture(imageNamed: "plane_\(planeType.rawValue)_02"),
-                                     SKTexture(imageNamed: "plane_\(planeType.rawValue)_03"),
-                                     SKTexture(imageNamed: "plane_\(planeType.rawValue)_02")]
-        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
-        planeNode.runAction(SKAction.repeatActionForever(animation))
+
+        plane.animationComponent.requestedAnimationState = .Flying
         
         planeNode.runAction(SKAction.moveByX(900, y: 0, duration: 3))
         
@@ -63,6 +73,10 @@ class GameScene: SKScene {
         
         if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
             spriteLayer.addChild(spriteNode)
+        }
+        
+        for componentSystem in componentSystems {
+            componentSystem.addComponentWithEntity(entity)
         }
     }
     

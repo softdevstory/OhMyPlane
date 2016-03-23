@@ -18,6 +18,8 @@
 		A496E8F71CA2500600A448F5 /* plane.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A496E8F61CA2500600A448F5 /* plane.atlas */; };
 		A496E8FA1CA250F600A448F5 /* PlaneEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8F91CA250F600A448F5 /* PlaneEntity.swift */; };
 		A496E8FC1CA25E0E00A448F5 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */; };
+		A496E8FF1CA2763100A448F5 /* PlaneMovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */; };
+		A496E9011CA2782D00A448F5 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E9001CA2782D00A448F5 /* GameSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		A496E8F61CA2500600A448F5 /* plane.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = plane.atlas; sourceTree = "<group>"; };
 		A496E8F91CA250F600A448F5 /* PlaneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneEntity.swift; sourceTree = "<group>"; };
 		A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
+		A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneMovementComponent.swift; sourceTree = "<group>"; };
+		A496E9001CA2782D00A448F5 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				A496E8F51CA24FFC00A448F5 /* resources */,
+				A496E8FD1CA269DA00A448F5 /* States */,
 				A496E8F81CA250E200A448F5 /* Entities */,
 				A496E8F21CA23DAB00A448F5 /* Components */,
 				A496E8DC1CA228C800A448F5 /* AppDelegate.swift */,
@@ -77,6 +82,7 @@
 				A496E8E71CA228C900A448F5 /* Assets.xcassets */,
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
+				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
 			);
 			path = BrokenPlane;
 			sourceTree = "<group>";
@@ -86,6 +92,7 @@
 			children = (
 				A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */,
 				A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */,
+				A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -104,6 +111,13 @@
 				A496E8F91CA250F600A448F5 /* PlaneEntity.swift */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		A496E8FD1CA269DA00A448F5 /* States */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = States;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,7 +198,9 @@
 				A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */,
 				A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */,
 				A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */,
+				A496E9011CA2782D00A448F5 /* GameSetting.swift in Sources */,
 				A496E8FA1CA250F600A448F5 /* PlaneEntity.swift in Sources */,
+				A496E8FF1CA2763100A448F5 /* PlaneMovementComponent.swift in Sources */,
 				A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

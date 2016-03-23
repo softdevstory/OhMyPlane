@@ -9,22 +9,49 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+enum PhysicsCategory: Int {
+    case Plane = 0
+}
 
+class GameScene: SKScene, SKPhysicsContactDelegate {
+
+    // MARK: update time
+    
     var lastUpdateTimeInterval: NSTimeInterval = 0
     let maximumUpdateDeltaTime: NSTimeInterval = 1.0 / 60.0
     var lastDeltaTime: NSTimeInterval = 0
+
+    // MARK: Sprite layers
     
     let backgroundLayer = SKNode()
     let spriteLayer = SKNode()
+
+    // MARK: component systems
     
     lazy var componentSystems: [GKComponentSystem] = {
         let animationSystem = GKComponentSystem(componentClass: AnimationComponent.self)
-        return [animationSystem]
+        let planeMovementSystem = GKComponentSystem(componentClass: PlaneMovementComponent.self)
+        
+        return [animationSystem, planeMovementSystem]
     }()
+
+    // MARK: touches
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let planeNode = spriteLayer.childNodeWithName("plane") as? EntityNode,
+            let physicsBody = planeNode.physicsBody {
+            physicsBody.velocity = CGVector.zero
+            physicsBody.applyImpulse((planeNode.entity as! PlaneEntity).planeType.boostValue)
+        }
+    }
+
+    // MARK: SKScene jobs
     
     override func didMoveToView(view: SKView) {
 
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = GameSetting.PhysicsGravity
+        
         addChild(backgroundLayer)
         addChild(spriteLayer)
 
@@ -35,9 +62,6 @@ class GameScene: SKScene {
         addPlane(.Yellow)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
-    }
    
     override func update(currentTime: CFTimeInterval) {
         var deltaTime = currentTime - lastUpdateTimeInterval
@@ -56,10 +80,13 @@ class GameScene: SKScene {
         let planeNode = plane.spriteComponent.node
         planeNode.position = CGPoint(x: 500, y: 500)
         planeNode.zPosition = 100
-
-        plane.animationComponent.requestedAnimationState = .Flying
+        planeNode.name = "plane"
         
-        planeNode.runAction(SKAction.moveByX(900, y: 0, duration: 3))
+        planeNode.physicsBody = SKPhysicsBody(circleOfRadius: planeNode.size.height / 2.0)
+        planeNode.physicsBody?.dynamic = true
+        planeNode.physicsBody?.allowsRotation = false
+        
+        plane.animationComponent.requestedAnimationState = .Flying
         
         addEntity(plane)
     }

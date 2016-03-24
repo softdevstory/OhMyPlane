@@ -23,6 +23,15 @@ enum PlaneType: String {
         case Yellow: return CGVector(dx: 0, dy: 2500)
         }
     }
+    
+    var speed: CGFloat {
+        switch self {
+        case Blue: return 50
+        case Green: return 60
+        case Red: return 70
+        case Yellow: return 80
+        }
+    }
 }
 
 class PlaneEntity: GKEntity {
@@ -31,7 +40,7 @@ class PlaneEntity: GKEntity {
     var animationComponent: AnimationComponent!
     var movementComponent: PlaneMovementComponent!
     
-    init(planeType: PlaneType) {
+    init(planeType: PlaneType, atPosition position: CGPoint) {
         self.planeType = planeType
         super.init()
         
@@ -40,10 +49,27 @@ class PlaneEntity: GKEntity {
         
         spriteComponent = SpriteComponent(entity: self, texture: defaultTexture, size: defaultTexture.size())
         addComponent(spriteComponent)
+
+        let planeNode = spriteComponent.node
+
+        planeNode.position = position
+        planeNode.zPosition = 100
+        planeNode.name = "plane"
+        
+        planeNode.physicsBody = SKPhysicsBody(circleOfRadius: planeNode.size.height / 2.0)
+        planeNode.physicsBody?.dynamic = false
+        planeNode.physicsBody?.allowsRotation = false
+        planeNode.physicsBody?.categoryBitMask = PhysicsCategory.Plane
+        planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstabcle
+        
+        planeNode.addChild(SKEmitterNode(fileNamed: "Smoke")!)
+        
+        planeNode.runAction(SKAction.repeatActionForever(SKAction.moveByX(planeType.speed, y: 0, duration: 0.1)))
         
         animationComponent = AnimationComponent(node: spriteComponent.node, animations: loadAnimations())
+        animationComponent.requestedAnimationState = .Flying
         addComponent(animationComponent)
-        
+
         movementComponent = PlaneMovementComponent(node: spriteComponent.node)
         addComponent(movementComponent)
     }

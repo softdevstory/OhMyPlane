@@ -20,5 +20,8 @@ class Normal: GKState {
     
     override func didEnterWithPreviousState(previousState: GKState?) {
         /* physics dynamic false, flying, no smoke */
+        planeEntity.disableFalling()
+        planeEntity.fly()
+        planeEntity.hideSmoke()
     }
 }

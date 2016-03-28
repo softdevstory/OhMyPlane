@@ -19,8 +19,12 @@ class PlaneMovementComponent: GKComponent {
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        let value = node.physicsBody!.velocity.dy * (node.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001)
         
-        node.zRotation = max(min(value, 0.5), -1)
+        /* plane's head */
+        if let physicsBody = node.physicsBody {
+            let value = physicsBody.velocity.dy * (physicsBody.velocity.dy < 0 ? 0.003 : 0.001)
+
+            node.zRotation = max(min(value, 0.5), -1)
+        }
     }
 }

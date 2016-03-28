@@ -18,7 +18,9 @@ class ReadyGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        scene.reset()
+        scene.showBackground(BackgroundType.Ice)
+        scene.addPlane(.Blue)
+        scene.showReadyHud()
     }
     
     override func willExitWithNextState(nextState: GKState) {
@@ -26,6 +28,6 @@ class ReadyGame: GKState {
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
-
+        scene.updateBackground()
     }
 }

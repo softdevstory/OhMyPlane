@@ -20,5 +20,10 @@ class Landing: GKState {
     
     override func didEnterWithPreviousState(previousState: GKState?) {
         /* physics dynamic false, landing, smoke on */
+        planeEntity.showSmoke()
+    }
+    
+    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+        
     }
 }

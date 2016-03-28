@@ -9,17 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-enum BackgroundType: String {
-    case Dirt = "dirt"
-    case Grass = "grass"
-    case Ice = "ice"
-    case Rock = "rock"
-    case Snow = "snow"
-    
-    var imageFileName: String {
-        return "background_\(self.rawValue)"
-    }
-}
 
 struct PhysicsCategory {
     static let None: UInt32         = 0
@@ -39,14 +28,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let backgroundLayer = SKNode()
     let spriteLayer = SKNode()
-    let hudLayer = SKNode()
+    
+    // MARK: Camera node and hud
+    
     let readyHudNode = SKNode()
-
     let cameraNode = SKCameraNode()
+    
     
     // MARK: game state machine
     
-    lazy var gameState: GKStateMachine = GKStateMachine(states: [ReadyGame(scene: self), PlayGame(scene: self)])
+    lazy var gameState: GKStateMachine = GKStateMachine(states: [
+        ReadyGame(scene: self),
+        PlayGame(scene: self),
+        ])
     
     // MARK: plane
 
@@ -92,16 +86,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameState.enterState(PlayGame.self)
 
         case is PlayGame:
-            if let planeNode = spriteLayer.childNodeWithName("plane") as? EntityNode,
-                let physicsBody = planeNode.physicsBody {
-                physicsBody.velocity = CGVector.zero
-                physicsBody.applyImpulse((planeNode.entity as! PlaneEntity).planeType.boostValue)
-            }
+            planeEntity.impulse()
             
         default:
             break
         }
         
+        switch planeState.currentState {
+        case is Normal:
+            planeState.enterState(Broken.self)
+            
+        case is Broken:
+            planeState.enterState(Crash.self)
+            
+        case is Crash:
+            planeState.enterState(Landing.self)
+            
+        case is Landing:
+            planeState.enterState(Normal.self)
+
+        default:
+            break;
+        }
     }
 
     // MARK: SKScene jobs
@@ -113,10 +119,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         displaySize = CGSize(width: size.width, height: size.height - overlapAmount())
         
-        addChild(hudLayer)
         addChild(spriteLayer)
         addChild(backgroundLayer)
-
+        
         addChild(cameraNode)
         camera = cameraNode
         setCameraPosition(CGPoint(x: size.width / 2, y: size.height / 2))
@@ -136,15 +141,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         updateCameraNode()
         
-        updateBackground()
+
+        gameState.currentState?.updateWithDeltaTime(deltaTime)
+        
+        planeState.currentState?.updateWithDeltaTime(deltaTime)
     }
     
     // MARK: plane entity
     
-    func addPlane(planeType: PlaneType, atPosition position: CGPoint) {
-        planeEntity = PlaneEntity(planeType: planeType, atPosition: position)
+    func addPlane(planeType: PlaneType) {
+        
+        planeEntity = PlaneEntity(planeType: planeType)
+        planeEntity.planeNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        planeEntity.planeNode.zPosition = 100
+        planeEntity.planeNode.name = "plane"
 
         addEntity(planeEntity)
+        
+        spriteLayer.addChild(planeEntity.planeNode)
+        
+        planeState.enterState(Normal.self)
     }
     
     // MARK: entity management
@@ -154,23 +170,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addEntity(entity: GKEntity) {
         entities.insert(entity)
         
-        if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
-            spriteLayer.addChild(spriteNode)
-        }
-        
         for componentSystem in componentSystems {
             componentSystem.addComponentWithEntity(entity)
         }
     }
     
     // MARK: physics
-    
-    func enablePhysics() {
-        if let planeNode = spriteLayer.childNodeWithName("plane") as? EntityNode,
-            let physicsBody = planeNode.physicsBody {
-            physicsBody.dynamic = true
-        }
-    }
     
     func didBeginContact(contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
@@ -275,19 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: 
-    
-    func reset() {
-        backgroundLayer.removeAllChildren()
-        spriteLayer.removeAllChildren()
-        hudLayer.removeAllChildren()
-        
-        showBackground(BackgroundType.Ice)
-        
-        addPlane(.Blue, atPosition: CGPoint(x: size.width / 2, y: size.height / 2))
-
-        showReadyHud()
-    }
+    // MARK: ready scene
     
     func showReadyHud() {
         
@@ -328,8 +321,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func hideReadyHud() {
-        readyHudNode.removeFromParent()
         readyHudNode.removeAllChildren()
+        readyHudNode.removeFromParent()
     }
     
     // MARK: Camera
@@ -350,11 +343,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateCameraNode() {
-        for entity in entities {
-            if let planeEntity = entity as? PlaneEntity {
-                let planeNode = planeEntity.spriteComponent.node
-                setCameraPosition(CGPoint(x: planeNode.position.x, y: size.height / 2))
-            }
-        }
+        let planeNode = planeEntity.spriteComponent.node
+        setCameraPosition(CGPoint(x: planeNode.position.x, y: size.height / 2))
     }
 }

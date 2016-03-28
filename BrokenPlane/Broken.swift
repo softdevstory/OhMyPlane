@@ -20,5 +20,8 @@ class Broken: GKState {
     
     override func didEnterWithPreviousState(previousState: GKState?) {
         /* physics dynamic true, flying, smoke on */
+        planeEntity.enableFalling()
+        planeEntity.fly()
+        planeEntity.showSmoke()
     }
 }

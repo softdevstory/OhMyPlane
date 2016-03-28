@@ -9,6 +9,12 @@
 import SpriteKit
 import GameplayKit
 
+enum RockType {
+    case Top
+    case Bottom
+    case Both
+}
+
 class RockEntity: GKEntity {
     var spriteComponent: SpriteComponent!
     let backgroundType: BackgroundType

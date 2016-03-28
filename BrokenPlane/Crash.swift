@@ -20,6 +20,9 @@ class Crash: GKState {
     
     override func didEnterWithPreviousState(previousState: GKState?) {
         /* physics dynamic true, stop, smoke on, explosion */
+        planeEntity.enableFalling()
+        planeEntity.showSmoke()
+        
     }
 
 }

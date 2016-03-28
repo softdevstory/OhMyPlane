@@ -13,8 +13,10 @@
 		A43735DC1CA42455005F5BC1 /* Broken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735DB1CA42455005F5BC1 /* Broken.swift */; };
 		A43735DE1CA4245F005F5BC1 /* Crash.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735DD1CA4245F005F5BC1 /* Crash.swift */; };
 		A43735E01CA4246A005F5BC1 /* Landing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735DF1CA4246A005F5BC1 /* Landing.swift */; };
-		A43735E21CA42C40005F5BC1 /* EndGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E11CA42C40005F5BC1 /* EndGame.swift */; };
 		A43735E41CA43F15005F5BC1 /* obstacle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A43735E31CA43F15005F5BC1 /* obstacle.atlas */; };
+		A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E51CA51BA3005F5BC1 /* PauseGame.swift */; };
+		A43735E81CA51BC1005F5BC1 /* SuccessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E71CA51BC1005F5BC1 /* SuccessGame.swift */; };
+		A43735EA1CA51BC8005F5BC1 /* FailGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E91CA51BC8005F5BC1 /* FailGame.swift */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8DF1CA228C800A448F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A496E8DE1CA228C800A448F5 /* GameScene.sks */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
@@ -41,8 +43,10 @@
 		A43735DB1CA42455005F5BC1 /* Broken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broken.swift; sourceTree = "<group>"; };
 		A43735DD1CA4245F005F5BC1 /* Crash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crash.swift; sourceTree = "<group>"; };
 		A43735DF1CA4246A005F5BC1 /* Landing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
-		A43735E11CA42C40005F5BC1 /* EndGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGame.swift; sourceTree = "<group>"; };
 		A43735E31CA43F15005F5BC1 /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacle.atlas; sourceTree = "<group>"; };
+		A43735E51CA51BA3005F5BC1 /* PauseGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseGame.swift; sourceTree = "<group>"; };
+		A43735E71CA51BC1005F5BC1 /* SuccessGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessGame.swift; sourceTree = "<group>"; };
+		A43735E91CA51BC8005F5BC1 /* FailGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailGame.swift; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* BrokenPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrokenPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A496E8DE1CA228C800A448F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -159,7 +163,9 @@
 			children = (
 				A496E9061CA2823100A448F5 /* ReadyGame.swift */,
 				A43735D61CA3DA17005F5BC1 /* PlayGame.swift */,
-				A43735E11CA42C40005F5BC1 /* EndGame.swift */,
+				A43735E51CA51BA3005F5BC1 /* PauseGame.swift */,
+				A43735E71CA51BC1005F5BC1 /* SuccessGame.swift */,
+				A43735E91CA51BC8005F5BC1 /* FailGame.swift */,
 			);
 			name = "Game States";
 			sourceTree = "<group>";
@@ -251,12 +257,14 @@
 				A43735E01CA4246A005F5BC1 /* Landing.swift in Sources */,
 				A43735DC1CA42455005F5BC1 /* Broken.swift in Sources */,
 				A496E9011CA2782D00A448F5 /* GameSetting.swift in Sources */,
-				A43735E21CA42C40005F5BC1 /* EndGame.swift in Sources */,
 				A43735D51CA3D9F9005F5BC1 /* RockEntity.swift in Sources */,
+				A43735EA1CA51BC8005F5BC1 /* FailGame.swift in Sources */,
 				A496E8FA1CA250F600A448F5 /* PlaneEntity.swift in Sources */,
 				A496E8FF1CA2763100A448F5 /* PlaneMovementComponent.swift in Sources */,
+				A43735E81CA51BC1005F5BC1 /* SuccessGame.swift in Sources */,
 				A496E9071CA2823100A448F5 /* ReadyGame.swift in Sources */,
 				A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */,
+				A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */,
 				A43735DE1CA4245F005F5BC1 /* Crash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

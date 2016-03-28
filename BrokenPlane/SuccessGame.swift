@@ -19,7 +19,7 @@ class SuccessGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-
+        scene.addHomeBackground()
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {

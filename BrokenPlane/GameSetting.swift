@@ -24,24 +24,18 @@ enum BackgroundType: String {
     }
 }
 
-enum SpriteLayer: Int {
-    case BackBackground     = 0
-    case RockObstacle
-    case FrontBackground
-    case Plane
-    case Item
-    case Hud
-    case Overlay
-    
-    var zPosition: CGFloat {
-        switch self {
-        case BackBackground: return -300
-        case RockObstacle: return -200
-        case FrontBackground: return -100
-        case Plane: return 0
-        case Item: return 0
-        case Hud: return 100
-        case Overlay: return 200
-        }
-    }
+struct SpriteName {
+    static let background = "background"
+    static let rockObstacle = "rock"
+    static let plane = "plane"
+}
+
+struct SpriteZPosition {
+    static let BackBackground: CGFloat         = -300
+    static let RockObstacle: CGFloat           = -200
+    static let FrontBackground: CGFloat        = -100
+    static let Plane: CGFloat                  = 0
+    static let Item: CGFloat                   = 100
+    static let Hud: CGFloat                    = 200
+    static let Overlay: CGFloat                = 300
 }

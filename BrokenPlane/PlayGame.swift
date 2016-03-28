@@ -18,7 +18,7 @@ class PlayGame: GKState {
     }
 
     override func didEnterWithPreviousState(previousState: GKState?) {
-
+        scene.showRockObstacles()
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {

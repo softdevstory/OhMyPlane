@@ -18,7 +18,10 @@ class ReadyGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        scene.showBackground(BackgroundType.Ice)
+        let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Rock, .Snow]
+        let choice = background[Int(arc4random_uniform(6))]
+
+        scene.showBackground(choice)
         scene.addPlane(.Blue)
         scene.showReadyHud()
     }

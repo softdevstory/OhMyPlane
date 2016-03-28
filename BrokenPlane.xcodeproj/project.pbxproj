@@ -118,11 +118,11 @@
 				A496E8DE1CA228C800A448F5 /* GameScene.sks */,
 				A496E8E01CA228C800A448F5 /* GameScene.swift */,
 				A496E8E21CA228C800A448F5 /* GameViewController.swift */,
-				A496E8E41CA228C800A448F5 /* Main.storyboard */,
+				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
 				A496E8E71CA228C900A448F5 /* Assets.xcassets */,
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
-				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
+				A496E8E41CA228C800A448F5 /* Main.storyboard */,
 			);
 			path = BrokenPlane;
 			sourceTree = "<group>";

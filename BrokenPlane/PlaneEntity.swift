@@ -64,7 +64,7 @@ class PlaneEntity: GKEntity {
         planeNode.physicsBody?.dynamic = false
         planeNode.physicsBody?.allowsRotation = false
         planeNode.physicsBody?.categoryBitMask = PhysicsCategory.Plane
-        planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstabcle
+        planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle
         
         animationComponent = AnimationComponent(node: planeNode, animations: loadAnimations())
         animationComponent.requestedAnimationState = .Flying

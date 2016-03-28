@@ -23,8 +23,6 @@ class RockEntity: GKEntity {
     var spriteName: [String]!
     var physicsBodyFileName = ["obstacle_top_physics", "obstacle_bottom_physics"]
     
-    var physicsBody: SKPhysicsBody!
-    
     /*
      * position is left, bottom point.
      */
@@ -48,27 +46,12 @@ class RockEntity: GKEntity {
         sprite.zPosition = SpriteZPosition.RockObstacle
         sprite.name = SpriteName.rockObstacle
         sprite.position = CGPoint(x: position.x + sprite.size.width / 2, y: position.y + sprite.size.height / 2)
-        sprite.hidden = true
         
         let physicsBodyTexture = SKTexture(imageNamed: physicsBodyFileName[rockType.rawValue])
-        physicsBody = SKPhysicsBody(texture: physicsBodyTexture, size: physicsBodyTexture.size())
-        physicsBody?.dynamic = false
-        physicsBody?.categoryBitMask = PhysicsCategory.Obstabcle
-        physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        physicsBody?.contactTestBitMask = PhysicsCategory.Plane
-    }
-    
-    func show() {
-        let sprite = spriteComponent.node as SKSpriteNode
-    
-        sprite.hidden = false
-        sprite.physicsBody = physicsBody!
-    }
-    
-    func hide() {
-        let sprite = spriteComponent.node as SKSpriteNode
-        
-        sprite.hidden = true
-        sprite.physicsBody = nil
+        sprite.physicsBody = SKPhysicsBody(texture: physicsBodyTexture, size: physicsBodyTexture.size())
+        sprite.physicsBody?.dynamic = false
+        sprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        sprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+        sprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
     }
 }

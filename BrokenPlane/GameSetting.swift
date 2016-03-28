@@ -10,6 +10,7 @@ import SpriteKit
 
 struct GameSetting {
     static let PhysicsGravity = CGVector(dx: 0, dy: -9)
+    static let DeltaRockObstacle: CGFloat = 350
 }
 
 enum BackgroundType: String {

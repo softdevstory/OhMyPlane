@@ -13,7 +13,7 @@ import GameplayKit
 struct PhysicsCategory {
     static let None: UInt32         = 0
     static let Plane: UInt32        = 0b1
-    static let Obstabcle: UInt32    = 0b10
+    static let Obstacle: UInt32    = 0b10
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -51,7 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Broken(planeEntity: self.planeEntity),
         Crash(planeEntity: self.planeEntity),
         Landing(planeEntity: self.planeEntity)])
-    
+
+    // MARK: rock obstacle
+
     // MARK: component systems
     
     lazy var componentSystems: [GKComponentSystem] = {
@@ -64,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: display size
     
     var displaySize = CGSize()
+    var visibleArea = CGRect()
     
     func overlapAmount() -> CGFloat {
         guard let view = self.view else {
@@ -142,14 +145,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         updateCameraNode()
-        
 
         gameState.currentState?.updateWithDeltaTime(deltaTime)
         
         planeState.currentState?.updateWithDeltaTime(deltaTime)
     }
     
-    // MARK: entity
+    // MARK: entity management
     
     func addPlane(planeType: PlaneType) {
         
@@ -160,20 +162,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         addEntity(planeEntity)
         
-        spriteLayer.addChild(planeEntity.planeNode)
-        
         planeState.enterState(Normal.self)
     }
     
-    func addRockEntity(backgroundType: BackgroundType, atPosition position: CGPoint, toLayer layer: SKNode) {
-        let rockEntity = RockEntity(backgroundType: backgroundType, rockType: .Bottom, atPosition: position)
+    func addRockEntity(rockType: RockType, position: CGPoint) {
+        let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Snow]
+        let backgroundType = background[Int(arc4random_uniform(4))]
+
+        let rockEntity = RockEntity(backgroundType: backgroundType, rockType: rockType, atPosition: position)
         
         addEntity(rockEntity)
-        
-        layer.addChild(rockEntity.spriteComponent.node)
     }
     
-    // MARK: entity management
+    func checkRockEntities() {
+        for entity in entities {
+            if let rockEntity = entity as? RockEntity {
+                let spriteNode = rockEntity.spriteComponent.node
+                
+                if spriteNode.position.x - spriteNode.size.width < visibleArea.origin.x - visibleArea.size.width / 2 {
+                    removeEntity(entity)
+                }
+            }
+        }
+    }
     
     var entities = Set<GKEntity>()
     
@@ -183,6 +194,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for componentSystem in componentSystems {
             componentSystem.addComponentWithEntity(entity)
         }
+        
+        if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
+            spriteLayer.addChild(spriteNode)
+        }
+    }
+    
+    func removeEntity(entity: GKEntity) {
+
+        if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
+            spriteNode.removeFromParent()
+        }
+
+        for componentSystem in componentSystems {
+            componentSystem.removeComponentWithEntity(entity)
+        }
+        
+        entities.remove(entity)
     }
     
     // MARK: physics
@@ -191,7 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch collision {
-        case PhysicsCategory.Plane | PhysicsCategory.Obstabcle:
+        case PhysicsCategory.Plane | PhysicsCategory.Obstacle:
             
             break
             
@@ -200,18 +228,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: background
+    // MARK: Rock obstacle
     
-    func addRockObstacles(backgroundType: BackgroundType, toNode node:SKNode, size: CGSize) {
-        for i in 0 ... 8 {
-            if i % 2 == 0 {
-                continue
+    var lastRockObstacleXPosition: CGFloat = 0
+    
+    func updateRockObstacle() {
+        let rightEdge = (visibleArea.origin.x + visibleArea.size.width)
+        let deltaX = rightEdge - lastRockObstacleXPosition
+        
+        let rock: [RockType] = [.Bottom, .Top]
+        let rockType = rock[Int(arc4random_uniform(2))]
+        
+        if (deltaX > GameSetting.DeltaRockObstacle) {
+            lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
+
+            let position: CGPoint
+            switch rockType {
+            case .Bottom:
+                position = CGPoint(x: lastRockObstacleXPosition, y: 100)
+
+            case .Top:
+                position = CGPoint(x: lastRockObstacleXPosition, y: visibleArea.size.height - 350)
             }
-            
-            let position = CGPoint(x: size.width / 8 * CGFloat(i), y: 100)
-            addRockEntity(backgroundType, atPosition: position, toLayer: node)
+
+            addRockEntity(rockType, position: position)
         }
     }
+    
+    // MARK: background
     
     func backgroundNode(backgroundType: BackgroundType) -> SKSpriteNode {
         let backgroundNode = SKSpriteNode()
@@ -230,13 +274,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         frontSprite.physicsBody = SKPhysicsBody(texture: bodyTexture, size: bodyTexture.size())
         frontSprite.physicsBody?.dynamic = false
-        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstabcle
+        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
         frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
         
         backgroundNode.addChild(frontSprite)
-        
-        addRockObstacles(backgroundType, toNode: backgroundNode, size: backSprite.size)
         
         backgroundNode.size = backSprite.size
         backgroundNode.name = SpriteName.background
@@ -260,7 +302,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bodyTexture = SKTexture(imageNamed: "background_port_physics")
         frontSprite.physicsBody = SKPhysicsBody(texture: bodyTexture, size: bodyTexture.size())
         frontSprite.physicsBody?.dynamic = false
-        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstabcle
+        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
         frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
         
@@ -314,40 +356,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if background.position.x + (background.size.width / 2 * 3) < self.getCameraPosition().x - (self.displaySize.width / 2) {
                 
                 background.position.x += background.size.width * 3
-                
-                if self.gameState.currentState is PlayGame {
-                    background.enumerateChildNodesWithName(SpriteName.rockObstacle) { node, _ in
-                        if let rockObstacle = node as? EntityNode, let rockEntity = rockObstacle.entity as? RockEntity {
-                            rockEntity.show()
-                        }
-                    }
-                }
             }
         }
     }
-    
-    func showRockObstacles() {
-        backgroundLayer.enumerateChildNodesWithName(SpriteName.background) { node, _ in
-            let background = node as! SKSpriteNode
-            
-            if background.position.x > self.getCameraPosition().x + (self.displaySize.width / 2) {
-                background.enumerateChildNodesWithName(SpriteName.rockObstacle) { node, _ in
-                    if let rockObstacle = node as? EntityNode, let rockEntity = rockObstacle.entity as? RockEntity {
-                        let point = rockObstacle.convertPoint(rockObstacle.position, toNode: self.cameraNode)
-                        let margin = rockObstacle.size.width / 2 * 3
-                        
-                        let cameraPosition = self.getCameraPosition()
-                        let cameraMargin = self.displaySize.width / 2
-                        
-                        if point.x + margin > cameraPosition.x + cameraMargin {
-                            rockEntity.show()
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
+
     // MARK: ready scene
     
     func showReadyHud() {
@@ -404,6 +416,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setCameraPosition(position: CGPoint) {
         cameraNode.position = CGPoint(x: position.x, y: position.y - overlapAmount() / 2)
+        
+        visibleArea = CGRect(origin: CGPoint(x: cameraNode.position.x - displaySize.width / 2, y: cameraNode.position.y - displaySize.height / 2), size: displaySize)
     }
     
     func convertPositionInCameraNodeFromScene(position: CGPoint) -> CGPoint {

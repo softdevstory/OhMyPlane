@@ -20,4 +20,8 @@ class SpriteComponent: GKComponent {
         node = EntityNode(texture: texture, size: size)
         node.entity = entity
     }
+    
+    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+        entity?.updateWithDeltaTime(seconds)
+    }
 }

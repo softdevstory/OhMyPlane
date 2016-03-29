@@ -19,10 +19,12 @@ class PauseGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        
+        scene.paused = true
+        scene.showPause()
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        
+    override func willExitWithNextState(nextState: GKState) {
+        scene.paused = false
+        scene.hidePause()
     }
 }

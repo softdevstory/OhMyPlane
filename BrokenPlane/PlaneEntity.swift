@@ -17,7 +17,7 @@ enum PlaneType: String {
     
     var boostValue: CGVector {
         switch self {
-        case Blue: return CGVector(dx: 0, dy: 2000)
+        case Blue: return CGVector(dx: 0, dy: 1000)
         case Green: return CGVector(dx: 0, dy: 1500)
         case Red: return CGVector(dx: 0, dy: 2000)
         case Yellow: return CGVector(dx: 0, dy: 2500)

@@ -18,12 +18,16 @@ class PlayGame: GKState {
     }
 
     override func didEnterWithPreviousState(previousState: GKState?) {
-
+        if !(previousState is PauseGame) {
+            scene.planeState.enterState(Broken.self)
+            scene.showOverlay()
+        }
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {
         scene.updateBackground()
         scene.updateRockObstacle()
+        scene.updateScore()
         
         scene.checkRockEntities()
     }

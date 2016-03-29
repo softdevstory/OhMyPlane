@@ -26,6 +26,7 @@ class ReadyGame: GKState {
         scene.showBackground(choice)
         scene.addPlane(.Blue)
         scene.showReadyHud()
+
     }
     
     override func willExitWithNextState(nextState: GKState) {

@@ -29,8 +29,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgroundLayer = SKNode()
     let spriteLayer = SKNode()
     
-    // MARK: Camera node and hud
-    
     let readyHudNode = SKNode()
     let cameraNode = SKCameraNode()
     
@@ -41,7 +39,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         PlayGame(scene: self),
         SuccessGame(scene: self),
         FailGame(scene: self),
+        PauseGame(scene: self)
         ])
+    
+    // MARK: Game UI
+
+    var score: Int = 0
+    var rockXPositions: [CGFloat] = []
+    
+    var pauseButton: SKSpriteNode! = nil
+    var scoreNode: [SKSpriteNode] = []
     
     // MARK: plane
 
@@ -52,8 +59,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Broken(planeEntity: self.planeEntity),
         Crash(planeEntity: self.planeEntity),
         Landing(planeEntity: self.planeEntity)])
-
-    // MARK: rock obstacle
 
     // MARK: component systems
     
@@ -81,16 +86,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return scaledOverlap / scale
     }
 
-
     // MARK: touches
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
         switch gameState.currentState {
         case is ReadyGame:
             gameState.enterState(PlayGame.self)
 
         case is PlayGame:
-            planeEntity.impulse()
+            let touch = touches.first
+            let location = touch?.locationInNode(cameraNode)
+            let node = cameraNode.nodeAtPoint(location!)
+            
+            if node == pauseButton {
+                gameState.enterState(PauseGame.self)
+            } else {
+                planeEntity.impulse()
+            }
             
         case is FailGame:
             if let scene = GameScene(fileNamed: "GameScene") {
@@ -99,26 +112,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 view!.presentScene(scene, transition: transition)
             }
             
+        case is PauseGame:
+            gameState.enterState(PlayGame)
+            
         default:
             break
-        }
-        
-        switch planeState.currentState {
-        case is Normal:
-            planeState.enterState(Broken.self)
-            break
-        
-//        case is Broken:
-//            planeState.enterState(Crash.self)
-//            
-//        case is Crash:
-//            planeState.enterState(Landing.self)
-//            
-//        case is Landing:
-//            planeState.enterState(Normal.self)
-
-        default:
-            break;
         }
     }
 
@@ -181,6 +179,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let backgroundType = background[Int(arc4random_uniform(4))]
 
         let rockEntity = RockEntity(backgroundType: backgroundType, rockType: rockType, atPosition: position)
+        
+        rockXPositions.append(rockEntity.spriteComponent.node.position.x)
         
         addEntity(rockEntity)
     }
@@ -262,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case .Top:
                 position = CGPoint(x: lastRockObstacleXPosition, y: visibleArea.size.height - 350)
             }
-
+            
             addRockEntity(rockType, position: position)
         }
     }
@@ -373,6 +373,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     // MARK: HUD
+    
+    func showPause() {
+        let sprite = SKSpriteNode(imageNamed: "paused")
+        sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
+        sprite.zPosition = SpriteZPosition.Hud
+        sprite.name = "pause"
+        
+        cameraNode.addChild(sprite)
+    }
+    
+    func hidePause() {
+        if let sprite = cameraNode.childNodeWithName("pause") as? SKSpriteNode {
+            sprite.removeFromParent()
+        }
+    }
+    
+    func showOverlay() {
+        let yPosition: CGFloat = (displaySize.height / 2) - 150
+        var xPosition: CGFloat = 0
+        
+        pauseButton = SKSpriteNode(imageNamed: "pause")
+        xPosition = (displaySize.width - pauseButton.size.width * 2) / 2
+        pauseButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        pauseButton.zPosition = SpriteZPosition.Hud
+
+        cameraNode.addChild(pauseButton)
+        
+        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        xPosition = (-1 * displaySize.width / 2) + scoreNode[0].size.width
+        scoreNode[0].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[0].zPosition = SpriteZPosition.Hud
+        
+        cameraNode.addChild(scoreNode[0])
+
+        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        xPosition += 150
+        scoreNode[1].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[1].zPosition = SpriteZPosition.Hud
+        
+        cameraNode.addChild(scoreNode[1])
+
+        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        xPosition += 150
+        scoreNode[2].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[2].zPosition = SpriteZPosition.Hud
+        
+        cameraNode.addChild(scoreNode[2])
+    }
+    
+    func updateScore() {
+        for xPosition in rockXPositions {
+            let planeNode = planeEntity.spriteComponent.node
+            if xPosition > planeNode.position.x {
+                break
+            }
+            
+            score += 1
+            rockXPositions.removeFirst()
+            
+            var number = Int(score / 100)
+            scoreNode[0].texture = SKTexture(imageNamed: "\(number)")
+            number = (score - (score / 100 * 100)) / 10
+            scoreNode[1].texture = SKTexture(imageNamed: "\(number)")
+            number = score % 10
+            scoreNode[2].texture = SKTexture(imageNamed: "\(number)")
+        }
+    }
     
     func showGameOver() {
         let sprite = SKSpriteNode(imageNamed: "game_over")

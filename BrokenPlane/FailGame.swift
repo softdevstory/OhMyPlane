@@ -19,7 +19,8 @@ class FailGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        
+        scene.planeState.enterState(Crash.self)
+        scene.showGameOver()
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {

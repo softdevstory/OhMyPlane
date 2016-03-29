@@ -22,7 +22,9 @@ class Crash: GKState {
         /* physics dynamic true, stop, smoke on, explosion */
         planeEntity.enableFalling()
         planeEntity.showSmoke()
+        planeEntity.stopFlying()
         
+        planeEntity.explosion()
     }
 
 }

@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ReadyGame(scene: self),
         PlayGame(scene: self),
         SuccessGame(scene: self),
+        FailGame(scene: self),
         ])
     
     // MARK: plane
@@ -87,10 +88,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch gameState.currentState {
         case is ReadyGame:
             gameState.enterState(PlayGame.self)
-//            gameState.enterState(SuccessGame.self)
 
         case is PlayGame:
             planeEntity.impulse()
+            
+        case is FailGame:
+            if let scene = GameScene(fileNamed: "GameScene") {
+                scene.scaleMode = (self.scene?.scaleMode)!
+                let transition = SKTransition.fadeWithDuration(0.6)
+                view!.presentScene(scene, transition: transition)
+            }
             
         default:
             break
@@ -116,6 +123,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     // MARK: SKScene jobs
+    
+    func reset() {
+
+    }
     
     override func didMoveToView(view: SKView) {
 
@@ -220,8 +231,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch collision {
         case PhysicsCategory.Plane | PhysicsCategory.Obstacle:
-            
-            break
+            if !(gameState.currentState is FailGame) {
+                gameState.enterState(FailGame.self)
+            }
             
         default:
             break
@@ -360,7 +372,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    // MARK: ready scene
+    // MARK: HUD
+    
+    func showGameOver() {
+        let sprite = SKSpriteNode(imageNamed: "game_over")
+        sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 2))
+        sprite.zPosition = SpriteZPosition.Hud
+
+        let action = SKAction.moveTo(convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: 0)), duration: 0.3)
+        sprite.runAction(action)
+        
+        cameraNode.addChild(sprite)
+    }
     
     func showReadyHud() {
         

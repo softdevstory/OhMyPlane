@@ -120,5 +120,30 @@ class PlaneEntity: GKEntity {
         planeNode.physicsBody?.velocity = CGVector.zero
         planeNode.physicsBody?.applyImpulse(planeType.boostValue)
     }
+    
+    func explosion() {
+        let emitter = SKEmitterNode()
+        let particleTexture = SKTexture(imageNamed: "spark")
+        emitter.zPosition = 2
+        emitter.particleTexture = particleTexture
+        emitter.particleBirthRate = 4000
+        emitter.numParticlesToEmit = 400
+        emitter.particleLifetime = 2.0
+        emitter.emissionAngle = CGFloat(M_PI) * 90.0 / 180.0
+        emitter.emissionAngleRange = CGFloat(M_PI) * 360.0 / 180.0
+        emitter.particleSpeed = 600
+        emitter.particleSpeedRange = 1000
+        emitter.particleAlpha = 1.0
+        emitter.particleAlphaRange = 0.25
+        emitter.particleScale = 1.2
+        emitter.particleScaleRange = 2.0
+        emitter.particleScaleSpeed = -1.5
+        emitter.particleColor = SKColor.orangeColor()
+        emitter.particleColorBlendFactor = 1
+        emitter.particleBlendMode = SKBlendMode.Add
+        emitter.runAction(SKAction.sequence([SKAction.waitForDuration(2.0), SKAction.removeFromParent()]))
+        
+        planeNode.addChild(emitter)
+    }
 
 }

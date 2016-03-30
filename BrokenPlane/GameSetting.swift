@@ -33,19 +33,19 @@ enum PlaneType: String {
     
     var boostValue: CGVector {
         switch self {
-        case Blue: return CGVector(dx: 0, dy: 1000)
+        case Blue: return CGVector(dx: 0, dy: 1100)
         case Green: return CGVector(dx: 0, dy: 1100)
-        case Red: return CGVector(dx: 0, dy: 1200)
-        case Yellow: return CGVector(dx: 0, dy: 1300)
+        case Red: return CGVector(dx: 0, dy: 1100)
+        case Yellow: return CGVector(dx: 0, dy: 1100)
         }
     }
     
     var speed: CGFloat {
         switch self {
-        case Blue: return 80
+        case Blue: return 75
         case Green: return 70
-        case Red: return 60
-        case Yellow: return 50
+        case Red: return 65
+        case Yellow: return 60
         }
     }
 }
@@ -64,4 +64,10 @@ struct SpriteZPosition {
     static let Item: CGFloat                   = 100
     static let Hud: CGFloat                    = 200
     static let Overlay: CGFloat                = 300
+}
+
+struct SpriteHight {
+    static let plane: CGFloat = 232
+    static let frontBackground: CGFloat = 226
+    static let rock: CGFloat = 763
 }

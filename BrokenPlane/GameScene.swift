@@ -169,7 +169,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         planeEntity.planeNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
         planeEntity.planeNode.zPosition = SpriteZPosition.Plane
         planeEntity.planeNode.name = SpriteName.plane
-
+        planeEntity.targetNode = spriteLayer
+        
         addEntity(planeEntity)
         
         planeState.enterState(Normal.self)
@@ -244,24 +245,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: Rock obstacle
     
     var lastRockObstacleXPosition: CGFloat = 0
+    var previousRockType: RockType = .Bottom
+    var countSameRock = 0
     
     func updateRockObstacle() {
         let rightEdge = (visibleArea.origin.x + visibleArea.size.width)
         let deltaX = rightEdge - lastRockObstacleXPosition
         
         let rock: [RockType] = [.Bottom, .Top]
-        let rockType = rock[Int(arc4random_uniform(2))]
+        var rockType = rock[Int(arc4random_uniform(2))]
         
         if (deltaX > GameSetting.DeltaRockObstacle) {
             lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
 
+            if rockType == previousRockType {
+                countSameRock += 1
+            } else {
+                previousRockType = rockType
+                countSameRock = 0
+            }
+            
+            if countSameRock > 2 {
+                if rockType == .Bottom {
+                    rockType = .Top
+                } else {
+                    rockType = .Bottom
+                }
+                countSameRock = 0
+                previousRockType = rockType
+            }
+
+            // position is left, bottom corner
             let position: CGPoint
             switch rockType {
             case .Bottom:
-                position = CGPoint(x: lastRockObstacleXPosition, y: 100)
+                position = CGPoint(x: lastRockObstacleXPosition, y: overlapAmount() / 2 - SpriteHight.plane / 2)
 
             case .Top:
-                position = CGPoint(x: lastRockObstacleXPosition, y: visibleArea.size.height - 350)
+                position = CGPoint(x: lastRockObstacleXPosition, y: overlapAmount() / 2 + SpriteHight.frontBackground + SpriteHight.plane * 1.7)
             }
             
             addRockEntity(rockType, position: position)
@@ -342,7 +363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background3.anchorPoint = CGPoint.zero
         background3.position = CGPoint(x: background1.size.width * 2, y:0)
         backgroundLayer.addChild(background3)
-        
     }
     
     func addHomeBackground() {

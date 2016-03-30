@@ -20,6 +20,7 @@ class PlaneEntity: GKEntity {
     
     // MARK: plane sprite
     
+    var targetNode: SKNode?
     var planeNode: SKSpriteNode!
     var smokeEmitter: SKEmitterNode?
     
@@ -71,6 +72,7 @@ class PlaneEntity: GKEntity {
     func showSmoke() {
         if smokeEmitter == nil {
             smokeEmitter = SKEmitterNode(fileNamed: "Smoke")
+            smokeEmitter?.targetNode = targetNode
             planeNode.addChild(smokeEmitter!)
         }
     }
@@ -99,6 +101,9 @@ class PlaneEntity: GKEntity {
     func explosion() {
         let emitter = SKEmitterNode()
         let particleTexture = SKTexture(imageNamed: "spark")
+
+        emitter.targetNode = targetNode
+        
         emitter.zPosition = 2
         emitter.particleTexture = particleTexture
         emitter.particleBirthRate = 4000
@@ -116,6 +121,7 @@ class PlaneEntity: GKEntity {
         emitter.particleColor = SKColor.orangeColor()
         emitter.particleColorBlendFactor = 1
         emitter.particleBlendMode = SKBlendMode.Add
+        emitter.yAcceleration = -2000.0
         emitter.runAction(SKAction.sequence([SKAction.waitForDuration(2.0), SKAction.removeFromParent()]))
         
         planeNode.addChild(emitter)

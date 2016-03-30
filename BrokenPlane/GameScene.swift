@@ -37,7 +37,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     lazy var gameState: GKStateMachine = GKStateMachine(states: [
         ReadyGame(scene: self),
         PlayGame(scene: self),
-        SuccessGame(scene: self),
         FailGame(scene: self),
         PauseGame(scene: self)
         ])
@@ -102,7 +101,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if node == pauseButton {
                 gameState.enterState(PauseGame.self)
             } else {
-                planeEntity.impulse()
+                if planeState.currentState is Broken {
+                    planeEntity.impulse()
+                }
             }
             
         case is FailGame:
@@ -478,15 +479,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapRight.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * 1.5, y: displaySize.height / -4))
         tapRight.zPosition = SpriteZPosition.Hud
         readyHudNode.addChild(tapRight)
-        
-        // for debugging
-        let box = SKShapeNode(rectOfSize: displaySize)
-        box.lineWidth = 10
-        box.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
-        box.strokeColor = UIColor.redColor()
-        box.zPosition = SpriteZPosition.Hud
-        readyHudNode.addChild(box)
-        
+                
         cameraNode.addChild(readyHudNode)
     }
     

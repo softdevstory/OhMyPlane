@@ -25,6 +25,31 @@ enum BackgroundType: String {
     }
 }
 
+enum PlaneType: String {
+    case Blue = "blue"
+    case Green = "green"
+    case Red = "red"
+    case Yellow = "yellow"
+    
+    var boostValue: CGVector {
+        switch self {
+        case Blue: return CGVector(dx: 0, dy: 1000)
+        case Green: return CGVector(dx: 0, dy: 1100)
+        case Red: return CGVector(dx: 0, dy: 1200)
+        case Yellow: return CGVector(dx: 0, dy: 1300)
+        }
+    }
+    
+    var speed: CGFloat {
+        switch self {
+        case Blue: return 80
+        case Green: return 70
+        case Red: return 60
+        case Yellow: return 50
+        }
+    }
+}
+
 struct SpriteName {
     static let background = "background"
     static let rockObstacle = "rock"

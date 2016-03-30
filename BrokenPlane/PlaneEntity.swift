@@ -9,31 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-enum PlaneType: String {
-    case Blue = "blue"
-    case Green = "green"
-    case Red = "red"
-    case Yellow = "yellow"
-    
-    var boostValue: CGVector {
-        switch self {
-        case Blue: return CGVector(dx: 0, dy: 1000)
-        case Green: return CGVector(dx: 0, dy: 1500)
-        case Red: return CGVector(dx: 0, dy: 2000)
-        case Yellow: return CGVector(dx: 0, dy: 2500)
-        }
-    }
-    
-    var speed: CGFloat {
-        switch self {
-        case Blue: return 50
-        case Green: return 60
-        case Red: return 70
-        case Yellow: return 80
-        }
-    }
-}
-
 class PlaneEntity: GKEntity {
     let planeType: PlaneType
     

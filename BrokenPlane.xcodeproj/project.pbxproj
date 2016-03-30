@@ -33,6 +33,10 @@
 		A496E9071CA2823100A448F5 /* ReadyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E9061CA2823100A448F5 /* ReadyGame.swift */; };
 		A496E90A1CA2853E00A448F5 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = A496E9081CA2853E00A448F5 /* Smoke.sks */; };
 		A496E90B1CA2853E00A448F5 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A496E9091CA2853E00A448F5 /* spark.png */; };
+		A4C08B181CABF74C00FD8DAE /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B171CABF74C00FD8DAE /* background.mp3 */; };
+		A4C08B1A1CABF8D200FD8DAE /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B191CABF8D200FD8DAE /* explosion.mp3 */; };
+		A4C08B1C1CABF8DF00FD8DAE /* Clank.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */; };
+		A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		A496E9061CA2823100A448F5 /* ReadyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyGame.swift; sourceTree = "<group>"; };
 		A496E9081CA2853E00A448F5 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 		A496E9091CA2853E00A448F5 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A4C08B171CABF74C00FD8DAE /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		A4C08B191CABF8D200FD8DAE /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
+		A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Clank.mp3; sourceTree = "<group>"; };
+		A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +146,7 @@
 		A496E8F51CA24FFC00A448F5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				A4C08B121CABB20500FD8DAE /* sound */,
 				A43735E31CA43F15005F5BC1 /* obstacle.atlas */,
 				A496E9041CA281D500A448F5 /* etc.atlas */,
 				A496E8F61CA2500600A448F5 /* plane.atlas */,
@@ -165,6 +174,17 @@
 				A43735E91CA51BC8005F5BC1 /* FailGame.swift */,
 			);
 			name = "Game States";
+			sourceTree = "<group>";
+		};
+		A4C08B121CABB20500FD8DAE /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				A4C08B171CABF74C00FD8DAE /* background.mp3 */,
+				A4C08B191CABF8D200FD8DAE /* explosion.mp3 */,
+				A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */,
+				A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */,
+			);
+			name = sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,8 +250,12 @@
 				A496E8EB1CA228C900A448F5 /* LaunchScreen.storyboard in Resources */,
 				A496E90A1CA2853E00A448F5 /* Smoke.sks in Resources */,
 				A496E8E81CA228C900A448F5 /* Assets.xcassets in Resources */,
+				A4C08B1C1CABF8DF00FD8DAE /* Clank.mp3 in Resources */,
 				A496E8F71CA2500600A448F5 /* plane.atlas in Resources */,
+				A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */,
 				A496E90B1CA2853E00A448F5 /* spark.png in Resources */,
+				A4C08B181CABF74C00FD8DAE /* background.mp3 in Resources */,
+				A4C08B1A1CABF8D200FD8DAE /* explosion.mp3 in Resources */,
 				A43735E41CA43F15005F5BC1 /* obstacle.atlas in Resources */,
 				A496E8E61CA228C800A448F5 /* Main.storyboard in Resources */,
 				A496E9051CA281D500A448F5 /* etc.atlas in Resources */,

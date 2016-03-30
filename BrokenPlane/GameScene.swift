@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-
+import AVFoundation
 
 struct PhysicsCategory {
     static let None: UInt32         = 0
@@ -530,5 +530,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func updateCameraNode() {
         let planeNode = planeEntity.spriteComponent.node
         setCameraPosition(CGPoint(x: planeNode.position.x, y: size.height / 2))
+    }
+    
+    // MARK: Music
+    
+    var audioPlayer: AVAudioPlayer?
+    
+    func playBackgroundMusic() {
+        let url = NSBundle.mainBundle().URLForResource("background", withExtension: "mp3")
+        
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if audioPlayer != nil {
+            audioPlayer!.numberOfLoops = -1
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.volume = 0.5
+            audioPlayer!.play()
+        }
+    }
+    
+    func playGameOverMusic() {
+        let url = NSBundle.mainBundle().URLForResource("game_over", withExtension: "mp3")
+        
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if audioPlayer != nil {
+            audioPlayer!.numberOfLoops = -1
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.volume = 0.5
+            audioPlayer!.play()
+        }
     }
 }

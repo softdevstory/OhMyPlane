@@ -96,6 +96,8 @@ class PlaneEntity: GKEntity {
     func impulse() {
         planeNode.physicsBody?.velocity = CGVector.zero
         planeNode.physicsBody?.applyImpulse(planeType.boostValue)
+        
+        planeNode.runAction(SKAction.playSoundFileNamed("Clank.mp3", waitForCompletion: false))
     }
     
     func explosion() {
@@ -125,6 +127,8 @@ class PlaneEntity: GKEntity {
         emitter.runAction(SKAction.sequence([SKAction.waitForDuration(2.0), SKAction.removeFromParent()]))
         
         planeNode.addChild(emitter)
+        
+        planeNode.runAction(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
     }
 
 }

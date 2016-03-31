@@ -295,6 +295,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let backgroundNode = SKSpriteNode()
         
         let bodyTexture = SKTexture(imageNamed: "background_physics")
+        let topBodyTexture = SKTexture(imageNamed: "background_top_physics")
         
         let backSprite = SKSpriteNode(imageNamed: "background")
         backSprite.anchorPoint = CGPoint.zero
@@ -313,6 +314,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
         
         backgroundNode.addChild(frontSprite)
+        
+        let frontSprite2 = SKSpriteNode(imageNamed: backgroundType.topImageFileName)
+        frontSprite2.position = CGPoint(x: frontSprite2.size.width / 2, y: size.height + overlapAmount() / 2 - frontSprite2.size.height / 2)
+        frontSprite2.zPosition = SpriteZPosition.FrontBackground
+        
+        frontSprite2.physicsBody = SKPhysicsBody(texture: topBodyTexture, size: topBodyTexture.size())
+        frontSprite2.physicsBody?.dynamic = false
+        frontSprite2.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        frontSprite2.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+        frontSprite2.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        
+        backgroundNode.addChild(frontSprite2)
         
         backgroundNode.size = backSprite.size
         backgroundNode.name = SpriteName.background

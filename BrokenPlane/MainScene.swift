@@ -1,6 +1,6 @@
 //
 //  MainScene.swift
-//  BrokenPlane
+//  OhMyPlane
 //
 //  Created by HS Song on 2016. 4. 1..
 //  Copyright © 2016년 softdevstory. All rights reserved.

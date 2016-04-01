@@ -1,6 +1,6 @@
 //
 //  SpriteComponent.swift
-//  BrokenPlane
+//  OhMyPlane
 //
 //  Created by HS Song on 2016. 3. 23..
 //  Copyright © 2016년 softdevstory. All rights reserved.

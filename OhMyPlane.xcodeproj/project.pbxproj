@@ -42,32 +42,32 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RockEntity.swift; sourceTree = "<group>"; };
-		A43735D61CA3DA17005F5BC1 /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGame.swift; sourceTree = "<group>"; };
-		A43735D91CA4244E005F5BC1 /* Normal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Normal.swift; sourceTree = "<group>"; };
-		A43735DB1CA42455005F5BC1 /* Broken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broken.swift; sourceTree = "<group>"; };
-		A43735DD1CA4245F005F5BC1 /* Crash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crash.swift; sourceTree = "<group>"; };
-		A43735DF1CA4246A005F5BC1 /* Landing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landing.swift; sourceTree = "<group>"; };
+		A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RockEntity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735D61CA3DA17005F5BC1 /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlayGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735D91CA4244E005F5BC1 /* Normal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Normal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735DB1CA42455005F5BC1 /* Broken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Broken.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735DD1CA4245F005F5BC1 /* Crash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Crash.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735DF1CA4246A005F5BC1 /* Landing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Landing.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735E31CA43F15005F5BC1 /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacle.atlas; sourceTree = "<group>"; };
-		A43735E51CA51BA3005F5BC1 /* PauseGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseGame.swift; sourceTree = "<group>"; };
-		A43735E91CA51BC8005F5BC1 /* FailGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailGame.swift; sourceTree = "<group>"; };
-		A496E8D91CA228C800A448F5 /* BrokenPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrokenPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A43735E51CA51BA3005F5BC1 /* PauseGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PauseGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43735E91CA51BC8005F5BC1 /* FailGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FailGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8DE1CA228C800A448F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		A496E8E21CA228C800A448F5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E8E21CA228C800A448F5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8E51CA228C800A448F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A496E8E71CA228C900A448F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A496E8EA1CA228C900A448F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A496E8EC1CA228C900A448F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SpriteComponent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8F61CA2500600A448F5 /* plane.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = plane.atlas; sourceTree = "<group>"; };
-		A496E8F91CA250F600A448F5 /* PlaneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneEntity.swift; sourceTree = "<group>"; };
-		A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
-		A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneMovementComponent.swift; sourceTree = "<group>"; };
-		A496E9001CA2782D00A448F5 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		A496E8F91CA250F600A448F5 /* PlaneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaneEntity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnimationComponent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaneMovementComponent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E9001CA2782D00A448F5 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameSetting.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E9041CA281D500A448F5 /* etc.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = etc.atlas; sourceTree = "<group>"; };
-		A496E9061CA2823100A448F5 /* ReadyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyGame.swift; sourceTree = "<group>"; };
+		A496E9061CA2823100A448F5 /* ReadyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReadyGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E9081CA2853E00A448F5 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 		A496E9091CA2853E00A448F5 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A4C08B171CABF74C00FD8DAE /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Clank.mp3; sourceTree = "<group>"; };
 		A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
 		A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = intro.mp3; sourceTree = "<group>"; };
-		A4C08B221CAE1F2700FD8DAE /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		A4C08B221CAE1F2700FD8DAE /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 		A496E8D01CA228C800A448F5 = {
 			isa = PBXGroup;
 			children = (
-				A496E8DB1CA228C800A448F5 /* BrokenPlane */,
+				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
 				A496E8DA1CA228C800A448F5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -111,12 +111,12 @@
 		A496E8DA1CA228C800A448F5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A496E8D91CA228C800A448F5 /* BrokenPlane.app */,
+				A496E8D91CA228C800A448F5 /* OhMyPlane.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A496E8DB1CA228C800A448F5 /* BrokenPlane */ = {
+		A496E8DB1CA228C800A448F5 /* OhMyPlane */ = {
 			isa = PBXGroup;
 			children = (
 				A496E8F51CA24FFC00A448F5 /* resources */,
@@ -133,6 +133,7 @@
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
 			);
+			name = OhMyPlane;
 			path = BrokenPlane;
 			sourceTree = "<group>";
 		};
@@ -204,9 +205,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A496E8D81CA228C800A448F5 /* BrokenPlane */ = {
+		A496E8D81CA228C800A448F5 /* OhMyPlane */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A496E8EF1CA228C900A448F5 /* Build configuration list for PBXNativeTarget "BrokenPlane" */;
+			buildConfigurationList = A496E8EF1CA228C900A448F5 /* Build configuration list for PBXNativeTarget "OhMyPlane" */;
 			buildPhases = (
 				A496E8D51CA228C800A448F5 /* Sources */,
 				A496E8D61CA228C800A448F5 /* Frameworks */,
@@ -216,9 +217,9 @@
 			);
 			dependencies = (
 			);
-			name = BrokenPlane;
+			name = OhMyPlane;
 			productName = BrokenPlane;
-			productReference = A496E8D91CA228C800A448F5 /* BrokenPlane.app */;
+			productReference = A496E8D91CA228C800A448F5 /* OhMyPlane.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -237,7 +238,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A496E8D41CA228C800A448F5 /* Build configuration list for PBXProject "BrokenPlane" */;
+			buildConfigurationList = A496E8D41CA228C800A448F5 /* Build configuration list for PBXProject "OhMyPlane" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -250,7 +251,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A496E8D81CA228C800A448F5 /* BrokenPlane */,
+				A496E8D81CA228C800A448F5 /* OhMyPlane */,
 			);
 		};
 /* End PBXProject section */
@@ -419,8 +420,8 @@
 				INFOPLIST_FILE = BrokenPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.BrokenPlane;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;
+				PRODUCT_NAME = OhMyPlane;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -435,8 +436,8 @@
 				INFOPLIST_FILE = BrokenPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.BrokenPlane;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;
+				PRODUCT_NAME = OhMyPlane;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -445,7 +446,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A496E8D41CA228C800A448F5 /* Build configuration list for PBXProject "BrokenPlane" */ = {
+		A496E8D41CA228C800A448F5 /* Build configuration list for PBXProject "OhMyPlane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A496E8ED1CA228C900A448F5 /* Debug */,
@@ -454,7 +455,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A496E8EF1CA228C900A448F5 /* Build configuration list for PBXNativeTarget "BrokenPlane" */ = {
+		A496E8EF1CA228C900A448F5 /* Build configuration list for PBXNativeTarget "OhMyPlane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A496E8F01CA228C900A448F5 /* Debug */,

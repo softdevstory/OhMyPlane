@@ -107,11 +107,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         case is FailGame:
-            if let scene = GameScene(fileNamed: "GameScene") {
-                scene.scaleMode = (self.scene?.scaleMode)!
-                let transition = SKTransition.fadeWithDuration(0.6)
-                view!.presentScene(scene, transition: transition)
-            }
+            let scene = GameScene(size: GameSetting.SceneSize)
+            scene.scaleMode = (self.scene?.scaleMode)!
+            let transition = SKTransition.fadeWithDuration(0.6)
+            view!.presentScene(scene, transition: transition)
             
         case is PauseGame:
             gameState.enterState(PlayGame)

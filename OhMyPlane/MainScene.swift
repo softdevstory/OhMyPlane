@@ -15,6 +15,8 @@ class MainScene: SKScene {
     
     let backgroundLayer = SKNode()
     
+    var startSprite: SKSpriteNode!
+    
     override func didMoveToView(view: SKView) {
         
         addChild(backgroundLayer)
@@ -23,12 +25,44 @@ class MainScene: SKScene {
         playBackgroundMusic()
     }
     
+    override func willMoveFromView(view: SKView) {
+        stopBackgroundMusic()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.locationInNode(backgroundLayer)
+        let node = backgroundLayer.nodeAtPoint(location!)
+        
+        if node == startSprite {
+            let scene = GameScene(size: GameSetting.SceneSize)
+            scene.scaleMode = (self.scene?.scaleMode)!
+            let transition = SKTransition.fadeWithDuration(0.6)
+            view!.presentScene(scene, transition: transition)
+        }
+    }
+    
     func loadBackground() {
         let image = SKSpriteNode(imageNamed: "background_intro")
         image.anchorPoint = CGPoint.zero
         image.position = CGPoint(x: 0, y: overlapAmount() / 2)
-
+        image.zPosition = SpriteZPosition.BackBackground
+        
         backgroundLayer.addChild(image)
+        
+        let title = SKSpriteNode(imageNamed: "title")
+        title.position = CGPoint(x: size.width / 2, y: size.height / 2 + title.size.height)
+        title.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(title)
+        
+        let start = SKSpriteNode(imageNamed: "start")
+        start.position = CGPoint(x: size.width / 2, y: size.height / 2 - start.size.height)
+        start.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(start)
+        startSprite = start
+
     }
     
     func playBackgroundMusic() {
@@ -40,6 +74,12 @@ class MainScene: SKScene {
             audioPlayer!.prepareToPlay()
             audioPlayer!.volume = 0.5
             audioPlayer!.play()
+        }
+    }
+    
+    func stopBackgroundMusic() {
+        if audioPlayer != nil {
+            audioPlayer!.stop()
         }
     }
     

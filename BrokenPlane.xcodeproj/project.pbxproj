@@ -37,6 +37,8 @@
 		A4C08B1A1CABF8D200FD8DAE /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B191CABF8D200FD8DAE /* explosion.mp3 */; };
 		A4C08B1C1CABF8DF00FD8DAE /* Clank.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */; };
 		A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */; };
+		A4C08B201CAE1E2400FD8DAE /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */; };
+		A4C08B231CAE1F2700FD8DAE /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B221CAE1F2700FD8DAE /* MainScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		A4C08B191CABF8D200FD8DAE /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Clank.mp3; sourceTree = "<group>"; };
 		A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
+		A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = intro.mp3; sourceTree = "<group>"; };
+		A4C08B221CAE1F2700FD8DAE /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,13 +120,12 @@
 			isa = PBXGroup;
 			children = (
 				A496E8F51CA24FFC00A448F5 /* resources */,
+				A4C08B211CAE1EB600FD8DAE /* Scenes */,
 				A43735D81CA42438005F5BC1 /* Plane States */,
 				A496E8FD1CA269DA00A448F5 /* Game States */,
 				A496E8F81CA250E200A448F5 /* Entities */,
 				A496E8F21CA23DAB00A448F5 /* Components */,
 				A496E8DC1CA228C800A448F5 /* AppDelegate.swift */,
-				A496E8DE1CA228C800A448F5 /* GameScene.sks */,
-				A496E8E01CA228C800A448F5 /* GameScene.swift */,
 				A496E8E21CA228C800A448F5 /* GameViewController.swift */,
 				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
 				A496E8E71CA228C900A448F5 /* Assets.xcassets */,
@@ -183,8 +186,19 @@
 				A4C08B191CABF8D200FD8DAE /* explosion.mp3 */,
 				A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */,
 				A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */,
+				A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */,
 			);
 			name = sound;
+			sourceTree = "<group>";
+		};
+		A4C08B211CAE1EB600FD8DAE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A496E8DE1CA228C800A448F5 /* GameScene.sks */,
+				A496E8E01CA228C800A448F5 /* GameScene.swift */,
+				A4C08B221CAE1F2700FD8DAE /* MainScene.swift */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +271,7 @@
 				A4C08B181CABF74C00FD8DAE /* background.mp3 in Resources */,
 				A4C08B1A1CABF8D200FD8DAE /* explosion.mp3 in Resources */,
 				A43735E41CA43F15005F5BC1 /* obstacle.atlas in Resources */,
+				A4C08B201CAE1E2400FD8DAE /* intro.mp3 in Resources */,
 				A496E8E61CA228C800A448F5 /* Main.storyboard in Resources */,
 				A496E9051CA281D500A448F5 /* etc.atlas in Resources */,
 			);
@@ -284,6 +299,7 @@
 				A496E8FF1CA2763100A448F5 /* PlaneMovementComponent.swift in Sources */,
 				A496E9071CA2823100A448F5 /* ReadyGame.swift in Sources */,
 				A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */,
+				A4C08B231CAE1F2700FD8DAE /* MainScene.swift in Sources */,
 				A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */,
 				A43735DE1CA4245F005F5BC1 /* Crash.swift in Sources */,
 			);

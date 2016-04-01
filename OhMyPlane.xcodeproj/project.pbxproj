@@ -134,7 +134,7 @@
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
 			);
 			name = OhMyPlane;
-			path = BrokenPlane;
+			path = OhMyPlane;
 			sourceTree = "<group>";
 		};
 		A496E8F21CA23DAB00A448F5 /* Components */ = {
@@ -218,7 +218,7 @@
 			dependencies = (
 			);
 			name = OhMyPlane;
-			productName = BrokenPlane;
+			productName = OhMyPlane;
 			productReference = A496E8D91CA228C800A448F5 /* OhMyPlane.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -417,7 +417,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BrokenPlane/Info.plist;
+				INFOPLIST_FILE = OhMyPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;
@@ -433,7 +433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = BrokenPlane/Info.plist;
+				INFOPLIST_FILE = OhMyPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;

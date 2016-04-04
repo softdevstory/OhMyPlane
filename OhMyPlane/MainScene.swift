@@ -15,15 +15,30 @@ class MainScene: SKScene {
     
     let backgroundLayer = SKNode()
     
+    var gameScene: SKScene!
+    var creditScene: SKScene!
+    
     var startSprite: SKSpriteNode!
     var startTextures: [SKTexture] = []
     var startPressed = false
     
+    var setupSprite: SKSpriteNode!
+    var setupTextures: [SKTexture] = []
+    var setupPressed = false
+    
     override func didMoveToView(view: SKView) {
         
         addChild(backgroundLayer)
-        
+
+        gameScene = GameScene(size: GameSetting.SceneSize)
+        gameScene.scaleMode = (self.scene?.scaleMode)!
+
+        creditScene = CreditScene(size: GameSetting.SceneSize)
+        creditScene.scaleMode = (self.scene?.scaleMode)!
+
         loadBackground()
+        loadButtons()
+        
         playBackgroundMusic()
     }
     
@@ -41,18 +56,31 @@ class MainScene: SKScene {
             startSprite.size = (startSprite.texture?.size())!
             startPressed = true
         }
+        
+        if node == setupSprite {
+            setupSprite.texture = setupTextures[1]
+            setupSprite.size = (setupSprite.texture?.size())!
+            setupPressed = true
+        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if startPressed {
-            let scene = GameScene(size: GameSetting.SceneSize)
-            scene.scaleMode = (self.scene?.scaleMode)!
             let transition = SKTransition.fadeWithDuration(0.6)
-            view!.presentScene(scene, transition: transition)
+            view!.presentScene(gameScene, transition: transition)
             
             startSprite.texture = startTextures[0]
             startSprite.size = (startSprite.texture?.size())!
             startPressed = false
+        }
+        
+        if setupPressed {
+            let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
+            view!.presentScene(creditScene, transition: transition)
+            
+            setupSprite.texture = setupTextures[0]
+            setupSprite.size = (setupSprite.texture?.size())!
+            setupPressed = false
         }
     }
     
@@ -61,6 +89,12 @@ class MainScene: SKScene {
             startSprite.texture = startTextures[0]
             startSprite.size = (startSprite.texture?.size())!
             startPressed = false
+        }
+        
+        if setupPressed {
+            setupSprite.texture = setupTextures[0]
+            setupSprite.size = (setupSprite.texture?.size())!
+            setupPressed = false
         }
     }
     
@@ -77,17 +111,28 @@ class MainScene: SKScene {
         title.zPosition = SpriteZPosition.Overlay
         
         backgroundLayer.addChild(title)
-
+    }
+    
+    func loadButtons() {
         startTextures.append(SKTexture(imageNamed: "start"))
         startTextures.append(SKTexture(imageNamed: "start_pressed"))
         
         let start = SKSpriteNode(texture: startTextures[0])
         start.position = CGPoint(x: size.width / 2, y: size.height / 2 - start.size.height)
         start.zPosition = SpriteZPosition.Overlay
-
+        
         backgroundLayer.addChild(start)
         startSprite = start
-
+        
+        setupTextures.append(SKTexture(imageNamed: "setup"))
+        setupTextures.append(SKTexture(imageNamed: "setup_pressed"))
+        
+        let setup = SKSpriteNode(texture: setupTextures[0])
+        setup.position = CGPoint(x: size.width - setup.size.width, y: overlapAmount() / 2 + setup.size.height)
+        setup.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(setup)
+        setupSprite = setup
     }
     
     func playBackgroundMusic() {

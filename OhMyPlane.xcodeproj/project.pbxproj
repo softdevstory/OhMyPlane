@@ -38,6 +38,9 @@
 		A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */; };
 		A4C08B201CAE1E2400FD8DAE /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */; };
 		A4C08B231CAE1F2700FD8DAE /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B221CAE1F2700FD8DAE /* MainScene.swift */; };
+		A4C08B251CB2344300FD8DAE /* CreditScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B241CB2344300FD8DAE /* CreditScene.swift */; };
+		A4C08B271CB236F100FD8DAE /* credit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B261CB236F000FD8DAE /* credit.mp3 */; };
+		A4C08B2A1CB23C0000FD8DAE /* kenvector_future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +77,9 @@
 		A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
 		A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = intro.mp3; sourceTree = "<group>"; };
 		A4C08B221CAE1F2700FD8DAE /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A4C08B241CB2344300FD8DAE /* CreditScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditScene.swift; sourceTree = "<group>"; };
+		A4C08B261CB236F000FD8DAE /* credit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = credit.mp3; sourceTree = "<group>"; };
+		A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,7 @@
 		A496E8F51CA24FFC00A448F5 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				A4C08B281CB2398400FD8DAE /* fonts */,
 				A4C08B121CABB20500FD8DAE /* sound */,
 				A43735E31CA43F15005F5BC1 /* obstacle.atlas */,
 				A496E9041CA281D500A448F5 /* etc.atlas */,
@@ -185,6 +192,7 @@
 				A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */,
 				A4C08B1D1CABFB4B00FD8DAE /* game_over.mp3 */,
 				A4C08B1F1CAE1E2400FD8DAE /* intro.mp3 */,
+				A4C08B261CB236F000FD8DAE /* credit.mp3 */,
 			);
 			name = sound;
 			sourceTree = "<group>";
@@ -194,8 +202,17 @@
 			children = (
 				A496E8E01CA228C800A448F5 /* GameScene.swift */,
 				A4C08B221CAE1F2700FD8DAE /* MainScene.swift */,
+				A4C08B241CB2344300FD8DAE /* CreditScene.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		A4C08B281CB2398400FD8DAE /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,11 +274,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C08B2A1CB23C0000FD8DAE /* kenvector_future.ttf in Resources */,
 				A496E8EB1CA228C900A448F5 /* LaunchScreen.storyboard in Resources */,
 				A496E90A1CA2853E00A448F5 /* Smoke.sks in Resources */,
 				A496E8E81CA228C900A448F5 /* Assets.xcassets in Resources */,
 				A4C08B1C1CABF8DF00FD8DAE /* Clank.mp3 in Resources */,
 				A496E8F71CA2500600A448F5 /* plane.atlas in Resources */,
+				A4C08B271CB236F100FD8DAE /* credit.mp3 in Resources */,
 				A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */,
 				A496E90B1CA2853E00A448F5 /* spark.png in Resources */,
 				A4C08B181CABF74C00FD8DAE /* background.mp3 in Resources */,
@@ -284,6 +303,7 @@
 				A496E8FC1CA25E0E00A448F5 /* AnimationComponent.swift in Sources */,
 				A43735D71CA3DA17005F5BC1 /* PlayGame.swift in Sources */,
 				A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */,
+				A4C08B251CB2344300FD8DAE /* CreditScene.swift in Sources */,
 				A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */,
 				A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */,
 				A43735E01CA4246A005F5BC1 /* Landing.swift in Sources */,

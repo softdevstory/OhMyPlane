@@ -16,6 +16,8 @@ class MainScene: SKScene {
     let backgroundLayer = SKNode()
     
     var startSprite: SKSpriteNode!
+    var startTextures: [SKTexture] = []
+    var startPressed = false
     
     override func didMoveToView(view: SKView) {
         
@@ -35,10 +37,30 @@ class MainScene: SKScene {
         let node = backgroundLayer.nodeAtPoint(location!)
         
         if node == startSprite {
+            startSprite.texture = startTextures[1]
+            startSprite.size = (startSprite.texture?.size())!
+            startPressed = true
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if startPressed {
             let scene = GameScene(size: GameSetting.SceneSize)
             scene.scaleMode = (self.scene?.scaleMode)!
             let transition = SKTransition.fadeWithDuration(0.6)
             view!.presentScene(scene, transition: transition)
+            
+            startSprite.texture = startTextures[0]
+            startSprite.size = (startSprite.texture?.size())!
+            startPressed = false
+        }
+    }
+    
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        if startPressed {
+            startSprite.texture = startTextures[0]
+            startSprite.size = (startSprite.texture?.size())!
+            startPressed = false
         }
     }
     
@@ -55,11 +77,14 @@ class MainScene: SKScene {
         title.zPosition = SpriteZPosition.Overlay
         
         backgroundLayer.addChild(title)
+
+        startTextures.append(SKTexture(imageNamed: "start"))
+        startTextures.append(SKTexture(imageNamed: "start_pressed"))
         
-        let start = SKSpriteNode(imageNamed: "start")
+        let start = SKSpriteNode(texture: startTextures[0])
         start.position = CGPoint(x: size.width / 2, y: size.height / 2 - start.size.height)
         start.zPosition = SpriteZPosition.Overlay
-        
+
         backgroundLayer.addChild(start)
         startSprite = start
 

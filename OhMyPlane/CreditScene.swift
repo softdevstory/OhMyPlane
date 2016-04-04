@@ -29,6 +29,8 @@ class CreditScene: SKScene {
         "Tester",
         "ES Song",
         "",
+        "Thanks to:",
+        "",
         "Kenny(http://www.kenny.nl)",
         "images, sound resources",
         "",
@@ -171,6 +173,6 @@ class CreditScene: SKScene {
             creditLayer.addChild(label)
         }
         
-        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 30.0))
+        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0))
     }
 }

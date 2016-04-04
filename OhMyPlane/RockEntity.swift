@@ -17,6 +17,17 @@ enum RockType: Int {
 class RockEntityTexture {
     static var topTextures: [String: SKTexture] = [:]
     static var bottomTextures: [String: SKTexture] = [:]
+    static var physicsTextures: [RockType: SKTexture] = [:]
+
+    class func loadAllTextures() {
+        for type in BackgroundType.allTypes {
+            getTexture(.Top, backgroundType: type)
+            getTexture(.Bottom, backgroundType: type)
+        }
+
+        getPhysicsTexture(.Top)
+        getPhysicsTexture(.Bottom)
+    }
     
     class func getTexture(rockType: RockType, backgroundType: BackgroundType) -> SKTexture {
         switch rockType {
@@ -29,13 +40,19 @@ class RockEntityTexture {
     }
     
     class func getPhysicsTexture(rockType: RockType) -> SKTexture {
+        if let texture = physicsTextures[rockType] {
+            return texture
+        }
+        
         switch rockType {
         case .Top:
-            return SKTexture(imageNamed: "obstacle_top_physics")
+            physicsTextures[.Top] = SKTexture(imageNamed: "obstacle_top_physics")
             
         case .Bottom:
-            return SKTexture(imageNamed: "obstacle_bottom_physics")
+            physicsTextures[.Bottom] = SKTexture(imageNamed: "obstacle_bottom_physics")
         }
+        
+        return physicsTextures[rockType]!
     }
 
     private class func getTopTexture(backgroundType: BackgroundType) -> SKTexture {
@@ -100,5 +117,22 @@ class RockEntity: GKEntity {
         sprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         sprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
         sprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+    }
+    
+    func reset(backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) {
+        let sprite = spriteComponent.node as SKSpriteNode
+        sprite.texture = RockEntityTexture.getTexture(rockType, backgroundType: backgroundType)
+        sprite.position = CGPoint(x: position.x + sprite.size.width / 2, y: position.y + sprite.size.height / 2)
+        
+        if self.rockType != rockType {
+            let physicsBodyTexture = RockEntityTexture.getPhysicsTexture(rockType)
+            sprite.physicsBody = SKPhysicsBody(texture: physicsBodyTexture, size: physicsBodyTexture.size())
+            sprite.physicsBody?.dynamic = false
+            sprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+            sprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+            sprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        }
+        
+        self.rockType = rockType
     }
 }

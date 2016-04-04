@@ -130,6 +130,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = GameSetting.PhysicsGravity
+
+        RockEntityTexture.loadAllTextures()
+        initializeRockEntities()
         
         displaySize = CGSize(width: size.width, height: size.height - overlapAmount())
         
@@ -179,11 +182,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Snow]
         let backgroundType = background[Int(arc4random_uniform(4))]
 
-        let rockEntity = RockEntity(backgroundType: backgroundType, rockType: rockType, atPosition: position)
-        
-        rockXPositions.append(rockEntity.spriteComponent.node.position.x)
+        let rockEntity = newRockEntity(backgroundType, rockType: rockType, atPosition: position)
         
         addEntity(rockEntity)
+        
+        rockXPositions.append(rockEntity.spriteComponent.node.position.x)
     }
     
     func checkRockEntities() {
@@ -192,6 +195,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let spriteNode = rockEntity.spriteComponent.node
                 
                 if spriteNode.position.x - spriteNode.size.width < visibleArea.origin.x - visibleArea.size.width / 2 {
+                    freeRockEntity(rockEntity)
                     removeEntity(entity)
                 }
             }
@@ -246,15 +250,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastRockObstacleXPosition: CGFloat = 0
     var previousRockType: RockType = .Bottom
     var countSameRock = 0
+    var rockEntities: [RockEntity] = []
+    var freeRockEntities: [RockEntity] = []
+    
+    func initializeRockEntities() {
+        for _ in 0 ... 6 {
+            let rockEntity = RockEntity(backgroundType: .Ice, rockType: .Bottom, atPosition: CGPoint.zero)
+
+            freeRockEntities.append(rockEntity)
+        }
+    }
+    
+    func freeRockEntity(rockEntity: RockEntity) {
+        freeRockEntities.append(rockEntity)
+    }
+    
+    func newRockEntity(backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) -> RockEntity {
+        
+        if let rockEntity = freeRockEntities.popLast() {
+            rockEntity.reset(backgroundType, rockType: rockType, atPosition: position)
+
+            return rockEntity
+        }
+        
+        let rockEntity = RockEntity(backgroundType: backgroundType, rockType: rockType, atPosition: position)
+        
+        return rockEntity
+    }
     
     func updateRockObstacle() {
         let rightEdge = (visibleArea.origin.x + visibleArea.size.width)
         let deltaX = rightEdge - lastRockObstacleXPosition
         
-        let rock: [RockType] = [.Bottom, .Top]
-        var rockType = rock[Int(arc4random_uniform(2))]
-        
         if (deltaX > GameSetting.DeltaRockObstacle) {
+            let rock: [RockType] = [.Bottom, .Top]
+            var rockType = rock[Int(arc4random_uniform(2))]
+            
             lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
 
             if rockType == previousRockType {

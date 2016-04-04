@@ -28,6 +28,10 @@ enum BackgroundType: String {
     var topImageFileName: String {
         return "background_\(self.rawValue)_top"
     }
+
+    static var allTypes: [BackgroundType] {
+        return [.Dirt, .Grass, .Ice, .Rock, .Snow]
+    }
 }
 
 enum PlaneType: String {

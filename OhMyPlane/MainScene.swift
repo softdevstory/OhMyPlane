@@ -12,11 +12,13 @@ import AVFoundation
 class MainScene: SKScene {
     
     var audioPlayer: AVAudioPlayer?
+    var effectPlayer: AVAudioPlayer?
     
     let backgroundLayer = SKNode()
     
     var gameScene: SKScene!
-    var creditScene: SKScene!
+    var creditScene: CreditScene!
+    var topRecordsScene: SKScene!
     
     var startSprite: SKSpriteNode!
     var startTextures: [SKTexture] = []
@@ -25,6 +27,10 @@ class MainScene: SKScene {
     var setupSprite: SKSpriteNode!
     var setupTextures: [SKTexture] = []
     var setupPressed = false
+    
+    var topRecordsSprite: SKSpriteNode!
+    var topRecordsTextures: [SKTexture] = []
+    var topRecordsPressed = false
     
     override func didMoveToView(view: SKView) {
         
@@ -35,7 +41,10 @@ class MainScene: SKScene {
 
         creditScene = CreditScene(size: GameSetting.SceneSize)
         creditScene.scaleMode = (self.scene?.scaleMode)!
-
+        
+        topRecordsScene = TopRecordsScene(size: GameSetting.SceneSize)
+        topRecordsScene.scaleMode = (self.scene?.scaleMode)!
+        
         loadBackground()
         loadButtons()
         
@@ -55,12 +64,24 @@ class MainScene: SKScene {
             startSprite.texture = startTextures[1]
             startSprite.size = (startSprite.texture?.size())!
             startPressed = true
+
+            playClinkSound()
         }
         
         if node == setupSprite {
             setupSprite.texture = setupTextures[1]
             setupSprite.size = (setupSprite.texture?.size())!
             setupPressed = true
+            
+            playClinkSound()
+        }
+        
+        if node == topRecordsSprite {
+            topRecordsSprite.texture = topRecordsTextures[1]
+            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
+            topRecordsPressed = true
+            
+            playClinkSound()
         }
     }
     
@@ -82,6 +103,15 @@ class MainScene: SKScene {
             setupSprite.size = (setupSprite.texture?.size())!
             setupPressed = false
         }
+        
+        if topRecordsPressed {
+            let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
+            view!.presentScene(topRecordsScene, transition: transition)
+
+            topRecordsSprite.texture = topRecordsTextures[0]
+            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
+            topRecordsPressed = false
+        }
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
@@ -95,6 +125,12 @@ class MainScene: SKScene {
             setupSprite.texture = setupTextures[0]
             setupSprite.size = (setupSprite.texture?.size())!
             setupPressed = false
+        }
+        
+        if topRecordsPressed {
+            topRecordsSprite.texture = topRecordsTextures[0]
+            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
+            topRecordsPressed = false
         }
     }
     
@@ -133,6 +169,16 @@ class MainScene: SKScene {
         
         backgroundLayer.addChild(setup)
         setupSprite = setup
+        
+        topRecordsTextures.append(SKTexture(imageNamed: "topRecords"))
+        topRecordsTextures.append(SKTexture(imageNamed: "topRecords_pressed"))
+        
+        let topRecords = SKSpriteNode(texture: topRecordsTextures[0])
+        topRecords.position = CGPoint( x: setup.position.x, y: setup.position.y + topRecords.size.height)
+        topRecords.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(topRecords)
+        topRecordsSprite = topRecords
     }
     
     func playBackgroundMusic() {
@@ -144,6 +190,17 @@ class MainScene: SKScene {
             audioPlayer!.prepareToPlay()
             audioPlayer!.volume = 0.5
             audioPlayer!.play()
+        }
+    }
+    
+    func playClinkSound() {
+        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
+        
+        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if effectPlayer != nil {
+            effectPlayer!.numberOfLoops = 0
+            effectPlayer!.prepareToPlay()
+            effectPlayer!.play()
         }
     }
     

@@ -41,6 +41,9 @@
 		A4C08B251CB2344300FD8DAE /* CreditScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B241CB2344300FD8DAE /* CreditScene.swift */; };
 		A4C08B271CB236F100FD8DAE /* credit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B261CB236F000FD8DAE /* credit.mp3 */; };
 		A4C08B2A1CB23C0000FD8DAE /* kenvector_future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */; };
+		A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */; };
+		A4C08B2E1CB39AF400FD8DAE /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B2D1CB39AF400FD8DAE /* click3.wav */; };
+		A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,9 @@
 		A4C08B241CB2344300FD8DAE /* CreditScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditScene.swift; sourceTree = "<group>"; };
 		A4C08B261CB236F000FD8DAE /* credit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = credit.mp3; sourceTree = "<group>"; };
 		A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future.ttf; sourceTree = "<group>"; };
+		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopThreeRecords.swift; sourceTree = "<group>"; };
+		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
+		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRecordsScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
+				A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */,
 			);
 			path = OhMyPlane;
 			sourceTree = "<group>";
@@ -187,6 +194,7 @@
 		A4C08B121CABB20500FD8DAE /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				A4C08B2D1CB39AF400FD8DAE /* click3.wav */,
 				A4C08B171CABF74C00FD8DAE /* background.mp3 */,
 				A4C08B191CABF8D200FD8DAE /* explosion.mp3 */,
 				A4C08B1B1CABF8DF00FD8DAE /* Clank.mp3 */,
@@ -202,6 +210,7 @@
 			children = (
 				A496E8E01CA228C800A448F5 /* GameScene.swift */,
 				A4C08B221CAE1F2700FD8DAE /* MainScene.swift */,
+				A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */,
 				A4C08B241CB2344300FD8DAE /* CreditScene.swift */,
 			);
 			name = Scenes;
@@ -289,6 +298,7 @@
 				A4C08B201CAE1E2400FD8DAE /* intro.mp3 in Resources */,
 				A496E8E61CA228C800A448F5 /* Main.storyboard in Resources */,
 				A496E9051CA281D500A448F5 /* etc.atlas in Resources */,
+				A4C08B2E1CB39AF400FD8DAE /* click3.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,9 +315,11 @@
 				A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */,
 				A4C08B251CB2344300FD8DAE /* CreditScene.swift in Sources */,
 				A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */,
+				A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */,
 				A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */,
 				A43735E01CA4246A005F5BC1 /* Landing.swift in Sources */,
 				A43735DC1CA42455005F5BC1 /* Broken.swift in Sources */,
+				A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */,
 				A496E9011CA2782D00A448F5 /* GameSetting.swift in Sources */,
 				A43735D51CA3D9F9005F5BC1 /* RockEntity.swift in Sources */,
 				A43735EA1CA51BC8005F5BC1 /* FailGame.swift in Sources */,

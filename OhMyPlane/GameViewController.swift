@@ -14,7 +14,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let scene = GameScene(size: CGSize(width: 2048, height: 1536))
         let scene = MainScene(size: GameSetting.SceneSize)
         
         // Configure the view.

@@ -11,6 +11,7 @@ import AVFoundation
 
 class CreditScene: SKScene {
     var audioPlayer: AVAudioPlayer?
+    var effectPlayer: AVAudioPlayer?
     
     let backgroundLayer = SKNode()
     let creditLayer = SKNode()
@@ -44,16 +45,21 @@ class CreditScene: SKScene {
         "All images are modified by using InkScape."
     ]
     
+    var creditLabels: [SKLabelNode] = []
+    
     override func didMoveToView(view: SKView) {
         addChild(backgroundLayer)
         addChild(creditLayer)
         
         loadBackground()
         loadButtons()
-        
-        loadCreditLabels()
-        
+
         playBackgroundMusic()
+
+        creditLayer.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), SKAction.runBlock() {
+            self.loadCreditLabels()
+            self.positionCreditLabels()
+            } ]))
     }
     
     override func willMoveFromView(view: SKView) {
@@ -69,6 +75,8 @@ class CreditScene: SKScene {
             backSprite.texture = backTextures[1]
             backSprite.size = (backSprite.texture?.size())!
             backPressed = true
+            
+            playClinkSound()
         }
     }
     
@@ -132,6 +140,18 @@ class CreditScene: SKScene {
         }
     }
     
+    func playClinkSound() {
+        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
+        
+        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if effectPlayer != nil {
+            effectPlayer!.numberOfLoops = 0
+            effectPlayer!.prepareToPlay()
+            effectPlayer!.play()
+        }
+    }
+
+    
     func overlapAmount() -> CGFloat {
         guard let view = self.view else {
             return 0
@@ -144,19 +164,27 @@ class CreditScene: SKScene {
         return scaledOverlap / scale
     }
     
-    func loadCreditLabels() {
+    func positionCreditLabels() {
         var position = CGPoint(x: size.width / 2, y: 0)
+        
+        for label in creditLabels {
+            position.y -= label.fontSize
+            label.position = position
+            position.y -= label.fontSize
+        }
+        
+        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0))
+    }
+    
+    func loadCreditLabels() {
         
         let title = SKLabelNode(fontNamed: "KenVector Future")
         title.text = "CREDIT"
         title.fontColor = SKColor.redColor()
         title.fontSize = 200
         title.zPosition = SpriteZPosition.Overlay
-        
-        position.y -= title.fontSize
-        title.position = position
-        position.y -= title.fontSize
-        
+
+        creditLabels.append(title)
         creditLayer.addChild(title)
         
         for string in creditContent {
@@ -166,13 +194,8 @@ class CreditScene: SKScene {
             label.fontSize = 50
             label.zPosition = SpriteZPosition.Overlay
             
-            position.y -= label.fontSize
-            label.position = position
-            position.y -= label.fontSize
-            
+            creditLabels.append(label)
             creditLayer.addChild(label)
         }
-        
-        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0))
     }
 }

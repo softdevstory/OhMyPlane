@@ -20,6 +20,9 @@ class FailGame: GKState {
     
     override func didEnterWithPreviousState(previousState: GKState?) {
         scene.planeState.enterState(Crash.self)
+        
+        scene.checkGameScore()
+        
         scene.showGameOver()
         scene.playGameOverMusic()
         

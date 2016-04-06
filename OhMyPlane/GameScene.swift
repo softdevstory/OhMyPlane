@@ -133,10 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: SKScene jobs
     
-    func reset() {
-
-    }
-    
     override func didMoveToView(view: SKView) {
 
         physicsWorld.contactDelegate = self
@@ -576,6 +572,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func hideReadyHud() {
         readyHudNode.removeAllChildren()
         readyHudNode.removeFromParent()
+    }
+
+    // MARK: 
+    
+    func checkGameScore() {
+        let topThreeRecord = TopThreeRecords()
+        let rank = topThreeRecord.getRankOfPoint(score)
+        
+        if let fileName = rank.imageFileName {
+            let sprite = SKSpriteNode(imageNamed: fileName)
+            sprite.alpha = 0.9
+            sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
+            sprite.zPosition = SpriteZPosition.Overlay
+            
+            sprite.runAction(SKAction.group([
+                SKAction.rotateByAngle(360 * 2 * CGFloat(M_PI) / 180, duration: 2),
+                SKAction.scaleTo(2.0, duration: 2)
+                ]))
+            
+            cameraNode.addChild(sprite)
+            
+            topThreeRecord.checkAndReplacePoint(planeEntity.planeType.rawValue, point: score)
+        }
     }
     
     // MARK: Camera

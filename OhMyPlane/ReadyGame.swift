@@ -20,8 +20,6 @@ class ReadyGame: GKState {
     override func didEnterWithPreviousState(previousState: GKState?) {
         scene.playBackgroundMusic()
         
-        scene.reset()
-        
         let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Rock, .Snow]
         let choice = background[Int(arc4random_uniform(5))]
         scene.showBackground(choice)

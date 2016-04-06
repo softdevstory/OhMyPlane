@@ -13,6 +13,19 @@ enum Rank: Int {
     case Second    = 2
     case Third     = 1
     case None      = 0
+    
+    var imageFileName: String? {
+        switch self {
+        case .First:
+            return "gold"
+        case .Second:
+            return "silver"
+        case .Third:
+            return "bronze"
+        case .None:
+            return nil
+        }
+    }
 }
 
 class RecordItem: NSObject, NSCoding {
@@ -46,14 +59,15 @@ class TopThreeRecords {
         load()
     }
     
-    func dataFilePath() -> String {
+    private func dataFilePath() -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         
         return (paths[0] as NSString).stringByAppendingPathComponent(GameSetting.TopThreeRecordFileName)
     }
     
-    func load() {
+    private func load() {
         let path = dataFilePath()
+
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
             if let data = NSData(contentsOfFile: path) {
                 let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
@@ -66,7 +80,7 @@ class TopThreeRecords {
             }
         } else {
             // initial records
-            for point in [40, 30, 20] {
+            for point in [30, 20, 10] {
                 let item = RecordItem(planeType: PlaneType.Red.rawValue, point: point)
                 topThreeRecords.append(item)
             }

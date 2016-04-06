@@ -44,6 +44,7 @@
 		A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */; };
 		A4C08B2E1CB39AF400FD8DAE /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B2D1CB39AF400FD8DAE /* click3.wav */; };
 		A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */; };
+		A4F66B561CB4EC4B00122830 /* topThreeRecords.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopThreeRecords.swift; sourceTree = "<group>"; };
 		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
 		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRecordsScene.swift; sourceTree = "<group>"; };
+		A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = topThreeRecords.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 		A4C08B121CABB20500FD8DAE /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */,
 				A4C08B2D1CB39AF400FD8DAE /* click3.wav */,
 				A4C08B171CABF74C00FD8DAE /* background.mp3 */,
 				A4C08B191CABF8D200FD8DAE /* explosion.mp3 */,
@@ -288,6 +291,7 @@
 				A496E90A1CA2853E00A448F5 /* Smoke.sks in Resources */,
 				A496E8E81CA228C900A448F5 /* Assets.xcassets in Resources */,
 				A4C08B1C1CABF8DF00FD8DAE /* Clank.mp3 in Resources */,
+				A4F66B561CB4EC4B00122830 /* topThreeRecords.mp3 in Resources */,
 				A496E8F71CA2500600A448F5 /* plane.atlas in Resources */,
 				A4C08B271CB236F100FD8DAE /* credit.mp3 in Resources */,
 				A4C08B1E1CABFB4B00FD8DAE /* game_over.mp3 in Resources */,

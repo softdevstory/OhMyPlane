@@ -49,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pauseButton: SKSpriteNode! = nil
     var scoreNode: [SKSpriteNode] = []
     
+    var exitButton: SKSpriteNode! = nil
+    var returnButton: SKSpriteNode! = nil
+    
     // MARK: plane
 
     var planeEntity: PlaneEntity! = nil
@@ -88,15 +91,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: touches
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.locationInNode(cameraNode)
+        let node = cameraNode.nodeAtPoint(location!)
         
         switch gameState.currentState {
         case is ReadyGame:
             gameState.enterState(PlayGame.self)
 
         case is PlayGame:
-            let touch = touches.first
-            let location = touch?.locationInNode(cameraNode)
-            let node = cameraNode.nodeAtPoint(location!)
             
             if node == pauseButton {
                 gameState.enterState(PauseGame.self)
@@ -113,7 +116,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             view!.presentScene(scene, transition: transition)
             
         case is PauseGame:
-            gameState.enterState(PlayGame)
+            
+            if node == returnButton {
+                gameState.enterState(PlayGame)
+            } else if node == exitButton {
+                let scene = MainScene(size: GameSetting.SceneSize)
+                scene.scaleMode = (self.scene?.scaleMode)!
+                let transition = SKTransition.fadeWithDuration(0.6)
+                view!.presentScene(scene, transition: transition)
+            }
             
         default:
             break
@@ -440,16 +451,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func showPause() {
         let sprite = SKSpriteNode(imageNamed: "paused")
-        sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
+        sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: sprite.size.height))
         sprite.zPosition = SpriteZPosition.Hud
         sprite.name = "pause"
         
         cameraNode.addChild(sprite)
+        
+        exitButton = SKSpriteNode(imageNamed: "exit")
+        exitButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: -sprite.size.width  / 2, y: -sprite.size.height))
+        exitButton.zPosition = SpriteZPosition.Hud
+        exitButton.name = "pause"
+        
+        cameraNode.addChild(exitButton)
+        
+        returnButton = SKSpriteNode(imageNamed: "return")
+        returnButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: sprite.size.width  / 2, y: -sprite.size.height))
+        returnButton.zPosition = SpriteZPosition.Hud
+        returnButton.name = "pause"
+        
+        cameraNode.addChild(returnButton)
     }
     
     func hidePause() {
-        if let sprite = cameraNode.childNodeWithName("pause") as? SKSpriteNode {
-            sprite.removeFromParent()
+        cameraNode.enumerateChildNodesWithName("pause") { node, _  in
+            if let sprite = node as? SKSpriteNode {
+                sprite.removeFromParent()
+            }
         }
     }
     

@@ -28,6 +28,12 @@ class TopRecordsScene: SKScene {
         loadButtons()
         
         showTopRecords()
+        
+        playBackgroundMusic()
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        stopBackgroundMusic()
     }
  
     func loadBackground() {
@@ -61,6 +67,24 @@ class TopRecordsScene: SKScene {
         
         backgroundLayer.addChild(back)
         backSprite = back
+    }
+    
+    func playBackgroundMusic() {
+        let url = NSBundle.mainBundle().URLForResource("topThreeRecords", withExtension: "mp3")
+        
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if audioPlayer != nil {
+            audioPlayer!.numberOfLoops = -1
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.volume = 0.5
+            audioPlayer!.play()
+        }
+    }
+    
+    func stopBackgroundMusic() {
+        if audioPlayer != nil {
+            audioPlayer!.stop()
+        }
     }
     
     func playClinkSound() {
@@ -111,7 +135,7 @@ class TopRecordsScene: SKScene {
     
     func showTopRecords() {
         let coins = ["gold", "silver", "bronze"]
-        let modifier: [CGFloat] = [ -1, 0, 1]
+        let modifier: [CGFloat] = [ 1, 0, -1]
         
         var i = 0
 

@@ -65,7 +65,7 @@ class MainScene: SKScene {
             startSprite.size = (startSprite.texture?.size())!
             startPressed = true
 
-            playClinkSound()
+            playClickSound()
         }
         
         if node == setupSprite {
@@ -73,7 +73,7 @@ class MainScene: SKScene {
             setupSprite.size = (setupSprite.texture?.size())!
             setupPressed = true
             
-            playClinkSound()
+            playClickSound()
         }
         
         if node == topRecordsSprite {
@@ -81,7 +81,7 @@ class MainScene: SKScene {
             topRecordsSprite.size = (topRecordsSprite.texture?.size())!
             topRecordsPressed = true
             
-            playClinkSound()
+            playClickSound()
         }
     }
     
@@ -193,7 +193,7 @@ class MainScene: SKScene {
         }
     }
     
-    func playClinkSound() {
+    func playClickSound() {
         let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
         
         effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)

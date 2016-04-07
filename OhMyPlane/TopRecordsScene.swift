@@ -87,7 +87,7 @@ class TopRecordsScene: SKScene {
         }
     }
     
-    func playClinkSound() {
+    func playClickSound() {
         let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
         
         effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
@@ -108,7 +108,7 @@ class TopRecordsScene: SKScene {
             backSprite.size = (backSprite.texture?.size())!
             backPressed = true
             
-            playClinkSound()
+            playClickSound()
         }
     }
     

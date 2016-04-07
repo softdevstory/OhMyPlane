@@ -76,7 +76,7 @@ class CreditScene: SKScene {
             backSprite.size = (backSprite.texture?.size())!
             backPressed = true
             
-            playClinkSound()
+            playClickSound()
         }
     }
     
@@ -140,7 +140,7 @@ class CreditScene: SKScene {
         }
     }
     
-    func playClinkSound() {
+    func playClickSound() {
         let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
         
         effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)

@@ -102,6 +102,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case is PlayGame:
             
             if node == pauseButton {
+                playClickSound()
+                
                 gameState.enterState(PauseGame.self)
             } else {
                 if planeState.currentState is Broken {
@@ -118,8 +120,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case is PauseGame:
             
             if node == returnButton {
+                playClickSound()
+                
                 gameState.enterState(PlayGame)
             } else if node == exitButton {
+                playClickSound()
+                
                 let scene = MainScene(size: GameSetting.SceneSize)
                 scene.scaleMode = (self.scene?.scaleMode)!
                 let transition = SKTransition.fadeWithDuration(0.6)
@@ -624,6 +630,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: Music
     
     var audioPlayer: AVAudioPlayer?
+    var effectPlayer: AVAudioPlayer?
     
     func playBackgroundMusic() {
         let url = NSBundle.mainBundle().URLForResource("background", withExtension: "mp3")
@@ -648,4 +655,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             audioPlayer!.play()
         }
     }
+    
+    func playClickSound() {
+        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
+        
+        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
+        if effectPlayer != nil {
+            effectPlayer!.numberOfLoops = 0
+            effectPlayer!.prepareToPlay()
+            effectPlayer!.play()
+        }
+    }
+
 }

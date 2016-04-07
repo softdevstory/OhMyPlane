@@ -12,7 +12,6 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-  /*    background: url('http://placehold.it/1900x500') no-repeat center center scroll; */
     background: url('../img/header.png') no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -178,3 +177,41 @@ footer {
     }
 }
 
+button {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.428571429;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PURCHASE
+/*--------------------------------------------------------------------------*/
+
+.purchase{
+  overflow: hidden;
+  padding: 100px 0px 100px 0px;
+  min-height: 200px;
+}
+
+.purchase button.app-store{
+  width: 152px;
+  height: 52px;
+  background: url(../img/badge-appstore.png) #3a3a3a no-repeat 0px 5px;
+  color: white;
+}

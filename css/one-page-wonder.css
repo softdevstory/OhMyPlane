@@ -215,3 +215,12 @@ button {
   background: url(../img/badge-appstore.png) #3a3a3a no-repeat 0px 5px;
   color: white;
 }
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    /* Retina-specific stuff here */
+    .purchasebutton.app-store, .get-it button.app-store{
+        background: url(../img/badge-appstore@2x.png) #3a3a3a no-repeat 0px 5px;
+        background-size: 98%;
+    	color: white;
+    }
+}

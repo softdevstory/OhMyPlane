@@ -7,12 +7,9 @@
 //
 
 import SpriteKit
-import AVFoundation
+import SKTUtils
 
 class MainScene: SKScene {
-    
-    var audioPlayer: AVAudioPlayer?
-    var effectPlayer: AVAudioPlayer?
     
     let backgroundLayer = SKNode()
     
@@ -49,10 +46,6 @@ class MainScene: SKScene {
         loadButtons()
         
         playBackgroundMusic()
-    }
-    
-    override func willMoveFromView(view: SKView) {
-        stopBackgroundMusic()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -182,32 +175,11 @@ class MainScene: SKScene {
     }
     
     func playBackgroundMusic() {
-        let url = NSBundle.mainBundle().URLForResource("intro", withExtension: "mp3")
-        
-        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if audioPlayer != nil {
-            audioPlayer!.numberOfLoops = -1
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.volume = 0.5
-            audioPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playBackgroundMusic("intro.mp3")
     }
     
     func playClickSound() {
-        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
-        
-        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if effectPlayer != nil {
-            effectPlayer!.numberOfLoops = 0
-            effectPlayer!.prepareToPlay()
-            effectPlayer!.play()
-        }
-    }
-    
-    func stopBackgroundMusic() {
-        if audioPlayer != nil {
-            audioPlayer!.stop()
-        }
+        SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
     
     func overlapAmount() -> CGFloat {

@@ -6,13 +6,11 @@
 //  Copyright © 2016년 softdevstory. All rights reserved.
 //
 
-import AVFoundation
 import SpriteKit
+import SKTUtils
 
 class TopRecordsScene: SKScene {
-    var audioPlayer: AVAudioPlayer?
-    var effectPlayer: AVAudioPlayer?
-    
+
     let backgroundLayer = SKNode()
     
     var backSprite: SKSpriteNode!
@@ -31,11 +29,7 @@ class TopRecordsScene: SKScene {
         
         playBackgroundMusic()
     }
-    
-    override func willMoveFromView(view: SKView) {
-        stopBackgroundMusic()
-    }
- 
+
     func loadBackground() {
         let image = SKSpriteNode(imageNamed: "underground")
         image.anchorPoint = CGPoint.zero
@@ -70,32 +64,11 @@ class TopRecordsScene: SKScene {
     }
     
     func playBackgroundMusic() {
-        let url = NSBundle.mainBundle().URLForResource("topThreeRecords", withExtension: "mp3")
-        
-        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if audioPlayer != nil {
-            audioPlayer!.numberOfLoops = -1
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.volume = 0.5
-            audioPlayer!.play()
-        }
-    }
-    
-    func stopBackgroundMusic() {
-        if audioPlayer != nil {
-            audioPlayer!.stop()
-        }
+        SKTAudio.sharedInstance().playBackgroundMusic("topThreeRecords.mp3")
     }
     
     func playClickSound() {
-        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
-        
-        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if effectPlayer != nil {
-            effectPlayer!.numberOfLoops = 0
-            effectPlayer!.prepareToPlay()
-            effectPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

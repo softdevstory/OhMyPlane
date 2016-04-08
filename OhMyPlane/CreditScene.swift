@@ -7,12 +7,10 @@
 //
 
 import SpriteKit
-import AVFoundation
+import SKTUtils
 
 class CreditScene: SKScene {
-    var audioPlayer: AVAudioPlayer?
-    var effectPlayer: AVAudioPlayer?
-    
+
     let backgroundLayer = SKNode()
     let creditLayer = SKNode()
 
@@ -61,11 +59,7 @@ class CreditScene: SKScene {
             self.positionCreditLabels()
             } ]))
     }
-    
-    override func willMoveFromView(view: SKView) {
-        stopBackgroundMusic()
-    }
-    
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
         let location = touch?.locationInNode(backgroundLayer)
@@ -123,34 +117,12 @@ class CreditScene: SKScene {
     }
     
     func playBackgroundMusic() {
-        let url = NSBundle.mainBundle().URLForResource("credit", withExtension: "mp3")
-        
-        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if audioPlayer != nil {
-            audioPlayer!.numberOfLoops = -1
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.volume = 0.5
-            audioPlayer!.play()
-        }
-    }
-    
-    func stopBackgroundMusic() {
-        if audioPlayer != nil {
-            audioPlayer!.stop()
-        }
+        SKTAudio.sharedInstance().playBackgroundMusic("credit.mp3")
     }
     
     func playClickSound() {
-        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
-        
-        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if effectPlayer != nil {
-            effectPlayer!.numberOfLoops = 0
-            effectPlayer!.prepareToPlay()
-            effectPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
-
     
     func overlapAmount() -> CGFloat {
         guard let view = self.view else {

@@ -21,11 +21,11 @@ class ReadyGame: GKState {
         scene.playBackgroundMusic()
         
         let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Rock, .Snow]
-        let choice = background[Int(arc4random_uniform(5))]
+        let choice = background[Int.random(5)]
         scene.showBackground(choice)
         
         let plane: [PlaneType] = [ .Blue, .Green, .Red, .Yellow ]
-        let planeChoice = plane[Int(arc4random_uniform(4))]
+        let planeChoice = plane[Int.random(4)]
         scene.addPlane(planeChoice)
         
         scene.showReadyHud()

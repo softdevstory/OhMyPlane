@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-import AVFoundation
+import SKTUtils
 
 struct PhysicsCategory {
     static let None: UInt32         = 0
@@ -193,7 +193,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addRockEntity(rockType: RockType, position: CGPoint) {
         let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Snow]
-        let backgroundType = background[Int(arc4random_uniform(4))]
+        let backgroundType = background[Int.random(4)]
 
         let rockEntity = newRockEntity(backgroundType, rockType: rockType, atPosition: position)
         
@@ -297,7 +297,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (deltaX > GameSetting.DeltaRockObstacle) {
             let rock: [RockType] = [.Bottom, .Top]
-            var rockType = rock[Int(arc4random_uniform(2))]
+            var rockType = rock[Int.random(2)]
             
             lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
 
@@ -593,7 +593,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sprite.zPosition = SpriteZPosition.Overlay
             
             sprite.runAction(SKAction.group([
-                SKAction.rotateByAngle(360 * 2 * CGFloat(M_PI) / 180, duration: 2),
+                SKAction.rotateByAngle(CGFloat(360 * 2).degreesToRadians(), duration: 2),
                 SKAction.scaleTo(2.0, duration: 2)
                 ]))
             
@@ -629,42 +629,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: Music
     
-    var audioPlayer: AVAudioPlayer?
-    var effectPlayer: AVAudioPlayer?
-    
     func playBackgroundMusic() {
-        let url = NSBundle.mainBundle().URLForResource("background", withExtension: "mp3")
-        
-        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if audioPlayer != nil {
-            audioPlayer!.numberOfLoops = -1
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.volume = 0.5
-            audioPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playBackgroundMusic("background.mp3")
     }
     
     func playGameOverMusic() {
-        let url = NSBundle.mainBundle().URLForResource("game_over", withExtension: "mp3")
-        
-        audioPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if audioPlayer != nil {
-            audioPlayer!.numberOfLoops = -1
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.volume = 0.5
-            audioPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playBackgroundMusic("game_over.mp3")
     }
     
     func playClickSound() {
-        let url = NSBundle.mainBundle().URLForResource("click3", withExtension: "wav")
-        
-        effectPlayer = try? AVAudioPlayer(contentsOfURL: url!)
-        if effectPlayer != nil {
-            effectPlayer!.numberOfLoops = 0
-            effectPlayer!.prepareToPlay()
-            effectPlayer!.play()
-        }
+        SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
-
 }

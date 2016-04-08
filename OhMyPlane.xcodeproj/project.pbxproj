@@ -44,6 +44,7 @@
 		A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */; };
 		A4C08B2E1CB39AF400FD8DAE /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B2D1CB39AF400FD8DAE /* click3.wav */; };
 		A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */; };
+		A4D1BF481CB77895001B455A /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D1BF471CB77895001B455A /* SKTUtils.framework */; };
 		A4F66B561CB4EC4B00122830 /* topThreeRecords.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopThreeRecords.swift; sourceTree = "<group>"; };
 		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
 		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRecordsScene.swift; sourceTree = "<group>"; };
+		A4D1BF471CB77895001B455A /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = Carthage/Build/iOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = topThreeRecords.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D1BF481CB77895001B455A /* SKTUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,7 @@
 			children = (
 				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
 				A496E8DA1CA228C800A448F5 /* Products */,
+				A4D1BF471CB77895001B455A /* SKTUtils.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +241,7 @@
 				A496E8D51CA228C800A448F5 /* Sources */,
 				A496E8D61CA228C800A448F5 /* Frameworks */,
 				A496E8D71CA228C800A448F5 /* Resources */,
+				A4D1BF491CB778B7001B455A /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -307,6 +312,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A4D1BF491CB778B7001B455A /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SKTUtils.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A496E8D51CA228C800A448F5 /* Sources */ = {
@@ -448,6 +471,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = OhMyPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -464,6 +491,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = OhMyPlane/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

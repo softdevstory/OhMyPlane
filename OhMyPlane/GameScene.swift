@@ -334,6 +334,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: background
     
+    var backgroundNodes: [SKSpriteNode] = []
+    
     func backgroundNode(backgroundType: BackgroundType) -> SKSpriteNode {
         let backgroundNode = SKSpriteNode()
         
@@ -376,75 +378,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return backgroundNode
     }
     
-    func backgroundHome() -> SKSpriteNode {
-        let backgroundNode = SKSpriteNode()
-        
-        let backSprite = SKSpriteNode(imageNamed: "background")
-        backSprite.anchorPoint = CGPoint.zero
-        backSprite.position = CGPoint.zero
-        backSprite.zPosition = SpriteZPosition.BackBackground
-        backgroundNode.addChild(backSprite)
-        
-        let frontSprite = SKSpriteNode(imageNamed: "background_port")
-        frontSprite.position = CGPoint(x: frontSprite.size.width / 2, y: overlapAmount() / 2 + frontSprite.size.height / 2)
-        frontSprite.zPosition = SpriteZPosition.FrontBackground
-        
-        let bodyTexture = SKTexture(imageNamed: "background_port_physics")
-        frontSprite.physicsBody = SKPhysicsBody(texture: bodyTexture, size: bodyTexture.size())
-        frontSprite.physicsBody?.dynamic = false
-        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
-        
-        backgroundNode.addChild(frontSprite)
-        
-        backgroundNode.size = backSprite.size
-        backgroundNode.name = SpriteName.background
-        
-        return backgroundNode
-    }
-    
     func showBackground(backgroundType: BackgroundType) {
         let background1 = backgroundNode(backgroundType)
         background1.anchorPoint = CGPoint.zero
         background1.position = CGPoint.zero
         backgroundLayer.addChild(background1)
+
+        backgroundNodes.append(background1)
         
         let background2 = backgroundNode(backgroundType)
         background2.anchorPoint = CGPoint.zero
         background2.position = CGPoint(x: background1.size.width, y:0)
         backgroundLayer.addChild(background2)
+
+        backgroundNodes.append(background2)
         
         let background3 = backgroundNode(backgroundType)
         background3.anchorPoint = CGPoint.zero
         background3.position = CGPoint(x: background1.size.width * 2, y:0)
         backgroundLayer.addChild(background3)
-    }
-    
-    func addHomeBackground() {
-        let background4 = backgroundHome()
-        background4.anchorPoint = CGPoint.zero
-        var xPosition: CGFloat = 0
-        backgroundLayer.enumerateChildNodesWithName(SpriteName.background) { node, _ in
-            let background = node as! SKSpriteNode
-            
-            if xPosition < background.position.x {
-                xPosition = background.position.x
-            }
-        }
         
-        background4.position = CGPoint(x: xPosition + background4.size.width, y:0)
-
-        backgroundLayer.addChild(background4)
+        backgroundNodes.append(background3)
     }
     
     func updateBackground() {
-        
-        backgroundLayer.enumerateChildNodesWithName(SpriteName.background) { node, _ in
-            let background = node as! SKSpriteNode
-            if background.position.x + (background.size.width / 2 * 3) < self.getCameraPosition().x - (self.displaySize.width / 2) {
+
+        for node in backgroundNodes {
+            if node.position.x + (node.size.width / 2 * 3) < self.getCameraPosition().x - (self.displaySize.width / 2) {
                 
-                background.position.x += background.size.width * 3
+                node.position.x += node.size.width * 3
             }
         }
     }

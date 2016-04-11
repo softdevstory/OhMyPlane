@@ -36,12 +36,12 @@ class PlaneEntity: GKEntity {
 
         planeNode = spriteComponent.node
         
-        planeNode.physicsBody = SKPhysicsBody(circleOfRadius: planeNode.size.height / 2.0)
-        planeNode.physicsBody?.dynamic = false
-        planeNode.physicsBody?.allowsRotation = false
-        planeNode.physicsBody?.categoryBitMask = PhysicsCategory.Plane
-        planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle
-        
+//        planeNode.physicsBody = SKPhysicsBody(circleOfRadius: planeNode.size.height / 2.0)
+//        planeNode.physicsBody?.dynamic = false
+//        planeNode.physicsBody?.allowsRotation = false
+//        planeNode.physicsBody?.categoryBitMask = PhysicsCategory.Plane
+//        planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle
+//        
         animationComponent = AnimationComponent(node: planeNode, animations: loadAnimations())
         animationComponent.requestedAnimationState = .Flying
         addComponent(animationComponent)

@@ -52,6 +52,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var exitButton: SKSpriteNode! = nil
     var returnButton: SKSpriteNode! = nil
     
+    var numberTextures: [SKTexture] = []
+    
     // MARK: plane
 
     var planeEntity: PlaneEntity! = nil
@@ -146,6 +148,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         RockEntityTexture.loadAllTextures()
         initializeRockEntities()
+        
+        loadNumberTextures()
         
         displaySize = CGSize(width: size.width, height: size.height - overlapAmount())
         
@@ -455,21 +459,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         cameraNode.addChild(pauseButton)
         
-        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
         xPosition = (-1 * displaySize.width / 2) + scoreNode[0].size.width
         scoreNode[0].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
         scoreNode[0].zPosition = SpriteZPosition.Hud
         
         cameraNode.addChild(scoreNode[0])
 
-        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
         xPosition += 150
         scoreNode[1].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
         scoreNode[1].zPosition = SpriteZPosition.Hud
         
         cameraNode.addChild(scoreNode[1])
 
-        scoreNode.append(SKSpriteNode(imageNamed: "0"))
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
         xPosition += 150
         scoreNode[2].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
         scoreNode[2].zPosition = SpriteZPosition.Hud
@@ -478,21 +482,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateScore() {
-        for xPosition in rockXPositions {
-            let planeNode = planeEntity.spriteComponent.node
-            if xPosition > planeNode.position.x {
-                break
-            }
-            
+        let xPosition = rockXPositions.first!
+        let planeNode = planeEntity.spriteComponent.node
+        
+        if xPosition < planeNode.position.x {
             score += 1
             rockXPositions.removeFirst()
             
             var number = Int(score / 100)
-            scoreNode[0].texture = SKTexture(imageNamed: "\(number)")
+            scoreNode[0].texture = numberTextures[number]
             number = (score - (score / 100 * 100)) / 10
-            scoreNode[1].texture = SKTexture(imageNamed: "\(number)")
+            scoreNode[1].texture = numberTextures[number]
             number = score % 10
-            scoreNode[2].texture = SKTexture(imageNamed: "\(number)")
+            scoreNode[2].texture = numberTextures[number]
         }
     }
     
@@ -542,6 +544,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         readyHudNode.removeFromParent()
     }
 
+    func loadNumberTextures() {
+        for i in 0 ... 9 {
+            let texture = SKTexture(imageNamed: "\(i)")
+            numberTextures.append(texture)
+        }
+    }
+    
     // MARK: 
     
     func checkGameScore() {

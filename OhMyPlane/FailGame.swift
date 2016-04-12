@@ -25,7 +25,10 @@ class FailGame: GKState {
         
         scene.showGameOver()
         scene.playGameOverMusic()
-        
+    }
+    
+    override func willExitWithNextState(nextState: GKState) {
+        scene.hideGameOver()
     }
     
     override func updateWithDeltaTime(seconds: NSTimeInterval) {

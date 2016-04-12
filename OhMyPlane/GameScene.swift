@@ -13,7 +13,7 @@ import SKTUtils
 struct PhysicsCategory {
     static let None: UInt32         = 0
     static let Plane: UInt32        = 0b1
-    static let Obstacle: UInt32    = 0b10
+    static let Obstacle: UInt32     = 0b10
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -29,7 +29,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgroundLayer = SKNode()
     let spriteLayer = SKNode()
     
-    let readyHudNode = SKNode()
     let cameraNode = SKCameraNode()
     
     // MARK: game state machine
@@ -41,28 +40,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         PauseGame(scene: self)
         ])
     
-    // MARK: Game UI
+    // MARK: Game data
 
-    var score: Int = 0
+    var score: Int = 0 {
+        didSet {
+            if scoreNode.count > 0 {
+                var number = Int(score / 100)
+                scoreNode[0].texture = numberTextures[number]
+                number = (score - (score / 100 * 100)) / 10
+                scoreNode[1].texture = numberTextures[number]
+                number = score % 10
+                scoreNode[2].texture = numberTextures[number]
+            }
+        }
+    }
     var rockXPositions: [CGFloat] = []
+
+    // MARK: UI buttons
     
     var pauseButton: SKSpriteNode! = nil
     var scoreNode: [SKSpriteNode] = []
     
     var exitButton: SKSpriteNode! = nil
     var returnButton: SKSpriteNode! = nil
-    
-    var numberTextures: [SKTexture] = []
-    
+
     // MARK: plane
 
-    var planeEntity: PlaneEntity! = nil
+    var planeState: GKStateMachine!
     
-    lazy var planeState: GKStateMachine = GKStateMachine(states: [
-        Normal(planeEntity: self.planeEntity),
-        Broken(planeEntity: self.planeEntity),
-        Crash(planeEntity: self.planeEntity),
-        Landing(planeEntity: self.planeEntity)])
+    var planeEntity: PlaneEntity! = nil {
+        didSet {
+            planeState =  GKStateMachine(states: [
+                Normal(planeEntity: planeEntity),
+                Broken(planeEntity: planeEntity),
+                Crash(planeEntity: planeEntity),
+                Landing(planeEntity: planeEntity)])
+        }
+    }
 
     // MARK: component systems
     
@@ -90,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return scaledOverlap / scale
     }
 
-    // MARK: touches
+    // MARK: handling touches
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
@@ -114,10 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
         case is FailGame:
-            let scene = GameScene(size: GameSetting.SceneSize)
-            scene.scaleMode = (self.scene?.scaleMode)!
-            let transition = SKTransition.fadeWithDuration(0.6)
-            view!.presentScene(scene, transition: transition)
+            gameState.enterState(ReadyGame.self)
             
         case is PauseGame:
             
@@ -138,7 +149,261 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
         }
     }
+    
+    // MARK: Textures
+    
+    var backgroundTexture: SKTexture!
+    
+    var bottomFrontBackgroundPhysicsTexture: SKTexture!
+    var bottomFrontBackgroundTextures: [BackgroundType: SKTexture] = [:]
+    
+    var topFrontBackgroundPhysicsTexture: SKTexture!
+    var topFrontBackgroundTextures: [BackgroundType: SKTexture] = [:]
+    
+    var numberTextures: [SKTexture] = []
+    
+    private func loadNumberTextures() {
+        for i in 0 ... 9 {
+            let texture = SKTexture(imageNamed: "\(i)")
+            numberTextures.append(texture)
+        }
+    }
+    
+    private func loadAllTextures() {
+        RockEntityTexture.loadAllTextures()
+        loadNumberTextures()
+        
+        backgroundTexture = SKTexture(imageNamed: "background")
+        
+        bottomFrontBackgroundPhysicsTexture = SKTexture(imageNamed: "background_physics")
+        topFrontBackgroundPhysicsTexture = SKTexture(imageNamed: "background_top_physics")
 
+        for backgroundType in BackgroundType.allTypes {
+            let bottomTexture = SKTexture(imageNamed: backgroundType.imageFileName)
+            bottomFrontBackgroundTextures[backgroundType] = bottomTexture
+            
+            let topTexture = SKTexture(imageNamed: backgroundType.topImageFileName)
+            topFrontBackgroundTextures[backgroundType] = topTexture
+        }
+    }
+    
+    // MARK: sprite nodes
+    
+    var pauseNode = SKNode()
+    var backgroundNodes: [SKSpriteNode] = []
+    
+    var gameOverNode = SKSpriteNode()
+    
+    var overlayNode = SKNode()
+    
+    var readyNode = SKNode()
+    
+    var medalNodes: [Rank: SKSpriteNode] = [:]
+    
+    private func prepareMedalNodes() {
+        let goldMedal = SKSpriteNode(imageNamed: Rank.First.imageFileName!)
+        goldMedal.zPosition = SpriteZPosition.Overlay
+        goldMedal.hidden = true
+        
+        cameraNode.addChild(goldMedal)
+        medalNodes[Rank.First] = goldMedal
+        
+        let silverMedal = SKSpriteNode(imageNamed: Rank.Second.imageFileName!)
+        silverMedal.zPosition = SpriteZPosition.Overlay
+        silverMedal.hidden = true
+        
+        cameraNode.addChild(silverMedal)
+        medalNodes[Rank.Second] = silverMedal
+
+        let bronzeMedal = SKSpriteNode(imageNamed: Rank.Third.imageFileName!)
+        bronzeMedal.zPosition = SpriteZPosition.Overlay
+        bronzeMedal.hidden = true
+        
+        cameraNode.addChild(bronzeMedal)
+        medalNodes[Rank.Third] = bronzeMedal
+    }
+    
+    private func preparePauseNode() {
+        let sprite = SKSpriteNode(imageNamed: "paused")
+        sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: sprite.size.height))
+        sprite.zPosition = SpriteZPosition.Hud
+        
+        pauseNode.addChild(sprite)
+        
+        exitButton = SKSpriteNode(imageNamed: "exit")
+        exitButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: -sprite.size.width  / 2, y: -sprite.size.height))
+        exitButton.zPosition = SpriteZPosition.Hud
+        
+        pauseNode.addChild(exitButton)
+        
+        returnButton = SKSpriteNode(imageNamed: "return")
+        returnButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: sprite.size.width  / 2, y: -sprite.size.height))
+        returnButton.zPosition = SpriteZPosition.Hud
+        
+        pauseNode.addChild(returnButton)
+        
+        pauseNode.hidden = true
+        cameraNode.addChild(pauseNode)
+    }
+    
+    private func prepareGameOverNode() {
+        gameOverNode = SKSpriteNode(imageNamed: "game_over")
+        gameOverNode.zPosition = SpriteZPosition.Hud
+        gameOverNode.hidden = true
+        
+        cameraNode.addChild(gameOverNode)
+    }
+    
+    private func prepareOverlayNode() {
+        let yPosition: CGFloat = (displaySize.height / 2) - 150
+        var xPosition: CGFloat = 0
+        
+        pauseButton = SKSpriteNode(imageNamed: "pause")
+        xPosition = (displaySize.width - pauseButton.size.width * 2) / 2
+        pauseButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        pauseButton.zPosition = SpriteZPosition.Hud
+        
+        overlayNode.addChild(pauseButton)
+        
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
+        xPosition = (-1 * displaySize.width / 2) + scoreNode[0].size.width
+        scoreNode[0].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[0].zPosition = SpriteZPosition.Hud
+        
+        overlayNode.addChild(scoreNode[0])
+        
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
+        xPosition += 150
+        scoreNode[1].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[1].zPosition = SpriteZPosition.Hud
+        
+        overlayNode.addChild(scoreNode[1])
+        
+        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
+        xPosition += 150
+        scoreNode[2].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
+        scoreNode[2].zPosition = SpriteZPosition.Hud
+        
+        overlayNode.addChild(scoreNode[2])
+        
+        overlayNode.hidden = true
+        cameraNode.addChild(overlayNode)
+    }
+    
+    private func prepareReadyNode() {
+        let readyImage = SKSpriteNode(imageNamed: "ready")
+        readyImage.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 4))
+        readyImage.zPosition = SpriteZPosition.Hud
+        readyNode.addChild(readyImage)
+        
+        let tap = SKSpriteNode(imageNamed: "tap")
+        tap.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / -4 ))
+        tap.zPosition = SpriteZPosition.Hud
+        readyNode.addChild(tap)
+        
+        let textures = [SKTexture(imageNamed: "tap"), SKTexture(imageNamed: "untap")]
+        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.5)
+        let tapAction = SKAction.repeatActionForever(animation)
+        tap.runAction(tapAction)
+        
+        let tapLeft = SKSpriteNode(imageNamed: "tap_left")
+        tapLeft.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * -1.5, y: displaySize.height / -4))
+        tapLeft.zPosition = SpriteZPosition.Hud
+        readyNode.addChild(tapLeft)
+        
+        let tapRight = SKSpriteNode(imageNamed: "tap_right")
+        tapRight.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * 1.5, y: displaySize.height / -4))
+        tapRight.zPosition = SpriteZPosition.Hud
+        readyNode.addChild(tapRight)
+        
+        readyNode.hidden = true
+        cameraNode.addChild(readyNode)
+    }
+    
+    private func prepareHuds() {
+        preparePauseNode()
+        
+        prepareGameOverNode()
+        
+        prepareOverlayNode()
+        
+        prepareReadyNode()
+        
+        prepareMedalNodes()
+    }
+    
+    private func backgroundNode(backgroundType: BackgroundType) -> SKSpriteNode {
+        let backgroundNode = SKSpriteNode()
+        
+        let backSprite = SKSpriteNode(texture: backgroundTexture)
+        backSprite.anchorPoint = CGPoint.zero
+        backSprite.position = CGPoint.zero
+        backSprite.zPosition = SpriteZPosition.BackBackground
+        backgroundNode.addChild(backSprite)
+        
+        let frontSprite = SKSpriteNode(texture: bottomFrontBackgroundTextures[backgroundType])
+        frontSprite.position = CGPoint(x: frontSprite.size.width / 2, y: overlapAmount() / 2 + frontSprite.size.height / 2)
+        frontSprite.zPosition = SpriteZPosition.FrontBackground
+        
+        frontSprite.physicsBody = SKPhysicsBody(texture: bottomFrontBackgroundPhysicsTexture, size: bottomFrontBackgroundPhysicsTexture.size())
+        frontSprite.physicsBody?.dynamic = false
+        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+        frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        
+        backgroundNode.addChild(frontSprite)
+        
+        let frontSprite2 = SKSpriteNode(texture: topFrontBackgroundTextures[backgroundType])
+        frontSprite2.position = CGPoint(x: frontSprite2.size.width / 2, y: size.height + overlapAmount() / 2 - frontSprite2.size.height / 2)
+        frontSprite2.zPosition = SpriteZPosition.FrontBackground
+        
+        frontSprite2.physicsBody = SKPhysicsBody(texture: topFrontBackgroundPhysicsTexture, size: topFrontBackgroundPhysicsTexture.size())
+        frontSprite2.physicsBody?.dynamic = false
+        frontSprite2.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        frontSprite2.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+        frontSprite2.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        
+        backgroundNode.addChild(frontSprite2)
+        
+        backgroundNode.size = backSprite.size
+        backgroundNode.name = SpriteName.background
+        
+        return backgroundNode
+    }
+    
+    private func prepareBackgroundNodes(backgroundType: BackgroundType) {
+        let background1 = backgroundNode(backgroundType)
+        background1.anchorPoint = CGPoint.zero
+        background1.position = CGPoint.zero
+        backgroundLayer.addChild(background1)
+        
+        backgroundNodes.append(background1)
+        
+        let background2 = backgroundNode(backgroundType)
+        background2.anchorPoint = CGPoint.zero
+        background2.position = CGPoint(x: background1.size.width, y:0)
+        backgroundLayer.addChild(background2)
+        
+        backgroundNodes.append(background2)
+        
+        let background3 = backgroundNode(backgroundType)
+        background3.anchorPoint = CGPoint.zero
+        background3.position = CGPoint(x: background1.size.width * 2, y:0)
+        backgroundLayer.addChild(background3)
+        
+        backgroundNodes.append(background3)
+    }
+    
+    private func prepareBackground(backgroundType: BackgroundType) {
+        prepareBackgroundNodes(backgroundType)
+    }
+    
+    private func resetBackground() {
+        backgroundNodes[0].position = CGPoint.zero
+        backgroundNodes[1].position = CGPoint(x: backgroundNodes[0].size.width, y:0)
+        backgroundNodes[2].position = CGPoint(x: backgroundNodes[0].size.width * 2, y:0)
+    }
+    
     // MARK: SKScene jobs
     
     override func didMoveToView(view: SKView) {
@@ -146,13 +411,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = GameSetting.PhysicsGravity
 
-        RockEntityTexture.loadAllTextures()
-        initializeRockEntities()
-        
-        loadNumberTextures()
-        
         displaySize = CGSize(width: size.width, height: size.height - overlapAmount())
-        
+
         addChild(spriteLayer)
         addChild(backgroundLayer)
         
@@ -160,9 +420,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         camera = cameraNode
         setCameraPosition(CGPoint(x: size.width / 2, y: size.height / 2))
         
+        loadAllTextures()
+        
+        prepareHuds()
+        
+        let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Rock, .Snow]
+        let choice = background[Int.random(5)]
+        prepareBackgroundNodes(choice)
+
+        initializeRockEntities()
+        
         gameState.enterState(ReadyGame.self)
     }
-    
    
     override func update(currentTime: CFTimeInterval) {
         var deltaTime = currentTime - lastUpdateTimeInterval
@@ -183,6 +452,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: entity management
     
     func addPlane(planeType: PlaneType) {
+
+        if planeEntity != nil {
+            removeEntity(planeEntity)
+        }
         
         planeEntity = PlaneEntity(planeType: planeType)
         planeEntity.planeNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -215,6 +488,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     freeRockEntity(rockEntity)
                     removeEntity(entity)
                 }
+            }
+        }
+    }
+    
+    private func resetRockEntities() {
+        for entity in entities {
+            if let rockEntity = entity as? RockEntity {
+                let spriteNode = rockEntity.spriteComponent.node
+                
+                spriteNode.position = CGPoint.zero
+                freeRockEntity(rockEntity)
+                removeEntity(entity)
             }
         }
     }
@@ -303,8 +588,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let rock: [RockType] = [.Bottom, .Top]
             var rockType = rock[Int.random(2)]
             
-            lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
-
             if rockType == previousRockType {
                 countSameRock += 1
             } else {
@@ -323,6 +606,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
 
             // position is left, bottom corner
+            lastRockObstacleXPosition = rightEdge + GameSetting.DeltaRockObstacle
+
             let position: CGPoint
             switch rockType {
             case .Bottom:
@@ -337,50 +622,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // MARK: background
-    
-    var backgroundNodes: [SKSpriteNode] = []
-    
-    func backgroundNode(backgroundType: BackgroundType) -> SKSpriteNode {
-        let backgroundNode = SKSpriteNode()
-        
-        let bodyTexture = SKTexture(imageNamed: "background_physics")
-        let topBodyTexture = SKTexture(imageNamed: "background_top_physics")
-        
-        let backSprite = SKSpriteNode(imageNamed: "background")
-        backSprite.anchorPoint = CGPoint.zero
-        backSprite.position = CGPoint.zero
-        backSprite.zPosition = SpriteZPosition.BackBackground
-        backgroundNode.addChild(backSprite)
-        
-        let frontSprite = SKSpriteNode(imageNamed: backgroundType.imageFileName)
-        frontSprite.position = CGPoint(x: frontSprite.size.width / 2, y: overlapAmount() / 2 + frontSprite.size.height / 2)
-        frontSprite.zPosition = SpriteZPosition.FrontBackground
-        
-        frontSprite.physicsBody = SKPhysicsBody(texture: bodyTexture, size: bodyTexture.size())
-        frontSprite.physicsBody?.dynamic = false
-        frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
-        
-        backgroundNode.addChild(frontSprite)
-        
-        let frontSprite2 = SKSpriteNode(imageNamed: backgroundType.topImageFileName)
-        frontSprite2.position = CGPoint(x: frontSprite2.size.width / 2, y: size.height + overlapAmount() / 2 - frontSprite2.size.height / 2)
-        frontSprite2.zPosition = SpriteZPosition.FrontBackground
-        
-        frontSprite2.physicsBody = SKPhysicsBody(texture: topBodyTexture, size: topBodyTexture.size())
-        frontSprite2.physicsBody?.dynamic = false
-        frontSprite2.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        frontSprite2.physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        frontSprite2.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
-        
-        backgroundNode.addChild(frontSprite2)
-        
-        backgroundNode.size = backSprite.size
-        backgroundNode.name = SpriteName.background
-        
-        return backgroundNode
-    }
     
     func showBackground(backgroundType: BackgroundType) {
         let background1 = backgroundNode(backgroundType)
@@ -418,68 +659,101 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: HUD
     
     func showPause() {
-        let sprite = SKSpriteNode(imageNamed: "paused")
-        sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: sprite.size.height))
-        sprite.zPosition = SpriteZPosition.Hud
-        sprite.name = "pause"
-        
-        cameraNode.addChild(sprite)
-        
-        exitButton = SKSpriteNode(imageNamed: "exit")
-        exitButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: -sprite.size.width  / 2, y: -sprite.size.height))
-        exitButton.zPosition = SpriteZPosition.Hud
-        exitButton.name = "pause"
-        
-        cameraNode.addChild(exitButton)
-        
-        returnButton = SKSpriteNode(imageNamed: "return")
-        returnButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: sprite.size.width  / 2, y: -sprite.size.height))
-        returnButton.zPosition = SpriteZPosition.Hud
-        returnButton.name = "pause"
-        
-        cameraNode.addChild(returnButton)
+        pauseNode.hidden = false
     }
     
     func hidePause() {
-        cameraNode.enumerateChildNodesWithName("pause") { node, _  in
-            if let sprite = node as? SKSpriteNode {
-                sprite.removeFromParent()
-            }
-        }
+        pauseNode.hidden = true
     }
     
     func showOverlay() {
-        let yPosition: CGFloat = (displaySize.height / 2) - 150
-        var xPosition: CGFloat = 0
-        
-        pauseButton = SKSpriteNode(imageNamed: "pause")
-        xPosition = (displaySize.width - pauseButton.size.width * 2) / 2
-        pauseButton.position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
-        pauseButton.zPosition = SpriteZPosition.Hud
-
-        cameraNode.addChild(pauseButton)
-        
-        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
-        xPosition = (-1 * displaySize.width / 2) + scoreNode[0].size.width
-        scoreNode[0].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
-        scoreNode[0].zPosition = SpriteZPosition.Hud
-        
-        cameraNode.addChild(scoreNode[0])
-
-        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
-        xPosition += 150
-        scoreNode[1].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
-        scoreNode[1].zPosition = SpriteZPosition.Hud
-        
-        cameraNode.addChild(scoreNode[1])
-
-        scoreNode.append(SKSpriteNode(texture: numberTextures[0]))
-        xPosition += 150
-        scoreNode[2].position = convertPositionInCameraNodeFromScene(CGPoint(x: xPosition, y: yPosition))
-        scoreNode[2].zPosition = SpriteZPosition.Hud
-        
-        cameraNode.addChild(scoreNode[2])
+        overlayNode.hidden = false
     }
+    
+    func hideOverlay() {
+        overlayNode.hidden = true
+    }
+    
+    func showGameOver() {
+        userInteractionEnabled = false
+        
+        gameOverNode.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 2))
+        gameOverNode.hidden = false
+        
+        let action = SKAction.sequence([
+            SKAction.moveTo(convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: 0)), duration: 0.3),
+            SKAction.runBlock( { self.userInteractionEnabled = true } )
+            ])
+        gameOverNode.runAction(action)
+    }
+    
+    func hideGameOver() {
+        gameOverNode.removeAllActions()
+        gameOverNode.hidden = true
+    }
+    
+    func showReadyHud() {
+        readyNode.hidden = false
+    }
+    
+    func hideReadyHud() {
+        readyNode.hidden = true
+    }
+    
+    private func showMedal(rank: Rank) {
+        if let sprite = medalNodes[rank] {
+            sprite.alpha = 0.9
+            sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
+            sprite.hidden = false
+            
+            sprite.runAction(SKAction.group([
+                SKAction.rotateByAngle(CGFloat(360).degreesToRadians() * 2, duration: 2),
+                SKAction.scaleTo(2.0, duration: 2)
+                ]))
+        }
+    }
+    
+    private func hideMedal() {
+        medalNodes[Rank.First]?.removeAllActions()
+        medalNodes[Rank.First]?.hidden = true
+        
+        medalNodes[Rank.Second]?.removeAllActions()
+        medalNodes[Rank.Second]?.hidden = true
+        
+        medalNodes[Rank.Third]?.removeAllActions()
+        medalNodes[Rank.Third]?.hidden = true
+    }
+
+    // MARK: 
+    
+    func ready() {
+        playBackgroundMusic()
+        
+        // reset background
+        resetBackground()
+
+        let plane: [PlaneType] = [ .Blue, .Green, .Red, .Yellow ]
+        let planeChoice = plane[Int.random(4)]
+        addPlane(planeChoice)
+        
+        showReadyHud()
+        
+        hideOverlay()
+        hideMedal()
+        
+        reset()
+    }
+    
+    func reset() {
+        score = 0
+        lastRockObstacleXPosition = 0
+        
+        rockXPositions = []
+        
+        resetRockEntities()
+    }
+    
+    // MARK: 
     
     func updateScore() {
         let xPosition = rockXPositions.first!
@@ -488,87 +762,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if xPosition < planeNode.position.x {
             score += 1
             rockXPositions.removeFirst()
-            
-            var number = Int(score / 100)
-            scoreNode[0].texture = numberTextures[number]
-            number = (score - (score / 100 * 100)) / 10
-            scoreNode[1].texture = numberTextures[number]
-            number = score % 10
-            scoreNode[2].texture = numberTextures[number]
         }
     }
-    
-    func showGameOver() {
-        let sprite = SKSpriteNode(imageNamed: "game_over")
-        sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 2))
-        sprite.zPosition = SpriteZPosition.Hud
-
-        let action = SKAction.moveTo(convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: 0)), duration: 0.3)
-        sprite.runAction(action)
-        
-        cameraNode.addChild(sprite)
-    }
-    
-    func showReadyHud() {
-        
-        let readyImage = SKSpriteNode(imageNamed: "ready")
-        readyImage.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 4))
-        readyImage.zPosition = SpriteZPosition.Hud
-        readyHudNode.addChild(readyImage)
-        
-        let tap = SKSpriteNode(imageNamed: "tap")
-        tap.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / -4 ))
-        tap.zPosition = SpriteZPosition.Hud
-        readyHudNode.addChild(tap)
-        
-        let textures = [SKTexture(imageNamed: "tap"), SKTexture(imageNamed: "untap")]
-        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.5)
-        let tapAction = SKAction.repeatActionForever(animation)
-        tap.runAction(tapAction)
-        
-        let tapLeft = SKSpriteNode(imageNamed: "tap_left")
-        tapLeft.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * -1.5, y: displaySize.height / -4))
-        tapLeft.zPosition = SpriteZPosition.Hud
-        readyHudNode.addChild(tapLeft)
-        
-        let tapRight = SKSpriteNode(imageNamed: "tap_right")
-        tapRight.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * 1.5, y: displaySize.height / -4))
-        tapRight.zPosition = SpriteZPosition.Hud
-        readyHudNode.addChild(tapRight)
-                
-        cameraNode.addChild(readyHudNode)
-    }
-    
-    func hideReadyHud() {
-        readyHudNode.removeAllChildren()
-        readyHudNode.removeFromParent()
-    }
-
-    func loadNumberTextures() {
-        for i in 0 ... 9 {
-            let texture = SKTexture(imageNamed: "\(i)")
-            numberTextures.append(texture)
-        }
-    }
-    
-    // MARK: 
     
     func checkGameScore() {
         let topThreeRecord = TopThreeRecords()
         let rank = topThreeRecord.getRankOfPoint(score)
         
-        if let fileName = rank.imageFileName {
-            let sprite = SKSpriteNode(imageNamed: fileName)
-            sprite.alpha = 0.9
-            sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
-            sprite.zPosition = SpriteZPosition.Overlay
-            
-            sprite.runAction(SKAction.group([
-                SKAction.rotateByAngle(CGFloat(360 * 2).degreesToRadians(), duration: 2),
-                SKAction.scaleTo(2.0, duration: 2)
-                ]))
-            
-            cameraNode.addChild(sprite)
+        if rank != .None {
+            showMedal(rank)
             
             topThreeRecord.checkAndReplacePoint(planeEntity.planeType.rawValue, point: score)
         }

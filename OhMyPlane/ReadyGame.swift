@@ -18,18 +18,7 @@ class ReadyGame: GKState {
     }
     
     override func didEnterWithPreviousState(previousState: GKState?) {
-        scene.playBackgroundMusic()
-        
-        let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Rock, .Snow]
-        let choice = background[Int.random(5)]
-        scene.showBackground(choice)
-        
-        let plane: [PlaneType] = [ .Blue, .Green, .Red, .Yellow ]
-        let planeChoice = plane[Int.random(4)]
-        scene.addPlane(planeChoice)
-        
-        scene.showReadyHud()
-
+        scene.ready()
     }
     
     override func willExitWithNextState(nextState: GKState) {

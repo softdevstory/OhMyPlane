@@ -130,5 +130,4 @@ class PlaneEntity: GKEntity {
         
         planeNode.runAction(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
     }
-
 }

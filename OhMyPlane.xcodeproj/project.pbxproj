@@ -115,6 +115,18 @@
 			name = "Plane States";
 			sourceTree = "<group>";
 		};
+		A48DA00E1CBCB6AE000DCCED /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				A496E8F21CA23DAB00A448F5 /* Components */,
+				A496E8F81CA250E200A448F5 /* Entities */,
+				A496E8FD1CA269DA00A448F5 /* Game States */,
+				A43735D81CA42438005F5BC1 /* Plane States */,
+				A496E8E01CA228C800A448F5 /* GameScene.swift */,
+			);
+			name = GameScene;
+			sourceTree = "<group>";
+		};
 		A496E8D01CA228C800A448F5 = {
 			isa = PBXGroup;
 			children = (
@@ -137,10 +149,6 @@
 			children = (
 				A496E8F51CA24FFC00A448F5 /* resources */,
 				A4C08B211CAE1EB600FD8DAE /* Scenes */,
-				A43735D81CA42438005F5BC1 /* Plane States */,
-				A496E8FD1CA269DA00A448F5 /* Game States */,
-				A496E8F81CA250E200A448F5 /* Entities */,
-				A496E8F21CA23DAB00A448F5 /* Components */,
 				A496E8DC1CA228C800A448F5 /* AppDelegate.swift */,
 				A496E8E21CA228C800A448F5 /* GameViewController.swift */,
 				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
@@ -215,7 +223,7 @@
 		A4C08B211CAE1EB600FD8DAE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				A496E8E01CA228C800A448F5 /* GameScene.swift */,
+				A48DA00E1CBCB6AE000DCCED /* GameScene */,
 				A4C08B221CAE1F2700FD8DAE /* MainScene.swift */,
 				A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */,
 				A4C08B241CB2344300FD8DAE /* CreditScene.swift */,

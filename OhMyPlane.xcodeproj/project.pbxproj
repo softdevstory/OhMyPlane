@@ -16,6 +16,14 @@
 		A43735E41CA43F15005F5BC1 /* obstacle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A43735E31CA43F15005F5BC1 /* obstacle.atlas */; };
 		A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E51CA51BA3005F5BC1 /* PauseGame.swift */; };
 		A43735EA1CA51BC8005F5BC1 /* FailGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E91CA51BC8005F5BC1 /* FailGame.swift */; };
+		A48DA0161CBE222B000DCCED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA0151CBE222B000DCCED /* AppDelegate.swift */; };
+		A48DA0181CBE222B000DCCED /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0171CBE222B000DCCED /* GameScene.sks */; };
+		A48DA01A1CBE222B000DCCED /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA0191CBE222B000DCCED /* GameScene.swift */; };
+		A48DA01C1CBE222B000DCCED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA01B1CBE222B000DCCED /* GameViewController.swift */; };
+		A48DA01E1CBE222B000DCCED /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA01D1CBE222B000DCCED /* Game.xcassets */; };
+		A48DA0211CBE222B000DCCED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A48DA01F1CBE222B000DCCED /* Main.storyboard */; };
+		A48DA0231CBE222B000DCCED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0221CBE222B000DCCED /* Assets.xcassets */; };
+		A48DA0461CBE2767000DCCED /* SKTUtilsTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E21CA228C800A448F5 /* GameViewController.swift */; };
@@ -58,6 +66,16 @@
 		A43735E31CA43F15005F5BC1 /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacle.atlas; sourceTree = "<group>"; };
 		A43735E51CA51BA3005F5BC1 /* PauseGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PauseGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735E91CA51BC8005F5BC1 /* FailGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FailGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A48DA0131CBE222B000DCCED /* OhMyPlaneTv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlaneTv.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A48DA0151CBE222B000DCCED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A48DA0171CBE222B000DCCED /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		A48DA0191CBE222B000DCCED /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		A48DA01B1CBE222B000DCCED /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A48DA01D1CBE222B000DCCED /* Game.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Game.xcassets; sourceTree = "<group>"; };
+		A48DA0201CBE222B000DCCED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A48DA0221CBE222B000DCCED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A48DA0241CBE222B000DCCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtilsTv.framework; path = Carthage/Build/tvOS/SKTUtilsTv.framework; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -71,7 +89,7 @@
 		A496E8F91CA250F600A448F5 /* PlaneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaneEntity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8FB1CA25E0E00A448F5 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnimationComponent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8FE1CA2763100A448F5 /* PlaneMovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaneMovementComponent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A496E9001CA2782D00A448F5 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameSetting.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A496E9001CA2782D00A448F5 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GameSetting.swift; path = OhMyPlane/GameSetting.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E9041CA281D500A448F5 /* etc.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = etc.atlas; sourceTree = "<group>"; };
 		A496E9061CA2823100A448F5 /* ReadyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReadyGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E9081CA2853E00A448F5 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
@@ -85,7 +103,7 @@
 		A4C08B241CB2344300FD8DAE /* CreditScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditScene.swift; sourceTree = "<group>"; };
 		A4C08B261CB236F000FD8DAE /* credit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = credit.mp3; sourceTree = "<group>"; };
 		A4C08B291CB2398F00FD8DAE /* kenvector_future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future.ttf; sourceTree = "<group>"; };
-		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopThreeRecords.swift; sourceTree = "<group>"; };
+		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopThreeRecords.swift; path = OhMyPlane/TopThreeRecords.swift; sourceTree = "<group>"; };
 		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
 		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRecordsScene.swift; sourceTree = "<group>"; };
 		A4D1BF471CB77895001B455A /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = Carthage/Build/iOS/SKTUtils.framework; sourceTree = "<group>"; };
@@ -93,6 +111,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A48DA0101CBE222B000DCCED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A48DA0461CBE2767000DCCED /* SKTUtilsTv.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A496E8D61CA228C800A448F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,12 +153,41 @@
 			name = GameScene;
 			sourceTree = "<group>";
 		};
+		A48DA0141CBE222B000DCCED /* OhMyPlaneTv */ = {
+			isa = PBXGroup;
+			children = (
+				A48DA0151CBE222B000DCCED /* AppDelegate.swift */,
+				A48DA0171CBE222B000DCCED /* GameScene.sks */,
+				A48DA0191CBE222B000DCCED /* GameScene.swift */,
+				A48DA01B1CBE222B000DCCED /* GameViewController.swift */,
+				A48DA01D1CBE222B000DCCED /* Game.xcassets */,
+				A48DA01F1CBE222B000DCCED /* Main.storyboard */,
+				A48DA0221CBE222B000DCCED /* Assets.xcassets */,
+				A48DA0241CBE222B000DCCED /* Info.plist */,
+			);
+			path = OhMyPlaneTv;
+			sourceTree = "<group>";
+		};
+		A48DA0281CBE2261000DCCED /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
+				A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */,
+				A4C08B211CAE1EB600FD8DAE /* Scenes */,
+				A496E8F51CA24FFC00A448F5 /* resources */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 		A496E8D01CA228C800A448F5 = {
 			isa = PBXGroup;
 			children = (
+				A48DA0281CBE2261000DCCED /* Share */,
 				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
+				A48DA0141CBE222B000DCCED /* OhMyPlaneTv */,
 				A496E8DA1CA228C800A448F5 /* Products */,
 				A4D1BF471CB77895001B455A /* SKTUtils.framework */,
+				A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				A496E8D91CA228C800A448F5 /* OhMyPlane.app */,
+				A48DA0131CBE222B000DCCED /* OhMyPlaneTv.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,16 +203,12 @@
 		A496E8DB1CA228C800A448F5 /* OhMyPlane */ = {
 			isa = PBXGroup;
 			children = (
-				A496E8F51CA24FFC00A448F5 /* resources */,
-				A4C08B211CAE1EB600FD8DAE /* Scenes */,
 				A496E8DC1CA228C800A448F5 /* AppDelegate.swift */,
 				A496E8E21CA228C800A448F5 /* GameViewController.swift */,
-				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
 				A496E8E71CA228C900A448F5 /* Assets.xcassets */,
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
-				A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */,
 			);
 			path = OhMyPlane;
 			sourceTree = "<group>";
@@ -183,6 +235,7 @@
 				A496E9091CA2853E00A448F5 /* spark.png */,
 			);
 			name = resources;
+			path = OhMyPlane;
 			sourceTree = "<group>";
 		};
 		A496E8F81CA250E200A448F5 /* Entities */ = {
@@ -229,6 +282,7 @@
 				A4C08B241CB2344300FD8DAE /* CreditScene.swift */,
 			);
 			name = Scenes;
+			path = OhMyPlane;
 			sourceTree = "<group>";
 		};
 		A4C08B281CB2398400FD8DAE /* fonts */ = {
@@ -242,6 +296,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A48DA0121CBE222B000DCCED /* OhMyPlaneTv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A48DA0251CBE222B000DCCED /* Build configuration list for PBXNativeTarget "OhMyPlaneTv" */;
+			buildPhases = (
+				A48DA00F1CBE222B000DCCED /* Sources */,
+				A48DA0101CBE222B000DCCED /* Frameworks */,
+				A48DA0111CBE222B000DCCED /* Resources */,
+				A48DA02A1CBE22DE000DCCED /* Carthage */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OhMyPlaneTv;
+			productName = OhMyPlaneTv;
+			productReference = A48DA0131CBE222B000DCCED /* OhMyPlaneTv.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A496E8D81CA228C800A448F5 /* OhMyPlane */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A496E8EF1CA228C900A448F5 /* Build configuration list for PBXNativeTarget "OhMyPlane" */;
@@ -270,6 +342,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = softdevstory;
 				TargetAttributes = {
+					A48DA0121CBE222B000DCCED = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = MGW797GVB2;
+					};
 					A496E8D81CA228C800A448F5 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = MGW797GVB2;
@@ -290,11 +366,23 @@
 			projectRoot = "";
 			targets = (
 				A496E8D81CA228C800A448F5 /* OhMyPlane */,
+				A48DA0121CBE222B000DCCED /* OhMyPlaneTv */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A48DA0111CBE222B000DCCED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A48DA0211CBE222B000DCCED /* Main.storyboard in Resources */,
+				A48DA0181CBE222B000DCCED /* GameScene.sks in Resources */,
+				A48DA0231CBE222B000DCCED /* Assets.xcassets in Resources */,
+				A48DA01E1CBE222B000DCCED /* Game.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A496E8D71CA228C800A448F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +410,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A48DA02A1CBE22DE000DCCED /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/SKTUtilsTv.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks ";
+		};
 		A4D1BF491CB778B7001B455A /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +443,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A48DA00F1CBE222B000DCCED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A48DA01A1CBE222B000DCCED /* GameScene.swift in Sources */,
+				A48DA01C1CBE222B000DCCED /* GameViewController.swift in Sources */,
+				A48DA0161CBE222B000DCCED /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A496E8D51CA228C800A448F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,6 +484,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		A48DA01F1CBE222B000DCCED /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A48DA0201CBE222B000DCCED /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		A496E8E41CA228C800A448F5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -390,6 +511,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A48DA0261CBE222B000DCCED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlaneTv;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		A48DA0271CBE222B000DCCED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlaneTv;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 		A496E8ED1CA228C900A448F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -516,6 +679,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A48DA0251CBE222B000DCCED /* Build configuration list for PBXNativeTarget "OhMyPlaneTv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A48DA0261CBE222B000DCCED /* Debug */,
+				A48DA0271CBE222B000DCCED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A496E8D41CA228C800A448F5 /* Build configuration list for PBXProject "OhMyPlane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

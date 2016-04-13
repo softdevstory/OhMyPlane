@@ -7,7 +7,12 @@
 //
 
 import SpriteKit
-import SKTUtils
+
+#if os(iOS)
+    import SKTUtils
+#elseif os(tvOS)
+    import SKTUtilsTv
+#endif
 
 class TopRecordsScene: SKScene {
 

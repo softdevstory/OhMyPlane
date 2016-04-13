@@ -7,7 +7,12 @@
 //
 
 import SpriteKit
-import SKTUtils
+
+#if os(iOS)
+    import SKTUtils
+#elseif os(tvOS)
+    import SKTUtilsTv
+#endif
 
 class MainScene: SKScene {
     
@@ -153,25 +158,27 @@ class MainScene: SKScene {
         backgroundLayer.addChild(start)
         startSprite = start
         
+        topRecordsTextures.append(SKTexture(imageNamed: "topRecords"))
+        topRecordsTextures.append(SKTexture(imageNamed: "topRecords_pressed"))
+        
+        let topRecords = SKSpriteNode(texture: topRecordsTextures[0])
+        topRecords.position = CGPoint( x: size.width - topRecords.size.width, y: overlapAmount() / 2 + topRecords.size.height)
+        topRecords.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(topRecords)
+        topRecordsSprite = topRecords
+        
         setupTextures.append(SKTexture(imageNamed: "setup"))
         setupTextures.append(SKTexture(imageNamed: "setup_pressed"))
         
         let setup = SKSpriteNode(texture: setupTextures[0])
-        setup.position = CGPoint(x: size.width - setup.size.width, y: overlapAmount() / 2 + setup.size.height)
+        setup.position = CGPoint(x: topRecords.position.x, y: topRecords.position.y + setup.size.height)
         setup.zPosition = SpriteZPosition.Overlay
         
         backgroundLayer.addChild(setup)
         setupSprite = setup
         
-        topRecordsTextures.append(SKTexture(imageNamed: "topRecords"))
-        topRecordsTextures.append(SKTexture(imageNamed: "topRecords_pressed"))
         
-        let topRecords = SKSpriteNode(texture: topRecordsTextures[0])
-        topRecords.position = CGPoint( x: setup.position.x, y: setup.position.y + topRecords.size.height)
-        topRecords.zPosition = SpriteZPosition.Overlay
-        
-        backgroundLayer.addChild(topRecords)
-        topRecordsSprite = topRecords
     }
     
     func playBackgroundMusic() {

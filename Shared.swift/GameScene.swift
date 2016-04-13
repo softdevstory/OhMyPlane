@@ -8,7 +8,12 @@
 
 import SpriteKit
 import GameplayKit
-import SKTUtils
+
+#if os(iOS)
+    import SKTUtils
+#elseif os(tvOS)
+    import SKTUtilsTv
+#endif
 
 struct PhysicsCategory {
     static let None: UInt32         = 0
@@ -73,8 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             planeState =  GKStateMachine(states: [
                 Normal(planeEntity: planeEntity),
                 Broken(planeEntity: planeEntity),
-                Crash(planeEntity: planeEntity),
-                Landing(planeEntity: planeEntity)])
+                Crash(planeEntity: planeEntity)])
         }
     }
 

@@ -26,7 +26,7 @@ class CreditScene: SKScene {
         "MH Choi",
         "",
         "Tester",
-        "ES Song",
+        "ES Song, HS Oh, DS Choi",
         "",
         "Thanks to:",
         "",

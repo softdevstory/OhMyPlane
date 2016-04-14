@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A427556C1CBE332600EB0E50 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
+		A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */; };
 		A43735D51CA3D9F9005F5BC1 /* RockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */; };
 		A43735D71CA3DA17005F5BC1 /* PlayGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D61CA3DA17005F5BC1 /* PlayGame.swift */; };
 		A43735DA1CA4244E005F5BC1 /* Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D91CA4244E005F5BC1 /* Normal.swift */; };
@@ -20,7 +21,6 @@
 		A48DA01C1CBE222B000DCCED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA01B1CBE222B000DCCED /* GameViewController.swift */; };
 		A48DA0211CBE222B000DCCED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A48DA01F1CBE222B000DCCED /* Main.storyboard */; };
 		A48DA0231CBE222B000DCCED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0221CBE222B000DCCED /* Assets.xcassets */; };
-		A48DA0461CBE2767000DCCED /* SKTUtilsTv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */; };
 		A48DA0471CBE2A19000DCCED /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E9001CA2782D00A448F5 /* GameSetting.swift */; };
 		A48DA0481CBE2A1C000DCCED /* TopThreeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */; };
 		A48DA0491CBE2A23000DCCED /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8F31CA23DBB00A448F5 /* SpriteComponent.swift */; };
@@ -87,6 +87,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/tvOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = RockEntity.swift; path = ../Shared/RockEntity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735D61CA3DA17005F5BC1 /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayGame.swift; path = ../Shared/PlayGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735D91CA4244E005F5BC1 /* Normal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Normal.swift; path = ../Shared/Normal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -101,7 +102,6 @@
 		A48DA0201CBE222B000DCCED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A48DA0221CBE222B000DCCED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A48DA0241CBE222B000DCCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtilsTv.framework; path = Carthage/Build/tvOS/SKTUtilsTv.framework; sourceTree = "<group>"; };
 		A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ShareAssets.xcassets; path = ../Shared/ShareAssets.xcassets; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -133,7 +133,7 @@
 		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopThreeRecords.swift; path = Shared/TopThreeRecords.swift; sourceTree = "<group>"; };
 		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click3.wav; path = ../Shared/click3.wav; sourceTree = "<group>"; };
 		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopRecordsScene.swift; path = ../Shared/TopRecordsScene.swift; sourceTree = "<group>"; };
-		A4D1BF471CB77895001B455A /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = Carthage/Build/iOS/SKTUtils.framework; sourceTree = "<group>"; };
+		A4D1BF471CB77895001B455A /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/iOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = topThreeRecords.mp3; path = ../Shared/topThreeRecords.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A48DA0461CBE2767000DCCED /* SKTUtilsTv.framework in Frameworks */,
+				A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +187,7 @@
 				A48DA01F1CBE222B000DCCED /* Main.storyboard */,
 				A48DA0221CBE222B000DCCED /* Assets.xcassets */,
 				A48DA0241CBE222B000DCCED /* Info.plist */,
+				A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */,
 			);
 			path = OhMyPlaneTv;
 			sourceTree = "<group>";
@@ -209,8 +210,6 @@
 				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
 				A48DA0141CBE222B000DCCED /* OhMyPlaneTv */,
 				A496E8DA1CA228C800A448F5 /* Products */,
-				A4D1BF471CB77895001B455A /* SKTUtils.framework */,
-				A48DA0451CBE2767000DCCED /* SKTUtilsTv.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,6 +231,7 @@
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
+				A4D1BF471CB77895001B455A /* SKTUtils.framework */,
 			);
 			path = OhMyPlane;
 			sourceTree = "<group>";
@@ -454,7 +454,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/SKTUtilsTv.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/SKTUtils.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -573,7 +573,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
 				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;
@@ -594,7 +593,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
 				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;

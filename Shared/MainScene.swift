@@ -7,12 +7,7 @@
 //
 
 import SpriteKit
-
-#if os(iOS)
-    import SKTUtils
-#elseif os(tvOS)
-    import SKTUtilsTv
-#endif
+import SKTUtils
 
 class MainScene: SKScene {
     

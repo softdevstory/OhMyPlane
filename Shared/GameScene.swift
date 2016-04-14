@@ -8,12 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-
-#if os(iOS)
-    import SKTUtils
-#elseif os(tvOS)
-    import SKTUtilsTv
-#endif
+import SKTUtils
 
 struct PhysicsCategory {
     static let None: UInt32         = 0

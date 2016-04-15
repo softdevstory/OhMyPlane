@@ -607,7 +607,7 @@
 				);
 				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlaneTv;
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -627,7 +627,7 @@
 				);
 				INFOPLIST_FILE = OhMyPlaneTv/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlaneTv;
+				PRODUCT_BUNDLE_IDENTIFIER = net.softdevstory.OhMyPlane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;

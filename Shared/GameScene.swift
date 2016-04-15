@@ -105,43 +105,66 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: handling touches
     
+    func touchDownPause() {
+        playClickSound()
+        
+        changeGameState(PauseGame.self)
+    }
+    
+    func touchDownReturn() {
+        playClickSound()
+        
+        changeGameState(PlayGame)
+    }
+    
+    func touchDownExit() {
+        playClickSound()
+        
+        let scene = MainScene(size: GameSetting.SceneSize)
+        scene.scaleMode = (self.scene?.scaleMode)!
+        let transition = SKTransition.fadeWithDuration(0.6)
+        view!.presentScene(scene, transition: transition)
+    }
+    
+    func goUpPlane() {
+        if planeState.currentState is Broken {
+            planeEntity.impulse()
+        }
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.touchOnRemoteBegan()
+            return
+        }
+        
         let touch = touches.first
         let location = touch?.locationInNode(cameraNode)
         let node = cameraNode.nodeAtPoint(location!)
         
         switch gameState.currentState {
         case is ReadyGame:
-            gameState.enterState(PlayGame.self)
+            changeGameState(PlayGame.self)
 
         case is PlayGame:
             
             if node == pauseButton {
-                playClickSound()
-                
-                gameState.enterState(PauseGame.self)
+                touchDownPause()
             } else {
-                if planeState.currentState is Broken {
-                    planeEntity.impulse()
-                }
+                goUpPlane()
             }
             
         case is FailGame:
-            gameState.enterState(ReadyGame.self)
+            changeGameState(ReadyGame.self)
             
         case is PauseGame:
             
             if node == returnButton {
-                playClickSound()
-                
-                gameState.enterState(PlayGame)
+                touchDownReturn()
             } else if node == exitButton {
-                playClickSound()
-                
-                let scene = MainScene(size: GameSetting.SceneSize)
-                scene.scaleMode = (self.scene?.scaleMode)!
-                let transition = SKTransition.fadeWithDuration(0.6)
-                view!.presentScene(scene, transition: transition)
+                touchDownExit()
             }
             
         default:
@@ -428,8 +451,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         prepareBackgroundNodes(choice)
 
         initializeRockEntities()
+
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.setupTVControls()
+        }
         
-        gameState.enterState(ReadyGame.self)
+        changeGameState(ReadyGame.self)
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -538,7 +567,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch collision {
         case PhysicsCategory.Plane | PhysicsCategory.Obstacle:
             if !(gameState.currentState is FailGame) {
-                gameState.enterState(FailGame.self)
+                changeGameState(FailGame.self)
             }
             
         default:
@@ -811,5 +840,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func playClickSound() {
         SKTAudio.sharedInstance().playSoundEffect("click3.wav")
+    }
+    
+    // MARK:
+    
+    func changeGameState(stateClass: AnyClass) {
+        gameState.enterState(stateClass)
+        
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.resetTVControls()
+        }
+    }
+    
+    func pausePlay() {
+        backgroundLayer.paused = true
+        spriteLayer.paused = true
+        physicsWorld.speed = 0.0
+    }
+    
+    func resumePlay() {
+        backgroundLayer.paused = false
+        spriteLayer.paused = false
+        physicsWorld.speed = 1.0
     }
 }

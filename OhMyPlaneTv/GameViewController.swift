@@ -34,4 +34,11 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
+    
+    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        let skView = self.view as! SKView
+        let scene = skView.scene!
+        
+        scene.pressesBegan(presses, withEvent: event)
+    }
 }

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		A427556C1CBE332600EB0E50 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */; };
+		A435C0621CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
+		A435C0631CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
+		A435C0661CBF6248002EFCCF /* GameScene+TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */; };
+		A435C0681CBF62AE002EFCCF /* MainScene+TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0671CBF62AE002EFCCF /* MainScene+TVControlsScene.swift */; };
+		A435C06A1CBF713A002EFCCF /* CreditScene+TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0691CBF713A002EFCCF /* CreditScene+TVControlsScene.swift */; };
+		A435C06C1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C06B1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift */; };
 		A43735D51CA3D9F9005F5BC1 /* RockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */; };
 		A43735D71CA3DA17005F5BC1 /* PlayGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D61CA3DA17005F5BC1 /* PlayGame.swift */; };
 		A43735DA1CA4244E005F5BC1 /* Normal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735D91CA4244E005F5BC1 /* Normal.swift */; };
@@ -88,6 +94,11 @@
 
 /* Begin PBXFileReference section */
 		A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/tvOS/SKTUtils.framework; sourceTree = "<group>"; };
+		A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVControlsScene.swift; sourceTree = "<group>"; };
+		A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+TVControlsScene.swift"; sourceTree = "<group>"; };
+		A435C0671CBF62AE002EFCCF /* MainScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainScene+TVControlsScene.swift"; sourceTree = "<group>"; };
+		A435C0691CBF713A002EFCCF /* CreditScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreditScene+TVControlsScene.swift"; sourceTree = "<group>"; };
+		A435C06B1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TopRecordsScene+TVControlsScene.swift"; sourceTree = "<group>"; };
 		A43735D41CA3D9F9005F5BC1 /* RockEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = RockEntity.swift; path = ../Shared/RockEntity.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735D61CA3DA17005F5BC1 /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayGame.swift; path = ../Shared/PlayGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735D91CA4244E005F5BC1 /* Normal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Normal.swift; path = ../Shared/Normal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -157,6 +168,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A435C0641CBF620D002EFCCF /* extensionsForTvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */,
+				A435C0671CBF62AE002EFCCF /* MainScene+TVControlsScene.swift */,
+				A435C0691CBF713A002EFCCF /* CreditScene+TVControlsScene.swift */,
+				A435C06B1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift */,
+			);
+			name = extensionsForTvOS;
+			sourceTree = "<group>";
+		};
 		A43735D81CA42438005F5BC1 /* Plane States */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +322,8 @@
 		A4C08B211CAE1EB600FD8DAE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */,
+				A435C0641CBF620D002EFCCF /* extensionsForTvOS */,
 				A48DA00E1CBCB6AE000DCCED /* GameScene */,
 				A4C08B221CAE1F2700FD8DAE /* MainScene.swift */,
 				A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */,
@@ -485,6 +509,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A435C0631CBF61DF002EFCCF /* TVControlsScene.swift in Sources */,
+				A435C0681CBF62AE002EFCCF /* MainScene+TVControlsScene.swift in Sources */,
 				A48DA04E1CBE2A2F000DCCED /* ReadyGame.swift in Sources */,
 				A48DA04F1CBE2A2F000DCCED /* PlayGame.swift in Sources */,
 				A48DA0481CBE2A1C000DCCED /* TopThreeRecords.swift in Sources */,
@@ -495,14 +521,17 @@
 				A48DA04A1CBE2A23000DCCED /* AnimationComponent.swift in Sources */,
 				A48DA0531CBE2A37000DCCED /* Broken.swift in Sources */,
 				A48DA04D1CBE2A2A000DCCED /* RockEntity.swift in Sources */,
+				A435C06A1CBF713A002EFCCF /* CreditScene+TVControlsScene.swift in Sources */,
 				A427556C1CBE332600EB0E50 /* GameScene.swift in Sources */,
 				A48DA04B1CBE2A23000DCCED /* PlaneMovementComponent.swift in Sources */,
 				A48DA0491CBE2A23000DCCED /* SpriteComponent.swift in Sources */,
 				A48DA0571CBE2A40000DCCED /* MainScene.swift in Sources */,
 				A48DA0161CBE222B000DCCED /* AppDelegate.swift in Sources */,
 				A48DA0501CBE2A2F000DCCED /* PauseGame.swift in Sources */,
+				A435C0661CBF6248002EFCCF /* GameScene+TVControlsScene.swift in Sources */,
 				A48DA04C1CBE2A2A000DCCED /* PlaneEntity.swift in Sources */,
 				A48DA0511CBE2A2F000DCCED /* FailGame.swift in Sources */,
+				A435C06C1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift in Sources */,
 				A48DA0541CBE2A37000DCCED /* Crash.swift in Sources */,
 				A48DA0591CBE2A40000DCCED /* CreditScene.swift in Sources */,
 			);
@@ -512,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A435C0621CBF61DF002EFCCF /* TVControlsScene.swift in Sources */,
 				A43735DA1CA4244E005F5BC1 /* Normal.swift in Sources */,
 				A496E8FC1CA25E0E00A448F5 /* AnimationComponent.swift in Sources */,
 				A43735D71CA3DA17005F5BC1 /* PlayGame.swift in Sources */,

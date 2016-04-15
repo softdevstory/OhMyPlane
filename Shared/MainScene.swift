@@ -13,6 +13,8 @@ class MainScene: SKScene {
     
     let backgroundLayer = SKNode()
     
+    // MARK: buttons
+    
     var gameScene: SKScene!
     var creditScene: CreditScene!
     var topRecordsScene: SKScene!
@@ -29,6 +31,50 @@ class MainScene: SKScene {
     var topRecordsTextures: [SKTexture] = []
     var topRecordsPressed = false
     
+    func touchDownStart() {
+        startSprite.texture = startTextures[1]
+        startSprite.size = (startSprite.texture?.size())!
+        startPressed = true
+        
+        playClickSound()
+    }
+    
+    private func touchUpStart() {
+        startSprite.texture = startTextures[0]
+        startSprite.size = (startSprite.texture?.size())!
+        startPressed = false
+    }
+    
+    func touchDownSetup() {
+        setupSprite.texture = setupTextures[1]
+        setupSprite.size = (setupSprite.texture?.size())!
+        setupPressed = true
+        
+        playClickSound()
+    }
+    
+    private func touchUpSetup() {
+        setupSprite.texture = setupTextures[0]
+        setupSprite.size = (setupSprite.texture?.size())!
+        setupPressed = false
+    }
+    
+    func touchDownTopRecord() {
+        topRecordsSprite.texture = topRecordsTextures[1]
+        topRecordsSprite.size = (topRecordsSprite.texture?.size())!
+        topRecordsPressed = true
+        
+        playClickSound()
+    }
+    
+    private func touchUpTopRecord() {
+        topRecordsSprite.texture = topRecordsTextures[0]
+        topRecordsSprite.size = (topRecordsSprite.texture?.size())!
+        topRecordsPressed = false
+    }
+    
+    // MARK: Scene's job
+
     override func didMoveToView(view: SKView) {
         
         addChild(backgroundLayer)
@@ -46,35 +92,36 @@ class MainScene: SKScene {
         loadButtons()
         
         playBackgroundMusic()
+
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.setupTVControls()
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.touchOnRemoteBegan()
+            return
+        }
+        
         let touch = touches.first
         let location = touch?.locationInNode(backgroundLayer)
         let node = backgroundLayer.nodeAtPoint(location!)
         
         if node == startSprite {
-            startSprite.texture = startTextures[1]
-            startSprite.size = (startSprite.texture?.size())!
-            startPressed = true
-
-            playClickSound()
+            touchDownStart()
         }
         
         if node == setupSprite {
-            setupSprite.texture = setupTextures[1]
-            setupSprite.size = (setupSprite.texture?.size())!
-            setupPressed = true
-            
-            playClickSound()
+            touchDownSetup()
         }
         
         if node == topRecordsSprite {
-            topRecordsSprite.texture = topRecordsTextures[1]
-            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
-            topRecordsPressed = true
-            
-            playClickSound()
+            touchDownTopRecord()
         }
     }
     
@@ -83,47 +130,35 @@ class MainScene: SKScene {
             let transition = SKTransition.fadeWithDuration(0.6)
             view!.presentScene(gameScene, transition: transition)
             
-            startSprite.texture = startTextures[0]
-            startSprite.size = (startSprite.texture?.size())!
-            startPressed = false
+            touchUpStart()
         }
         
         if setupPressed {
             let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
             view!.presentScene(creditScene, transition: transition)
-            
-            setupSprite.texture = setupTextures[0]
-            setupSprite.size = (setupSprite.texture?.size())!
-            setupPressed = false
+
+            touchUpSetup()
         }
         
         if topRecordsPressed {
             let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
             view!.presentScene(topRecordsScene, transition: transition)
 
-            topRecordsSprite.texture = topRecordsTextures[0]
-            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
-            topRecordsPressed = false
+            touchUpTopRecord()
         }
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         if startPressed {
-            startSprite.texture = startTextures[0]
-            startSprite.size = (startSprite.texture?.size())!
-            startPressed = false
+            touchUpStart()
         }
         
         if setupPressed {
-            setupSprite.texture = setupTextures[0]
-            setupSprite.size = (setupSprite.texture?.size())!
-            setupPressed = false
+            touchUpSetup()
         }
         
         if topRecordsPressed {
-            topRecordsSprite.texture = topRecordsTextures[0]
-            topRecordsSprite.size = (topRecordsSprite.texture?.size())!
-            topRecordsPressed = false
+            touchUpTopRecord()
         }
     }
     

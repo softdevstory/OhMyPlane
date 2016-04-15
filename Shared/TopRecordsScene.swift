@@ -28,6 +28,12 @@ class TopRecordsScene: SKScene {
         showTopRecords()
         
         playBackgroundMusic()
+        
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.setupTVControls()
+        }
     }
 
     func loadBackground() {
@@ -71,17 +77,28 @@ class TopRecordsScene: SKScene {
         SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
     
+    func touchDownBack() {
+        backSprite.texture = backTextures[1]
+        backSprite.size = (backSprite.texture?.size())!
+        backPressed = true
+        
+        playClickSound()
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.touchOnRemoteBegan()
+            return
+        }
+        
         let touch = touches.first
         let location = touch?.locationInNode(backgroundLayer)
         let node = backgroundLayer.nodeAtPoint(location!)
         
         if node == backSprite {
-            backSprite.texture = backTextures[1]
-            backSprite.size = (backSprite.texture?.size())!
-            backPressed = true
-            
-            playClickSound()
+            touchDownBack()
         }
     }
     

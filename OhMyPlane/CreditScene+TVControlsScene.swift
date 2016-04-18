@@ -17,10 +17,31 @@ extension CreditScene: TVControlsScene {
     }
     
     func touchOnRemoteBegan() {
-        touchDownBack()
+        // nothing to do
     }
     
     func resetTVControls() {
         // nothing to do
+    }
+    
+    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        for press in presses {
+            switch press.type {
+            case .Select:
+                touchDownBack()
+                
+            case .Menu:
+                touchDownBack()
+                
+            default:
+                break
+            }
+        }
+    }
+    
+    override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        if backPressed {
+            doBack()
+        }
     }
 }

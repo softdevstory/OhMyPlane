@@ -117,13 +117,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         changeGameState(PlayGame)
     }
     
-    func touchDownExit() {
-        playClickSound()
-        
+    func gotoMainScene() {
         let scene = MainScene(size: GameSetting.SceneSize)
         scene.scaleMode = (self.scene?.scaleMode)!
         let transition = SKTransition.fadeWithDuration(0.6)
         view!.presentScene(scene, transition: transition)
+    }
+    
+    func touchDownExit() {
+        playClickSound()
+
+        gotoMainScene()
     }
     
     func goUpPlane() {
@@ -459,6 +463,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         changeGameState(ReadyGame.self)
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -857,12 +865,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func pausePlay() {
         backgroundLayer.paused = true
         spriteLayer.paused = true
+        planeEntity.pause()
         physicsWorld.speed = 0.0
     }
     
     func resumePlay() {
         backgroundLayer.paused = false
         spriteLayer.paused = false
+        planeEntity.resume()
         physicsWorld.speed = 1.0
     }
 }

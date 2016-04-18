@@ -26,7 +26,7 @@ class CreditScene: SKScene {
         "MH Choi",
         "",
         "Tester",
-        "ES Song, HS Oh, DS Choi",
+        "ES Song, HS Oh, DS Choi, JH Choi",
         "",
         "Thanks to:",
         "",
@@ -74,6 +74,17 @@ class CreditScene: SKScene {
         playClickSound()
     }
     
+    func doBack() {
+        let scene = MainScene(size: GameSetting.SceneSize)
+        scene.scaleMode = (self.scene?.scaleMode)!
+        let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
+        view!.presentScene(scene, transition: transition)
+        
+        backSprite.texture = backTextures[0]
+        backSprite.size = (backSprite.texture?.size())!
+        backPressed = false
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
@@ -93,14 +104,7 @@ class CreditScene: SKScene {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if backPressed {
-            let scene = MainScene(size: GameSetting.SceneSize)
-            scene.scaleMode = (self.scene?.scaleMode)!
-            let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
-            view!.presentScene(scene, transition: transition)
-            
-            backSprite.texture = backTextures[0]
-            backSprite.size = (backSprite.texture?.size())!
-            backPressed = false
+            doBack()
         }
     }
     

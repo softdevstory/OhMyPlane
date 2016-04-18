@@ -37,18 +37,11 @@ extension MainScene: TVControlsScene {
     }
     
     func touchOnRemoteBegan() {
-        let node = activeNodes[currentNodeIndex] as! SKSpriteNode
-        
-        switch node {
-        case startSprite:
-            touchDownStart()
-        case setupSprite:
-            touchDownSetup()
-        case topRecordsSprite:
-            touchDownTopRecord()
-        default:
-            break;
-        }
+        // nothing to do
+    }
+    
+    func resetTVControls() {
+        // nothing to do
     }
 
     func didSwipeOnRemote(swipe: UISwipeGestureRecognizer) {
@@ -79,7 +72,32 @@ extension MainScene: TVControlsScene {
         currentNodeIndex = index
     }
     
-    func resetTVControls() {
-        // nothing to do
+    
+    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        for press in presses {
+            switch press.type {
+            case .Select:
+                let node = activeNodes[currentNodeIndex] as! SKSpriteNode
+                
+                switch node {
+                case startSprite:
+                    touchDownStart()
+                case setupSprite:
+                    touchDownSetup()
+                case topRecordsSprite:
+                    touchDownTopRecord()
+                default:
+                    break
+                }
+                
+            case .Menu:
+                exit(0)
+                break
+                
+            default:
+                break
+                
+            }
+        }
     }
 }

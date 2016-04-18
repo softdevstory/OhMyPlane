@@ -64,18 +64,6 @@ extension GameScene: TVControlsScene {
             
         case is PlayGame:
             goUpPlane()
-
-        case is PauseGame:
-            guard activeNodes.count > 0 else {
-                return
-            }
-
-            let node = activeNodes[currentNodeIndex] as! SKSpriteNode
-            if node == returnButton {
-                touchDownReturn()
-            } else {
-                touchDownExit()
-            }
             
         default:
             break
@@ -120,12 +108,46 @@ extension GameScene: TVControlsScene {
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
         switch gameState.currentState {
+        case is FailGame: fallthrough
+        case is ReadyGame:
+            for press in presses {
+                if press.type == .Menu {
+                    gotoMainScene()
+                }
+            }
+            
         case is PlayGame:
             for press in presses {
-                if press.type == .PlayPause {
+                if press.type == .Menu {
                     touchDownPause()
                 }
             }
+            
+        case is PauseGame:
+            guard activeNodes.count > 0 else {
+                return
+            }
+            
+            for press in presses {
+                switch press.type {
+                case .Select:
+                    let node = activeNodes[currentNodeIndex] as! SKSpriteNode
+                    if node == returnButton {
+                        activeNodes[currentNodeIndex].removeAllActions()
+                        touchDownReturn()
+                    } else {
+                        touchDownExit()
+                    }
+
+                case .Menu:
+                    activeNodes[currentNodeIndex].removeAllActions()
+                    touchDownReturn()
+
+                default:
+                    break
+                }
+            }
+
         default:
             break
         }

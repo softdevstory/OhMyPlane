@@ -36,8 +36,6 @@ extension GameScene: TVControlsScene {
     }
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-        print("GameScene.pressesBegan")
-
         for press in presses {
             if press.type == .Menu {
                 gotoMainScene()

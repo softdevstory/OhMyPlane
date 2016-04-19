@@ -39,8 +39,6 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         let scene = skView.scene!
 
-        print("pressesBegan")
-        
         if !(scene is GameScene) {
             for press in presses {
                 if press.type == .Menu {
@@ -57,8 +55,6 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         let scene = skView.scene!
         
-        print("pressesEnded")
-
         if !(scene is GameScene) {
             for press in presses {
                 if press.type == .Menu {

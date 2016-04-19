@@ -74,7 +74,6 @@ extension MainScene: TVControlsScene {
     
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-        print("MainScene.pressesBegan")
         
         for press in presses {
             switch press.type {
@@ -104,7 +103,6 @@ extension MainScene: TVControlsScene {
     }
     
     override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
-        print("MainScene.pressesEnded")
 
         if startPressed {
             let transition = SKTransition.fadeWithDuration(0.6)

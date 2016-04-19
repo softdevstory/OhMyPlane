@@ -82,8 +82,6 @@ class MainScene: SKScene {
         gameScene = GameScene(size: GameSetting.SceneSize)
         gameScene.scaleMode = (self.scene?.scaleMode)!
         
-        print("gameScene is created.")
-
         creditScene = CreditScene(size: GameSetting.SceneSize)
         creditScene.scaleMode = (self.scene?.scaleMode)!
         

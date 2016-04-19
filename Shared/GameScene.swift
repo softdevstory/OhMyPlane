@@ -434,8 +434,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
 
-        print("entered didMoveToView")
-        
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = GameSetting.PhysicsGravity
 
@@ -805,7 +803,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if rank != .None {
             showMedal(rank)
-            
+
+
             topThreeRecord.checkAndReplacePoint(planeEntity.planeType.rawValue, point: score)
         }
     }

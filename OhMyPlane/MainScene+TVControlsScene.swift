@@ -74,6 +74,8 @@ extension MainScene: TVControlsScene {
     
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        print("MainScene.pressesBegan")
+        
         for press in presses {
             switch press.type {
             case .Select:
@@ -98,6 +100,31 @@ extension MainScene: TVControlsScene {
                 break
                 
             }
+        }
+    }
+    
+    override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+        print("MainScene.pressesEnded")
+
+        if startPressed {
+            let transition = SKTransition.fadeWithDuration(0.6)
+            view!.presentScene(gameScene, transition: transition)
+            
+            touchUpStart()
+        }
+        
+        if setupPressed {
+            let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
+            view!.presentScene(creditScene, transition: transition)
+            
+            touchUpSetup()
+        }
+        
+        if topRecordsPressed {
+            let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
+            view!.presentScene(topRecordsScene, transition: transition)
+            
+            touchUpTopRecord()
         }
     }
 }

@@ -38,8 +38,10 @@ class GameViewController: UIViewController {
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
         let skView = self.view as! SKView
         let scene = skView.scene!
+
+        print("pressesBegan")
         
-        if scene is MainScene {
+        if !(scene is GameScene) {
             for press in presses {
                 if press.type == .Menu {
                     super.pressesBegan(presses, withEvent: event)
@@ -54,6 +56,17 @@ class GameViewController: UIViewController {
     override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
         let skView = self.view as! SKView
         let scene = skView.scene!
+        
+        print("pressesEnded")
+
+        if !(scene is GameScene) {
+            for press in presses {
+                if press.type == .Menu {
+                    super.pressesEnded(presses, withEvent: event)
+                    return
+                }
+            }
+        }
 
         scene.pressesEnded(presses, withEvent: event)
     }

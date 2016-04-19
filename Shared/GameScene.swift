@@ -434,6 +434,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
 
+        print("entered didMoveToView")
+        
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = GameSetting.PhysicsGravity
 
@@ -465,10 +467,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         changeGameState(ReadyGame.self)
     }
     
-    override func willMoveFromView(view: SKView) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-   
     override func update(currentTime: CFTimeInterval) {
         var deltaTime = currentTime - lastUpdateTimeInterval
         deltaTime = deltaTime > maximumUpdateDeltaTime ? maximumUpdateDeltaTime : deltaTime

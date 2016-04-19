@@ -65,7 +65,7 @@ class CreditScene: SKScene {
             self.positionCreditLabels()
             } ]))
     }
-
+    
     func touchDownBack() {
         backSprite.texture = backTextures[1]
         backSprite.size = (backSprite.texture?.size())!

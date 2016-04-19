@@ -39,7 +39,7 @@ class MainScene: SKScene {
         playClickSound()
     }
     
-    private func touchUpStart() {
+    func touchUpStart() {
         startSprite.texture = startTextures[0]
         startSprite.size = (startSprite.texture?.size())!
         startPressed = false
@@ -53,7 +53,7 @@ class MainScene: SKScene {
         playClickSound()
     }
     
-    private func touchUpSetup() {
+    func touchUpSetup() {
         setupSprite.texture = setupTextures[0]
         setupSprite.size = (setupSprite.texture?.size())!
         setupPressed = false
@@ -67,7 +67,7 @@ class MainScene: SKScene {
         playClickSound()
     }
     
-    private func touchUpTopRecord() {
+    func touchUpTopRecord() {
         topRecordsSprite.texture = topRecordsTextures[0]
         topRecordsSprite.size = (topRecordsSprite.texture?.size())!
         topRecordsPressed = false
@@ -81,6 +81,8 @@ class MainScene: SKScene {
 
         gameScene = GameScene(size: GameSetting.SceneSize)
         gameScene.scaleMode = (self.scene?.scaleMode)!
+        
+        print("gameScene is created.")
 
         creditScene = CreditScene(size: GameSetting.SceneSize)
         creditScene.scaleMode = (self.scene?.scaleMode)!
@@ -103,8 +105,7 @@ class MainScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
-        if let scene = scene as? TVControlsScene {
-            scene.touchOnRemoteBegan()
+        if let _ = scene as? TVControlsScene {
             return
         }
         
@@ -126,6 +127,12 @@ class MainScene: SKScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // for tvOS
+        let scene = (self as SKScene)
+        if let _ = scene as? TVControlsScene {
+            return
+        }
+
         if startPressed {
             let transition = SKTransition.fadeWithDuration(0.6)
             view!.presentScene(gameScene, transition: transition)

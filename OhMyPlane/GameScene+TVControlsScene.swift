@@ -20,7 +20,19 @@ extension GameScene: TVControlsScene {
     }
     
     func touchOnRemoteBegan() {
-        // nothing to do
+        switch gameState.currentState {
+        case is ReadyGame:
+            changeGameState(PlayGame.self)
+            
+        case is FailGame:
+            changeGameState(ReadyGame.self)
+                
+        case is PlayGame:
+            goUpPlane()
+
+        default:
+            break
+        }
     }
     
     override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {

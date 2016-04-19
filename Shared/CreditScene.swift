@@ -30,7 +30,7 @@ class CreditScene: SKScene {
         "",
         "Thanks to:",
         "",
-        "Kenny(http://www.kenny.nl)",
+        "Kenney(http://www.kenney.nl)",
         "images, sound resources",
         "",
         "RayWenderlich(https://www.raywenderlich.com)",

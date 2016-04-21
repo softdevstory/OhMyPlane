@@ -65,9 +65,9 @@ class TopThreeRecords {
         return (paths[0] as NSString).stringByAppendingPathComponent(GameSetting.TopThreeRecordFileName)
     }
     
-    private func load() {
+    private func loadForIOS() {
         let path = dataFilePath()
-
+        
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
             if let data = NSData(contentsOfFile: path) {
                 let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
@@ -88,16 +88,78 @@ class TopThreeRecords {
             topThreeRecords.sortInPlace() {
                 $0.point > $1.point
             }
-            save()
+            saveForIOS()
         }
     }
     
-    func save() {
+    private func saveForIOS() {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
         archiver.encodeObject(topThreeRecords, forKey: "TopThreeRecords")
         archiver.finishEncoding()
         data.writeToFile(dataFilePath(), atomically: true)
+    }
+    
+    private func loadForTvOS() {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let keyStrings = ["goldMedal", "silverMedal", "bronzeMedal"]
+        let defaultPoints = [30, 20, 10]
+        
+        if let _ = userDefault.stringForKey("goldMedalPlane") {
+            for (index, keyString) in keyStrings.enumerate() {
+                if let planeType = userDefault.stringForKey("\(keyString)Plane") {
+                    let point = userDefault.integerForKey("\(keyString)Point")
+                    let item = RecordItem(planeType: planeType, point: point)
+                    
+                    topThreeRecords.append(item)
+                } else {
+                    let item = RecordItem(planeType: PlaneType.Red.rawValue, point: defaultPoints[index])
+                    
+                    topThreeRecords.append(item)
+                }
+            }
+            
+            topThreeRecords.sortInPlace() {
+                $0.point > $1.point
+            }
+        } else {
+            // initial records
+            for point in defaultPoints {
+                let item = RecordItem(planeType: PlaneType.Red.rawValue, point: point)
+                topThreeRecords.append(item)
+            }
+            
+            topThreeRecords.sortInPlace() {
+                $0.point > $1.point
+            }
+            saveForTvOS()
+        }
+    }
+    
+    private func saveForTvOS() {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let keyStrings = ["goldMedal", "silverMedal", "bronzeMedal"]
+
+        for (index, keyString) in keyStrings.enumerate() {
+            userDefault.setObject(topThreeRecords[index].planeType, forKey: "\(keyString)Plane")
+            userDefault.setInteger(topThreeRecords[index].point, forKey: "\(keyString)Point")
+        }
+    }
+    
+    private func load() {
+        #if os(iOS)
+            loadForIOS()
+        #elseif os(tvOS)
+            loadForTvOS()
+        #endif
+    }
+    
+    private func save() {
+        #if os(iOS)
+            saveForIOS()
+        #elseif os(tvOS)
+            saveForTvOS()
+        #endif
     }
 
     func getRankOfPoint(point: Int) -> Rank {

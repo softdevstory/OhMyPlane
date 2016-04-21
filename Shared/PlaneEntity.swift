@@ -130,4 +130,20 @@ class PlaneEntity: GKEntity {
         
         planeNode.runAction(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
     }
+    
+    func pause() {
+        smokeEmitter?.speed = 0.0
+        smokeEmitter?.paused = true
+
+        planeNode.speed = 0.0
+        planeNode.paused = true
+    }
+    
+    func resume() {
+        smokeEmitter?.speed = 1.0
+        smokeEmitter?.paused = false
+        
+        planeNode.speed = 1.0
+        planeNode.paused = false
+    }
 }

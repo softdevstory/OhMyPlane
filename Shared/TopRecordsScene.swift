@@ -28,6 +28,12 @@ class TopRecordsScene: SKScene {
         showTopRecords()
         
         playBackgroundMusic()
+        
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.setupTVControls()
+        }
     }
 
     func loadBackground() {
@@ -71,30 +77,45 @@ class TopRecordsScene: SKScene {
         SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
     
+    func touchDownBack() {
+        backSprite.texture = backTextures[1]
+        backSprite.size = (backSprite.texture?.size())!
+        backPressed = true
+        
+        playClickSound()
+    }
+    
+    func doBack() {
+        let scene = MainScene(size: GameSetting.SceneSize)
+        scene.scaleMode = (self.scene?.scaleMode)!
+        let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
+        view!.presentScene(scene, transition: transition)
+        
+        backSprite.texture = backTextures[0]
+        backSprite.size = (backSprite.texture?.size())!
+        backPressed = false
+    }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // for tvOS
+        let scene = (self as SKScene)
+        if let scene = scene as? TVControlsScene {
+            scene.touchOnRemoteBegan()
+            return
+        }
+        
         let touch = touches.first
         let location = touch?.locationInNode(backgroundLayer)
         let node = backgroundLayer.nodeAtPoint(location!)
         
         if node == backSprite {
-            backSprite.texture = backTextures[1]
-            backSprite.size = (backSprite.texture?.size())!
-            backPressed = true
-            
-            playClickSound()
+            touchDownBack()
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if backPressed {
-            let scene = MainScene(size: GameSetting.SceneSize)
-            scene.scaleMode = (self.scene?.scaleMode)!
-            let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
-            view!.presentScene(scene, transition: transition)
-            
-            backSprite.texture = backTextures[0]
-            backSprite.size = (backSprite.texture?.size())!
-            backPressed = false
+            doBack()
         }
     }
     

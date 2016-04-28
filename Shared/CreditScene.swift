@@ -166,7 +166,11 @@ class CreditScene: SKScene {
             position.y -= label.fontSize
         }
         
-        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0))
+        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0)) {
+            let achievement = AchievementHelper.sharedInstance.creditWatchAchievement()
+            
+            GameKitHelper.sharedInstance.reportAchievements([achievement])
+        }
     }
     
     func loadCreditLabels() {

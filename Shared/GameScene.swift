@@ -227,26 +227,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var medalNodes: [Rank: SKSpriteNode] = [:]
     
     private func prepareMedalNodes() {
-        let goldMedal = SKSpriteNode(imageNamed: Rank.First.imageFileName!)
+        let goldMedal = SKSpriteNode(imageNamed: Rank.Gold.imageFileName!)
         goldMedal.zPosition = SpriteZPosition.Overlay
         goldMedal.hidden = true
         
         cameraNode.addChild(goldMedal)
-        medalNodes[Rank.First] = goldMedal
+        medalNodes[Rank.Gold] = goldMedal
         
-        let silverMedal = SKSpriteNode(imageNamed: Rank.Second.imageFileName!)
+        let silverMedal = SKSpriteNode(imageNamed: Rank.Silver.imageFileName!)
         silverMedal.zPosition = SpriteZPosition.Overlay
         silverMedal.hidden = true
         
         cameraNode.addChild(silverMedal)
-        medalNodes[Rank.Second] = silverMedal
+        medalNodes[Rank.Silver] = silverMedal
 
-        let bronzeMedal = SKSpriteNode(imageNamed: Rank.Third.imageFileName!)
+        let bronzeMedal = SKSpriteNode(imageNamed: Rank.Bronze.imageFileName!)
         bronzeMedal.zPosition = SpriteZPosition.Overlay
         bronzeMedal.hidden = true
         
         cameraNode.addChild(bronzeMedal)
-        medalNodes[Rank.Third] = bronzeMedal
+        medalNodes[Rank.Bronze] = bronzeMedal
     }
     
     private func preparePauseNode() {
@@ -746,14 +746,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func hideMedal() {
-        medalNodes[Rank.First]?.removeAllActions()
-        medalNodes[Rank.First]?.hidden = true
+        medalNodes[Rank.Gold]?.removeAllActions()
+        medalNodes[Rank.Gold]?.hidden = true
         
-        medalNodes[Rank.Second]?.removeAllActions()
-        medalNodes[Rank.Second]?.hidden = true
+        medalNodes[Rank.Silver]?.removeAllActions()
+        medalNodes[Rank.Silver]?.hidden = true
         
-        medalNodes[Rank.Third]?.removeAllActions()
-        medalNodes[Rank.Third]?.hidden = true
+        medalNodes[Rank.Bronze]?.removeAllActions()
+        medalNodes[Rank.Bronze]?.hidden = true
     }
 
     // MARK: 
@@ -796,6 +796,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             rockXPositions.removeFirst()
         }
     }
+
+    private func updateGameStatistics(planeType: PlaneType, medalType: Rank) {
+        GameStatistics.flightCount.increaseCountByOne()
+        
+        switch planeType {
+        case .Red:
+            GameStatistics.flightCountRedPlane.increaseCountByOne()
+        case .Green:
+            GameStatistics.flightCountGreenPlane.increaseCountByOne()
+        case .Yellow:
+            GameStatistics.flightCountYellowPlane.increaseCountByOne()
+        case .Blue:
+            GameStatistics.flightCountBluePlane.increaseCountByOne()
+        }
+        
+        switch medalType {
+        case .Gold:
+            GameStatistics.goldMedalCount.increaseCountByOne()
+        case .Silver:
+            GameStatistics.silverMedalCount.increaseCountByOne()
+        case .Bronze:
+            GameStatistics.bronzeMedalCount.increaseCountByOne()
+        case .None:
+            break
+        }
+    }
+    
+    private func reportAchievement(planeType: PlaneType, medalType: Rank) {
+        let achievements = AchievementHelper.sharedInstance.createAchievements(planeType, medalType: medalType)
+        GameKitHelper.sharedInstance.reportAchievements(achievements)
+    }
     
     func checkGameScore() {
         let topThreeRecord = TopThreeRecords()
@@ -804,10 +835,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if rank != .None {
             showMedal(rank)
 
-
             topThreeRecord.checkAndReplacePoint(planeEntity.planeType.rawValue, point: score)
         }
+    
+        updateGameStatistics(planeEntity.planeType, medalType: rank)
+        
+        reportAchievement(planeEntity.planeType, medalType: rank)
     }
+    
     
     // MARK: Camera
 

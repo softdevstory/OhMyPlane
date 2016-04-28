@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A427556C1CBE332600EB0E50 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
+		A42DE6611CCDD8F80088AD76 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */; };
+		A42DE6621CCDD8F80088AD76 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */; };
+		A42DE6651CCE11970088AD76 /* AchivementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6641CCE11970088AD76 /* AchivementHelper.swift */; };
+		A42DE6671CCF51320088AD76 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42DE6661CCF51320088AD76 /* GameKit.framework */; };
 		A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */; };
 		A435C0621CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
 		A435C0631CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
@@ -23,6 +27,7 @@
 		A43735E41CA43F15005F5BC1 /* obstacle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A43735E31CA43F15005F5BC1 /* obstacle.atlas */; };
 		A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E51CA51BA3005F5BC1 /* PauseGame.swift */; };
 		A43735EA1CA51BC8005F5BC1 /* FailGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43735E91CA51BC8005F5BC1 /* FailGame.swift */; };
+		A46711BD1CC8BC3D005A0E6A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46711BC1CC8BC3D005A0E6A /* GameKit.framework */; };
 		A48DA0161CBE222B000DCCED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA0151CBE222B000DCCED /* AppDelegate.swift */; };
 		A48DA01C1CBE222B000DCCED /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48DA01B1CBE222B000DCCED /* GameViewController.swift */; };
 		A48DA0211CBE222B000DCCED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A48DA01F1CBE222B000DCCED /* Main.storyboard */; };
@@ -60,6 +65,7 @@
 		A48DA0671CBE2A7A000DCCED /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A496E9091CA2853E00A448F5 /* spark.png */; };
 		A48DA0691CBE2AD7000DCCED /* ShareAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */; };
 		A48DA06A1CBE2AD7000DCCED /* ShareAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */; };
+		A490077C1CD09E6A0046DAC8 /* GameStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E21CA228C800A448F5 /* GameViewController.swift */; };
@@ -93,6 +99,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
+		A42DE6641CCE11970088AD76 /* AchivementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchivementHelper.swift; sourceTree = "<group>"; };
+		A42DE6661CCF51320088AD76 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/tvOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVControlsScene.swift; sourceTree = "<group>"; };
 		A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+TVControlsScene.swift"; sourceTree = "<group>"; };
@@ -107,6 +116,7 @@
 		A43735E31CA43F15005F5BC1 /* obstacle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = obstacle.atlas; path = ../Shared/obstacle.atlas; sourceTree = "<group>"; };
 		A43735E51CA51BA3005F5BC1 /* PauseGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PauseGame.swift; path = ../Shared/PauseGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A43735E91CA51BC8005F5BC1 /* FailGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = FailGame.swift; path = ../Shared/FailGame.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A46711BC1CC8BC3D005A0E6A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.2.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
 		A48DA0131CBE222B000DCCED /* OhMyPlaneTv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlaneTv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A48DA0151CBE222B000DCCED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A48DA01B1CBE222B000DCCED /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +124,7 @@
 		A48DA0221CBE222B000DCCED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A48DA0241CBE222B000DCCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ShareAssets.xcassets; path = ../Shared/ShareAssets.xcassets; sourceTree = "<group>"; };
+		A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatistics.swift; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GameScene.swift; path = ../Shared/GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -154,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */,
+				A46711BD1CC8BC3D005A0E6A /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,12 +174,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4D1BF481CB77895001B455A /* SKTUtils.framework in Frameworks */,
+				A42DE6671CCF51320088AD76 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A42DE6631CCE117C0088AD76 /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */,
+				A42DE6641CCE11970088AD76 /* AchivementHelper.swift */,
+				A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */,
+			);
+			name = GameCenter;
+			sourceTree = "<group>";
+		};
 		A435C0641CBF620D002EFCCF /* extensionsForTvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +240,7 @@
 		A48DA0281CBE2261000DCCED /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				A42DE6631CCE117C0088AD76 /* GameCenter */,
 				A496E9001CA2782D00A448F5 /* GameSetting.swift */,
 				A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */,
 				A4C08B211CAE1EB600FD8DAE /* Scenes */,
@@ -228,6 +252,8 @@
 		A496E8D01CA228C800A448F5 = {
 			isa = PBXGroup;
 			children = (
+				A42DE6661CCF51320088AD76 /* GameKit.framework */,
+				A46711BC1CC8BC3D005A0E6A /* GameKit.framework */,
 				A48DA0281CBE2261000DCCED /* Share */,
 				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
 				A48DA0141CBE222B000DCCED /* OhMyPlaneTv */,
@@ -393,10 +419,20 @@
 					A48DA0121CBE222B000DCCED = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = MGW797GVB2;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					A496E8D81CA228C800A448F5 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = MGW797GVB2;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -529,6 +565,7 @@
 				A48DA0161CBE222B000DCCED /* AppDelegate.swift in Sources */,
 				A48DA0501CBE2A2F000DCCED /* PauseGame.swift in Sources */,
 				A435C0661CBF6248002EFCCF /* GameScene+TVControlsScene.swift in Sources */,
+				A42DE6621CCDD8F80088AD76 /* GameKitHelper.swift in Sources */,
 				A48DA04C1CBE2A2A000DCCED /* PlaneEntity.swift in Sources */,
 				A48DA0511CBE2A2F000DCCED /* FailGame.swift in Sources */,
 				A435C06C1CBF7264002EFCCF /* TopRecordsScene+TVControlsScene.swift in Sources */,
@@ -541,6 +578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42DE6611CCDD8F80088AD76 /* GameKitHelper.swift in Sources */,
 				A435C0621CBF61DF002EFCCF /* TVControlsScene.swift in Sources */,
 				A43735DA1CA4244E005F5BC1 /* Normal.swift in Sources */,
 				A496E8FC1CA25E0E00A448F5 /* AnimationComponent.swift in Sources */,
@@ -559,6 +597,8 @@
 				A496E8FF1CA2763100A448F5 /* PlaneMovementComponent.swift in Sources */,
 				A496E9071CA2823100A448F5 /* ReadyGame.swift in Sources */,
 				A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */,
+				A42DE6651CCE11970088AD76 /* AchivementHelper.swift in Sources */,
+				A490077C1CD09E6A0046DAC8 /* GameStatistics.swift in Sources */,
 				A4C08B231CAE1F2700FD8DAE /* MainScene.swift in Sources */,
 				A43735E61CA51BA3005F5BC1 /* PauseGame.swift in Sources */,
 				A43735DE1CA4245F005F5BC1 /* Crash.swift in Sources */,

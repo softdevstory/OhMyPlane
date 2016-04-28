@@ -9,18 +9,18 @@
 import Foundation
 
 enum Rank: Int {
-    case First     = 3
-    case Second    = 2
-    case Third     = 1
+    case Gold      = 3
+    case Silver    = 2
+    case Bronze    = 1
     case None      = 0
     
     var imageFileName: String? {
         switch self {
-        case .First:
+        case .Gold:
             return "gold"
-        case .Second:
+        case .Silver:
             return "silver"
-        case .Third:
+        case .Bronze:
             return "bronze"
         case .None:
             return nil
@@ -163,7 +163,7 @@ class TopThreeRecords {
     }
 
     func getRankOfPoint(point: Int) -> Rank {
-        var result: Rank = .First
+        var result: Rank = .Gold
         
         for record in topThreeRecords {
             if record.point >= point {

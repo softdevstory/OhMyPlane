@@ -57,6 +57,14 @@ class GameKitHelper: NSObject {
         
         GKAchievement.reportAchievements(achievements, withCompletionHandler: errorHandler)
     }
+    
+    func reportScore(gkScore: GKScore, errorHandler: ((NSError?)->Void)? = nil) {
+        guard gameCenterEnabled else {
+            return
+        }
+        
+        GKScore.reportScores([gkScore], withCompletionHandler: errorHandler)
+    }
 }
 
 

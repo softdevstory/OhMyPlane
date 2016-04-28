@@ -823,9 +823,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func reportAchievement(planeType: PlaneType, medalType: Rank) {
+    private func reportToGameCenter(planeType: PlaneType, medalType: Rank, score: Int) {
         let achievements = AchievementHelper.sharedInstance.createAchievements(planeType, medalType: medalType)
         GameKitHelper.sharedInstance.reportAchievements(achievements)
+        
+        let gkScore = LeaderBoardHelper.sharedInstance.createScore(planeType, score: score)
+        GameKitHelper.sharedInstance.reportScore(gkScore)
     }
     
     func checkGameScore() {
@@ -839,8 +842,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     
         updateGameStatistics(planeEntity.planeType, medalType: rank)
-        
-        reportAchievement(planeEntity.planeType, medalType: rank)
+
+        reportToGameCenter(planeEntity.planeType, medalType: rank, score: score)
     }
     
     

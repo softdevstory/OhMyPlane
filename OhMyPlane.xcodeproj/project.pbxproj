@@ -66,6 +66,7 @@
 		A48DA0691CBE2AD7000DCCED /* ShareAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */; };
 		A48DA06A1CBE2AD7000DCCED /* ShareAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */; };
 		A490077C1CD09E6A0046DAC8 /* GameStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */; };
+		A490077E1CD1ED860046DAC8 /* LeaderBoardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E21CA228C800A448F5 /* GameViewController.swift */; };
@@ -125,6 +126,7 @@
 		A48DA0241CBE222B000DCCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ShareAssets.xcassets; path = ../Shared/ShareAssets.xcassets; sourceTree = "<group>"; };
 		A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatistics.swift; sourceTree = "<group>"; };
+		A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderBoardHelper.swift; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GameScene.swift; path = ../Shared/GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */,
+				A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */,
 				A42DE6641CCE11970088AD76 /* AchivementHelper.swift */,
 				A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */,
 			);
@@ -589,6 +592,7 @@
 				A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */,
 				A496E8F41CA23DBB00A448F5 /* SpriteComponent.swift in Sources */,
 				A43735DC1CA42455005F5BC1 /* Broken.swift in Sources */,
+				A490077E1CD1ED860046DAC8 /* LeaderBoardHelper.swift in Sources */,
 				A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */,
 				A496E9011CA2782D00A448F5 /* GameSetting.swift in Sources */,
 				A43735D51CA3D9F9005F5BC1 /* RockEntity.swift in Sources */,

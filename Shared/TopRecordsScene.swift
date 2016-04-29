@@ -17,6 +17,10 @@ class TopRecordsScene: SKScene {
     var backTextures: [SKTexture] = []
     var backPressed = false
     
+    var gameCenterSprite: SKSpriteNode!
+    var gameCenterTextures: [SKTexture] = []
+    var gameCenterPressed = false
+    
     var topThreeRecords = TopThreeRecords()
 
     override func didMoveToView(view: SKView) {
@@ -58,11 +62,21 @@ class TopRecordsScene: SKScene {
     }
     
     func loadButtons() {
+        gameCenterTextures.append(SKTexture(imageNamed: "game_center"))
+        gameCenterTextures.append(SKTexture(imageNamed: "game_center_pressed"))
+        
+        let gameCenter = SKSpriteNode(texture: gameCenterTextures[0])
+        gameCenter.position = CGPoint(x: size.width - gameCenter.size.width, y: overlapAmount() / 2 + gameCenter.size.height)
+        gameCenter.zPosition = SpriteZPosition.Overlay
+        
+        backgroundLayer.addChild(gameCenter)
+        gameCenterSprite = gameCenter
+        
         backTextures.append(SKTexture(imageNamed: "back"))
         backTextures.append(SKTexture(imageNamed: "back_pressed"))
         
         let back = SKSpriteNode(texture: backTextures[0])
-        back.position = CGPoint(x: size.width - back.size.width, y: overlapAmount() / 2 + back.size.height)
+        back.position = CGPoint(x: size.width - back.size.width, y: gameCenter.position.y + back.size.height)
         back.zPosition = SpriteZPosition.Overlay
         
         backgroundLayer.addChild(back)
@@ -77,6 +91,14 @@ class TopRecordsScene: SKScene {
         SKTAudio.sharedInstance().playSoundEffect("click3.wav")
     }
     
+    func touchDownGameCenter() {
+        gameCenterSprite.texture = gameCenterTextures[1]
+        gameCenterSprite.size = (gameCenterSprite.texture?.size())!
+        gameCenterPressed = true
+        
+        playClickSound()
+    }
+    
     func touchDownBack() {
         backSprite.texture = backTextures[1]
         backSprite.size = (backSprite.texture?.size())!
@@ -85,7 +107,16 @@ class TopRecordsScene: SKScene {
         playClickSound()
     }
     
+    func showGameCenterViewController() {
+        NSNotificationCenter.defaultCenter().postNotificationName(PresentGameCenterViewController, object: self)
+        
+        gameCenterSprite.texture = gameCenterTextures[0]
+        gameCenterSprite.size = (gameCenterSprite.texture?.size())!
+        gameCenterPressed = false
+    }
+    
     func doBack() {
+        
         let scene = MainScene(size: GameSetting.SceneSize)
         scene.scaleMode = (self.scene?.scaleMode)!
         let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
@@ -110,12 +141,18 @@ class TopRecordsScene: SKScene {
         
         if node == backSprite {
             touchDownBack()
+        } else if node == gameCenterSprite {
+            touchDownGameCenter()
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if backPressed {
             doBack()
+        }
+        
+        if gameCenterPressed {
+            showGameCenterViewController()
         }
     }
     
@@ -124,6 +161,12 @@ class TopRecordsScene: SKScene {
             backSprite.texture = backTextures[0]
             backSprite.size = (backSprite.texture?.size())!
             backPressed = false
+        }
+        
+        if gameCenterPressed {
+            gameCenterSprite.texture = gameCenterTextures[0]
+            gameCenterSprite.size = (gameCenterSprite.texture?.size())!
+            gameCenterPressed = false
         }
     }
     

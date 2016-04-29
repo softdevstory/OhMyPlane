@@ -67,6 +67,9 @@
 		A48DA06A1CBE2AD7000DCCED /* ShareAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */; };
 		A490077C1CD09E6A0046DAC8 /* GameStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */; };
 		A490077E1CD1ED860046DAC8 /* LeaderBoardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */; };
+		A490077F1CD300AF0046DAC8 /* LeaderBoardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */; };
+		A49007801CD300B20046DAC8 /* AchivementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6641CCE11970088AD76 /* AchivementHelper.swift */; };
+		A49007811CD300B60046DAC8 /* GameStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E21CA228C800A448F5 /* GameViewController.swift */; };
@@ -549,9 +552,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A435C0631CBF61DF002EFCCF /* TVControlsScene.swift in Sources */,
+				A49007811CD300B60046DAC8 /* GameStatistics.swift in Sources */,
 				A435C0681CBF62AE002EFCCF /* MainScene+TVControlsScene.swift in Sources */,
 				A48DA04E1CBE2A2F000DCCED /* ReadyGame.swift in Sources */,
 				A48DA04F1CBE2A2F000DCCED /* PlayGame.swift in Sources */,
+				A490077F1CD300AF0046DAC8 /* LeaderBoardHelper.swift in Sources */,
 				A48DA0481CBE2A1C000DCCED /* TopThreeRecords.swift in Sources */,
 				A48DA0471CBE2A19000DCCED /* GameSetting.swift in Sources */,
 				A48DA0581CBE2A40000DCCED /* TopRecordsScene.swift in Sources */,
@@ -560,6 +565,7 @@
 				A48DA04A1CBE2A23000DCCED /* AnimationComponent.swift in Sources */,
 				A48DA0531CBE2A37000DCCED /* Broken.swift in Sources */,
 				A48DA04D1CBE2A2A000DCCED /* RockEntity.swift in Sources */,
+				A49007801CD300B20046DAC8 /* AchivementHelper.swift in Sources */,
 				A435C06A1CBF713A002EFCCF /* CreditScene+TVControlsScene.swift in Sources */,
 				A427556C1CBE332600EB0E50 /* GameScene.swift in Sources */,
 				A48DA04B1CBE2A23000DCCED /* PlaneMovementComponent.swift in Sources */,

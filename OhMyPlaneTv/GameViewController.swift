@@ -28,6 +28,13 @@ class GameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         
         skView.presentScene(scene)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: PresentAuthenticationViewController, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: PresentGameCenterViewController, object: nil)
+        
+        GameKitHelper.sharedInstance.authenticateLocalPlayer()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,5 +72,16 @@ class GameViewController: UIViewController {
         }
 
         scene.pressesEnded(presses, withEvent: event)
+    }
+    
+    func showAuthenticationViewController() {
+        let gameKitHelper = GameKitHelper.sharedInstance
+        if let authenticationViewController = gameKitHelper.authenticationViewController {
+            presentViewController(authenticationViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func showGameCenterViewController() {
+        GameKitHelper.sharedInstance.showGKGameCenterViewController(self)
     }
 }

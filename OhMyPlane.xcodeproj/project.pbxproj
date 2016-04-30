@@ -12,7 +12,6 @@
 		A42DE6621CCDD8F80088AD76 /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */; };
 		A42DE6651CCE11970088AD76 /* AchivementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6641CCE11970088AD76 /* AchivementHelper.swift */; };
 		A42DE6671CCF51320088AD76 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42DE6661CCF51320088AD76 /* GameKit.framework */; };
-		A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */; };
 		A435C0621CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
 		A435C0631CBF61DF002EFCCF /* TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */; };
 		A435C0661CBF6248002EFCCF /* GameScene+TVControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */; };
@@ -70,6 +69,8 @@
 		A490077F1CD300AF0046DAC8 /* LeaderBoardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */; };
 		A49007801CD300B20046DAC8 /* AchivementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42DE6641CCE11970088AD76 /* AchivementHelper.swift */; };
 		A49007811CD300B60046DAC8 /* GameStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */; };
+		A49007FE1CD4C9230046DAC8 /* SKTUtilsExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A49007FD1CD4C9230046DAC8 /* SKTUtilsExtended.framework */; };
+		A49008001CD4C9310046DAC8 /* SKTUtilsExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A49007FF1CD4C9310046DAC8 /* SKTUtilsExtended.framework */; };
 		A496E8DD1CA228C800A448F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8DC1CA228C800A448F5 /* AppDelegate.swift */; };
 		A496E8E11CA228C800A448F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E01CA228C800A448F5 /* GameScene.swift */; };
 		A496E8E31CA228C800A448F5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A496E8E21CA228C800A448F5 /* GameViewController.swift */; };
@@ -98,7 +99,6 @@
 		A4C08B2C1CB258C800FD8DAE /* TopThreeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */; };
 		A4C08B2E1CB39AF400FD8DAE /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4C08B2D1CB39AF400FD8DAE /* click3.wav */; };
 		A4C08B301CB3A10D00FD8DAE /* TopRecordsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */; };
-		A4D1BF481CB77895001B455A /* SKTUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D1BF471CB77895001B455A /* SKTUtils.framework */; };
 		A4F66B561CB4EC4B00122830 /* topThreeRecords.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +106,6 @@
 		A42DE6601CCDD8F80088AD76 /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
 		A42DE6641CCE11970088AD76 /* AchivementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchivementHelper.swift; sourceTree = "<group>"; };
 		A42DE6661CCF51320088AD76 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/tvOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A435C0611CBF61DF002EFCCF /* TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVControlsScene.swift; sourceTree = "<group>"; };
 		A435C0651CBF6248002EFCCF /* GameScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+TVControlsScene.swift"; sourceTree = "<group>"; };
 		A435C0671CBF62AE002EFCCF /* MainScene+TVControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainScene+TVControlsScene.swift"; sourceTree = "<group>"; };
@@ -130,6 +129,8 @@
 		A48DA0681CBE2AD7000DCCED /* ShareAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ShareAssets.xcassets; path = ../Shared/ShareAssets.xcassets; sourceTree = "<group>"; };
 		A490077B1CD09E6A0046DAC8 /* GameStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatistics.swift; sourceTree = "<group>"; };
 		A490077D1CD1ED860046DAC8 /* LeaderBoardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderBoardHelper.swift; sourceTree = "<group>"; };
+		A49007FD1CD4C9230046DAC8 /* SKTUtilsExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtilsExtended.framework; path = Carthage/Build/tvOS/SKTUtilsExtended.framework; sourceTree = "<group>"; };
+		A49007FF1CD4C9310046DAC8 /* SKTUtilsExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtilsExtended.framework; path = Carthage/Build/iOS/SKTUtilsExtended.framework; sourceTree = "<group>"; };
 		A496E8D91CA228C800A448F5 /* OhMyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OhMyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496E8DC1CA228C800A448F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A496E8E01CA228C800A448F5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GameScene.swift; path = ../Shared/GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -160,7 +161,6 @@
 		A4C08B2B1CB258C800FD8DAE /* TopThreeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopThreeRecords.swift; path = Shared/TopThreeRecords.swift; sourceTree = "<group>"; };
 		A4C08B2D1CB39AF400FD8DAE /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click3.wav; path = ../Shared/click3.wav; sourceTree = "<group>"; };
 		A4C08B2F1CB3A10D00FD8DAE /* TopRecordsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopRecordsScene.swift; path = ../Shared/TopRecordsScene.swift; sourceTree = "<group>"; };
-		A4D1BF471CB77895001B455A /* SKTUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKTUtils.framework; path = ../Carthage/Build/iOS/SKTUtils.framework; sourceTree = "<group>"; };
 		A4F66B551CB4EC4B00122830 /* topThreeRecords.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = topThreeRecords.mp3; path = ../Shared/topThreeRecords.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A435C0601CBF4628002EFCCF /* SKTUtils.framework in Frameworks */,
+				A49007FE1CD4C9230046DAC8 /* SKTUtilsExtended.framework in Frameworks */,
 				A46711BD1CC8BC3D005A0E6A /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4D1BF481CB77895001B455A /* SKTUtils.framework in Frameworks */,
+				A49008001CD4C9310046DAC8 /* SKTUtilsExtended.framework in Frameworks */,
 				A42DE6671CCF51320088AD76 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,7 +238,6 @@
 				A48DA01F1CBE222B000DCCED /* Main.storyboard */,
 				A48DA0221CBE222B000DCCED /* Assets.xcassets */,
 				A48DA0241CBE222B000DCCED /* Info.plist */,
-				A435C05E1CBF45D3002EFCCF /* SKTUtils.framework */,
 			);
 			path = OhMyPlaneTv;
 			sourceTree = "<group>";
@@ -255,15 +254,25 @@
 			name = Share;
 			sourceTree = "<group>";
 		};
+		A49008011CD4C9CB0046DAC8 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				A49007FF1CD4C9310046DAC8 /* SKTUtilsExtended.framework */,
+				A49007FD1CD4C9230046DAC8 /* SKTUtilsExtended.framework */,
+				A42DE6661CCF51320088AD76 /* GameKit.framework */,
+				A46711BC1CC8BC3D005A0E6A /* GameKit.framework */,
+			);
+			name = framework;
+			sourceTree = "<group>";
+		};
 		A496E8D01CA228C800A448F5 = {
 			isa = PBXGroup;
 			children = (
-				A42DE6661CCF51320088AD76 /* GameKit.framework */,
-				A46711BC1CC8BC3D005A0E6A /* GameKit.framework */,
 				A48DA0281CBE2261000DCCED /* Share */,
 				A496E8DB1CA228C800A448F5 /* OhMyPlane */,
 				A48DA0141CBE222B000DCCED /* OhMyPlaneTv */,
 				A496E8DA1CA228C800A448F5 /* Products */,
+				A49008011CD4C9CB0046DAC8 /* framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,7 +294,6 @@
 				A496E8E91CA228C900A448F5 /* LaunchScreen.storyboard */,
 				A496E8EC1CA228C900A448F5 /* Info.plist */,
 				A496E8E41CA228C800A448F5 /* Main.storyboard */,
-				A4D1BF471CB77895001B455A /* SKTUtils.framework */,
 			);
 			path = OhMyPlane;
 			sourceTree = "<group>";
@@ -520,7 +528,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/SKTUtils.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/SKTUtilsExtended.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -535,7 +543,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SKTUtils.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SKTUtilsExtended.framework",
 			);
 			name = Carthage;
 			outputPaths = (

@@ -33,7 +33,9 @@ class GameViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: PresentAuthenticationViewController, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: PresentGameCenterViewController, object: nil)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         GameKitHelper.sharedInstance.authenticateLocalPlayer()
     }
     

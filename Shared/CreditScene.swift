@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-import SKTUtils
+import SKTUtilsExtended
 
 class CreditScene: SKScene {
 

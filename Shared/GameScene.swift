@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-import SKTUtils
+import SKTUtilsExtended
 
 struct PhysicsCategory {
     static let None: UInt32         = 0

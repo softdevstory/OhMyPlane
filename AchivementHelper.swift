@@ -50,9 +50,9 @@ enum Achievement: String {
     case CreditWatch
     
     private func getPercentage(gameStatistic: GameStatistics, maxValue: Double) -> Double {
-        let percent: Double = Double(gameStatistic.getValue()) / maxValue
-        if percent > 1.0 {
-            return 1.0
+        let percent: Double = (Double(gameStatistic.getValue()) / maxValue) * 100.0
+        if percent > 100.0 {
+            return 100.0
         }
 
         return percent
@@ -206,9 +206,9 @@ class AchievementHelper {
             case .Gold:
                 achievement = Achievement.YellowPlaneGoldMedal.gkAchievement
             case .Silver:
-                achievement = Achievement.YellowPlaneGoldMedal.gkAchievement
+                achievement = Achievement.YellowPlaneSilverMedal.gkAchievement
             case .Bronze:
-                achievement = Achievement.YellowPlaneGoldMedal.gkAchievement
+                achievement = Achievement.YellowPlaneBronzeMedal.gkAchievement
             default: break
             }
         }
@@ -335,10 +335,10 @@ class AchievementHelper {
             achievements.appendContentsOf(bluePlaneFlightAchievements())
             
         case .Yellow:
-            achievements.appendContentsOf(redPlaneFlightAchievements())
+            achievements.appendContentsOf(yellowPlaneFlightAchievements())
 
         case .Green:
-            achievements.appendContentsOf(redPlaneFlightAchievements())
+            achievements.appendContentsOf(greenPlaneFlightAchievements())
         }
         
         return achievements

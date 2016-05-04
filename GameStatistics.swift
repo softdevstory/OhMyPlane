@@ -25,7 +25,6 @@ enum GameStatistics: String {
     
     private func setValue(value: Int) {
         NSUserDefaults.standardUserDefaults().setInteger(value, forKey: self.rawValue)
-        print("\(self.rawValue) value: \(value)")
     }
     
     func increaseCountByOne() {

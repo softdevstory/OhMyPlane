@@ -18,12 +18,12 @@ class PauseGame: GKState {
         super.init()
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         scene.pausePlay()
         scene.showPause()
     }
     
-    override func willExitWithNextState(nextState: GKState) {
+    override func willExit(to nextState: GKState) {
         scene.resumePlay()
         scene.hidePause()
     }

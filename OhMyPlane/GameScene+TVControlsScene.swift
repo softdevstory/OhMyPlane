@@ -16,7 +16,7 @@ extension GameScene: TVControlsScene {
     }
     
     func resetTVControls() {
-        pauseButton.hidden = true
+        pauseButton.isHidden = true
     }
     
     func touchOnRemoteBegan() {
@@ -35,9 +35,9 @@ extension GameScene: TVControlsScene {
         }
     }
     
-    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
-            if press.type == .Menu {
+            if press.type == .menu {
                 gotoMainScene()
             }
         }

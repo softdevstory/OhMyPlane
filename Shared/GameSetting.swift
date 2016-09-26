@@ -43,19 +43,19 @@ enum PlaneType: String {
     
     var boostValue: CGVector {
         switch self {
-        case Blue: return CGVector(dx: 0, dy: 1100)
-        case Green: return CGVector(dx: 0, dy: 1100)
-        case Red: return CGVector(dx: 0, dy: 1100)
-        case Yellow: return CGVector(dx: 0, dy: 1100)
+        case .Blue: return CGVector(dx: 0, dy: 1100)
+        case .Green: return CGVector(dx: 0, dy: 1100)
+        case .Red: return CGVector(dx: 0, dy: 1100)
+        case .Yellow: return CGVector(dx: 0, dy: 1100)
         }
     }
     
     var speed: CGFloat {
         switch self {
-        case Blue: return 75
-        case Green: return 70
-        case Red: return 65
-        case Yellow: return 60
+        case .Blue: return 75
+        case .Green: return 70
+        case .Red: return 65
+        case .Yellow: return 60
         }
     }
 }

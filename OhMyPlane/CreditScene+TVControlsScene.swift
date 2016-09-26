@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-private let fadeOut = SKAction.fadeAlphaTo(0.5, duration: 0.5)
-private let fadeIn = SKAction.fadeAlphaTo(1.0, duration: 0.5)
+private let fadeOut = SKAction.fadeAlpha(to: 0.5, duration: 0.5)
+private let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
 
 extension CreditScene: TVControlsScene {
     func setupTVControls() {
-        backSprite.runAction(SKAction.repeatActionForever(SKAction.sequence([fadeOut, fadeIn])))
+        backSprite.run(SKAction.repeatForever(SKAction.sequence([fadeOut, fadeIn])))
     }
     
     func touchOnRemoteBegan() {
@@ -24,13 +24,13 @@ extension CreditScene: TVControlsScene {
         // nothing to do
     }
     
-    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
             switch press.type {
-            case .Select:
+            case .select:
                 touchDownBack()
                 
-            case .Menu:
+            case .menu:
                 touchDownBack()
                 
             default:
@@ -39,7 +39,7 @@ extension CreditScene: TVControlsScene {
         }
     }
     
-    override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         if backPressed {
             doBack()
         }

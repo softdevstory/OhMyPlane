@@ -20,9 +20,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: update time
     
-    var lastUpdateTimeInterval: NSTimeInterval = 0
-    let maximumUpdateDeltaTime: NSTimeInterval = 1.0 / 60.0
-    var lastDeltaTime: NSTimeInterval = 0
+    var lastUpdateTimeInterval: TimeInterval = 0
+    let maximumUpdateDeltaTime: TimeInterval = 1.0 / 60.0
+    var lastDeltaTime: TimeInterval = 0
 
     // MARK: Sprite layers
     
@@ -114,13 +114,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func touchDownReturn() {
         playClickSound()
         
-        changeGameState(PlayGame)
+        changeGameState(PlayGame.self)
     }
     
     func gotoMainScene() {
         let scene = MainScene(size: GameSetting.SceneSize)
         scene.scaleMode = (self.scene?.scaleMode)!
-        let transition = SKTransition.fadeWithDuration(0.6)
+        let transition = SKTransition.fade(withDuration: 0.6)
         view!.presentScene(scene, transition: transition)
     }
     
@@ -136,7 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
         if let scene = scene as? TVControlsScene {
@@ -145,8 +145,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         let touch = touches.first
-        let location = touch?.locationInNode(cameraNode)
-        let node = cameraNode.nodeAtPoint(location!)
+        let location = touch?.location(in: cameraNode)
+        let node = cameraNode.atPoint(location!)
         
         switch gameState.currentState {
         case is ReadyGame:
@@ -188,14 +188,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var numberTextures: [SKTexture] = []
     
-    private func loadNumberTextures() {
+    fileprivate func loadNumberTextures() {
         for i in 0 ... 9 {
             let texture = SKTexture(imageNamed: "\(i)")
             numberTextures.append(texture)
         }
     }
     
-    private func loadAllTextures() {
+    fileprivate func loadAllTextures() {
         RockEntityTexture.loadAllTextures()
         loadNumberTextures()
         
@@ -226,30 +226,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var medalNodes: [Rank: SKSpriteNode] = [:]
     
-    private func prepareMedalNodes() {
-        let goldMedal = SKSpriteNode(imageNamed: Rank.Gold.imageFileName!)
+    fileprivate func prepareMedalNodes() {
+        let goldMedal = SKSpriteNode(imageNamed: Rank.gold.imageFileName!)
         goldMedal.zPosition = SpriteZPosition.Overlay
-        goldMedal.hidden = true
+        goldMedal.isHidden = true
         
         cameraNode.addChild(goldMedal)
-        medalNodes[Rank.Gold] = goldMedal
+        medalNodes[Rank.gold] = goldMedal
         
-        let silverMedal = SKSpriteNode(imageNamed: Rank.Silver.imageFileName!)
+        let silverMedal = SKSpriteNode(imageNamed: Rank.silver.imageFileName!)
         silverMedal.zPosition = SpriteZPosition.Overlay
-        silverMedal.hidden = true
+        silverMedal.isHidden = true
         
         cameraNode.addChild(silverMedal)
-        medalNodes[Rank.Silver] = silverMedal
+        medalNodes[Rank.silver] = silverMedal
 
-        let bronzeMedal = SKSpriteNode(imageNamed: Rank.Bronze.imageFileName!)
+        let bronzeMedal = SKSpriteNode(imageNamed: Rank.bronze.imageFileName!)
         bronzeMedal.zPosition = SpriteZPosition.Overlay
-        bronzeMedal.hidden = true
+        bronzeMedal.isHidden = true
         
         cameraNode.addChild(bronzeMedal)
-        medalNodes[Rank.Bronze] = bronzeMedal
+        medalNodes[Rank.bronze] = bronzeMedal
     }
     
-    private func preparePauseNode() {
+    fileprivate func preparePauseNode() {
         let sprite = SKSpriteNode(imageNamed: "paused")
         sprite.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: sprite.size.height))
         sprite.zPosition = SpriteZPosition.Hud
@@ -268,19 +268,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         pauseNode.addChild(returnButton)
         
-        pauseNode.hidden = true
+        pauseNode.isHidden = true
         cameraNode.addChild(pauseNode)
     }
     
-    private func prepareGameOverNode() {
+    fileprivate func prepareGameOverNode() {
         gameOverNode = SKSpriteNode(imageNamed: "game_over")
         gameOverNode.zPosition = SpriteZPosition.Hud
-        gameOverNode.hidden = true
+        gameOverNode.isHidden = true
         
         cameraNode.addChild(gameOverNode)
     }
     
-    private func prepareOverlayNode() {
+    fileprivate func prepareOverlayNode() {
         let yPosition: CGFloat = (displaySize.height / 2) - 150
         var xPosition: CGFloat = 0
         
@@ -312,11 +312,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         overlayNode.addChild(scoreNode[2])
         
-        overlayNode.hidden = true
+        overlayNode.isHidden = true
         cameraNode.addChild(overlayNode)
     }
     
-    private func prepareReadyNode() {
+    fileprivate func prepareReadyNode() {
         let readyImage = SKSpriteNode(imageNamed: "ready")
         readyImage.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 4))
         readyImage.zPosition = SpriteZPosition.Hud
@@ -328,9 +328,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         readyNode.addChild(tap)
         
         let textures = [SKTexture(imageNamed: "tap"), SKTexture(imageNamed: "untap")]
-        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.5)
-        let tapAction = SKAction.repeatActionForever(animation)
-        tap.runAction(tapAction)
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.5)
+        let tapAction = SKAction.repeatForever(animation)
+        tap.run(tapAction)
         
         let tapLeft = SKSpriteNode(imageNamed: "tap_left")
         tapLeft.position = convertPositionInCameraNodeFromScene(CGPoint(x: tap.size.width * -1.5, y: displaySize.height / -4))
@@ -342,11 +342,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapRight.zPosition = SpriteZPosition.Hud
         readyNode.addChild(tapRight)
         
-        readyNode.hidden = true
+        readyNode.isHidden = true
         cameraNode.addChild(readyNode)
     }
     
-    private func prepareHuds() {
+    fileprivate func prepareHuds() {
         preparePauseNode()
         
         prepareGameOverNode()
@@ -358,7 +358,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         prepareMedalNodes()
     }
     
-    private func backgroundNode(backgroundType: BackgroundType) -> SKSpriteNode {
+    fileprivate func backgroundNode(_ backgroundType: BackgroundType) -> SKSpriteNode {
         let backgroundNode = SKSpriteNode()
         
         let backSprite = SKSpriteNode(texture: backgroundTexture)
@@ -372,7 +372,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         frontSprite.zPosition = SpriteZPosition.FrontBackground
         
         frontSprite.physicsBody = SKPhysicsBody(texture: bottomFrontBackgroundPhysicsTexture, size: bottomFrontBackgroundPhysicsTexture.size())
-        frontSprite.physicsBody?.dynamic = false
+        frontSprite.physicsBody?.isDynamic = false
         frontSprite.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         frontSprite.physicsBody?.collisionBitMask = PhysicsCategory.Plane
         frontSprite.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
@@ -384,7 +384,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         frontSprite2.zPosition = SpriteZPosition.FrontBackground
         
         frontSprite2.physicsBody = SKPhysicsBody(texture: topFrontBackgroundPhysicsTexture, size: topFrontBackgroundPhysicsTexture.size())
-        frontSprite2.physicsBody?.dynamic = false
+        frontSprite2.physicsBody?.isDynamic = false
         frontSprite2.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         frontSprite2.physicsBody?.collisionBitMask = PhysicsCategory.Plane
         frontSprite2.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
@@ -397,7 +397,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return backgroundNode
     }
     
-    private func prepareBackgroundNodes(backgroundType: BackgroundType) {
+    fileprivate func prepareBackgroundNodes(_ backgroundType: BackgroundType) {
         let background1 = backgroundNode(backgroundType)
         background1.anchorPoint = CGPoint.zero
         background1.position = CGPoint.zero
@@ -420,11 +420,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundNodes.append(background3)
     }
     
-    private func prepareBackground(backgroundType: BackgroundType) {
+    fileprivate func prepareBackground(_ backgroundType: BackgroundType) {
         prepareBackgroundNodes(backgroundType)
     }
     
-    private func resetBackground() {
+    fileprivate func resetBackground() {
         backgroundNodes[0].position = CGPoint.zero
         backgroundNodes[1].position = CGPoint(x: backgroundNodes[0].size.width, y:0)
         backgroundNodes[2].position = CGPoint(x: backgroundNodes[0].size.width * 2, y:0)
@@ -432,7 +432,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: SKScene jobs
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
 
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = GameSetting.PhysicsGravity
@@ -465,25 +465,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         changeGameState(ReadyGame.self)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         var deltaTime = currentTime - lastUpdateTimeInterval
         deltaTime = deltaTime > maximumUpdateDeltaTime ? maximumUpdateDeltaTime : deltaTime
         lastUpdateTimeInterval = currentTime
         
         for componentSystem in componentSystems {
-            componentSystem.updateWithDeltaTime(deltaTime)
+            componentSystem.update(deltaTime: deltaTime)
         }
         
         updateCameraNode()
 
-        gameState.currentState?.updateWithDeltaTime(deltaTime)
+        gameState.currentState?.update(deltaTime: deltaTime)
         
-        planeState.currentState?.updateWithDeltaTime(deltaTime)
+        planeState.currentState?.update(deltaTime: deltaTime)
     }
     
     // MARK: entity management
     
-    func addPlane(planeType: PlaneType) {
+    func addPlane(_ planeType: PlaneType) {
 
         if planeEntity != nil {
             removeEntity(planeEntity)
@@ -497,10 +497,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addEntity(planeEntity)
         
-        planeState.enterState(Normal.self)
+        planeState.enter(Normal.self)
     }
     
-    func addRockEntity(rockType: RockType, position: CGPoint) {
+    func addRockEntity(_ rockType: RockType, position: CGPoint) {
         let background: [BackgroundType] = [.Dirt, .Grass, .Ice, .Snow]
         let backgroundType = background[Int.random(4)]
 
@@ -524,7 +524,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func resetRockEntities() {
+    fileprivate func resetRockEntities() {
         for entity in entities {
             if let rockEntity = entity as? RockEntity {
                 let spriteNode = rockEntity.spriteComponent.node
@@ -538,26 +538,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var entities = Set<GKEntity>()
     
-    func addEntity(entity: GKEntity) {
+    func addEntity(_ entity: GKEntity) {
         entities.insert(entity)
         
         for componentSystem in componentSystems {
-            componentSystem.addComponentWithEntity(entity)
+            componentSystem.addComponent(foundIn: entity)
         }
         
-        if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
+        if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
             spriteLayer.addChild(spriteNode)
         }
     }
     
-    func removeEntity(entity: GKEntity) {
+    func removeEntity(_ entity: GKEntity) {
 
-        if let spriteNode = entity.componentForClass(SpriteComponent.self)?.node {
+        if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
             spriteNode.removeFromParent()
         }
 
         for componentSystem in componentSystems {
-            componentSystem.removeComponentWithEntity(entity)
+            componentSystem.removeComponent(foundIn: entity)
         }
         
         entities.remove(entity)
@@ -565,7 +565,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: physics
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch collision {
@@ -582,24 +582,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: Rock obstacle
     
     var lastRockObstacleXPosition: CGFloat = 0
-    var previousRockType: RockType = .Bottom
+    var previousRockType: RockType = .bottom
     var countSameRock = 0
     var rockEntities: [RockEntity] = []
     var freeRockEntities: [RockEntity] = []
     
     func initializeRockEntities() {
         for _ in 0 ... 6 {
-            let rockEntity = RockEntity(backgroundType: .Ice, rockType: .Bottom, atPosition: CGPoint.zero)
+            let rockEntity = RockEntity(backgroundType: .Ice, rockType: .bottom, atPosition: CGPoint.zero)
 
             freeRockEntities.append(rockEntity)
         }
     }
     
-    func freeRockEntity(rockEntity: RockEntity) {
+    func freeRockEntity(_ rockEntity: RockEntity) {
         freeRockEntities.append(rockEntity)
     }
     
-    func newRockEntity(backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) -> RockEntity {
+    func newRockEntity(_ backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) -> RockEntity {
         
         if let rockEntity = freeRockEntities.popLast() {
             rockEntity.reset(backgroundType, rockType: rockType, atPosition: position)
@@ -617,7 +617,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let deltaX = rightEdge - lastRockObstacleXPosition
         
         if (deltaX > GameSetting.DeltaRockObstacle) {
-            let rock: [RockType] = [.Bottom, .Top]
+            let rock: [RockType] = [.bottom, .top]
             var rockType = rock[Int.random(2)]
             
             if rockType == previousRockType {
@@ -628,10 +628,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if countSameRock > 2 {
-                if rockType == .Bottom {
-                    rockType = .Top
+                if rockType == .bottom {
+                    rockType = .top
                 } else {
-                    rockType = .Bottom
+                    rockType = .bottom
                 }
                 countSameRock = 0
                 previousRockType = rockType
@@ -642,10 +642,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             let position: CGPoint
             switch rockType {
-            case .Bottom:
+            case .bottom:
                 position = CGPoint(x: lastRockObstacleXPosition, y: overlapAmount() / 2 - SpriteHight.plane / 2)
 
-            case .Top:
+            case .top:
                 position = CGPoint(x: lastRockObstacleXPosition, y: overlapAmount() / 2 + SpriteHight.frontBackground + SpriteHight.plane * 1.7)
             }
             
@@ -655,7 +655,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: background
     
-    func showBackground(backgroundType: BackgroundType) {
+    func showBackground(_ backgroundType: BackgroundType) {
         let background1 = backgroundNode(backgroundType)
         background1.anchorPoint = CGPoint.zero
         background1.position = CGPoint.zero
@@ -691,69 +691,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: HUD
     
     func showPause() {
-        pauseNode.hidden = false
+        pauseNode.isHidden = false
     }
     
     func hidePause() {
-        pauseNode.hidden = true
+        pauseNode.isHidden = true
     }
     
     func showOverlay() {
-        overlayNode.hidden = false
+        overlayNode.isHidden = false
     }
     
     func hideOverlay() {
-        overlayNode.hidden = true
+        overlayNode.isHidden = true
     }
     
     func showGameOver() {
-        userInteractionEnabled = false
+        isUserInteractionEnabled = false
         
         gameOverNode.position = convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: displaySize.height / 2))
-        gameOverNode.hidden = false
+        gameOverNode.isHidden = false
         
         let action = SKAction.sequence([
-            SKAction.moveTo(convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: 0)), duration: 0.3),
-            SKAction.runBlock( { self.userInteractionEnabled = true } )
+            SKAction.move(to: convertPositionInCameraNodeFromScene(CGPoint(x: 0, y: 0)), duration: 0.3),
+            SKAction.run( { self.isUserInteractionEnabled = true } )
             ])
-        gameOverNode.runAction(action)
+        gameOverNode.run(action)
     }
     
     func hideGameOver() {
         gameOverNode.removeAllActions()
-        gameOverNode.hidden = true
+        gameOverNode.isHidden = true
     }
     
     func showReadyHud() {
-        readyNode.hidden = false
+        readyNode.isHidden = false
     }
     
     func hideReadyHud() {
-        readyNode.hidden = true
+        readyNode.isHidden = true
     }
     
-    private func showMedal(rank: Rank) {
+    fileprivate func showMedal(_ rank: Rank) {
         if let sprite = medalNodes[rank] {
             sprite.alpha = 0.9
             sprite.position = convertPositionInCameraNodeFromScene(CGPoint.zero)
-            sprite.hidden = false
+            sprite.isHidden = false
             
-            sprite.runAction(SKAction.group([
-                SKAction.rotateByAngle(CGFloat(360).degreesToRadians() * 2, duration: 2),
-                SKAction.scaleTo(2.0, duration: 2)
+            sprite.run(SKAction.group([
+                SKAction.rotate(byAngle: CGFloat(360).degreesToRadians() * 2, duration: 2),
+                SKAction.scale(to: 2.0, duration: 2)
                 ]))
         }
     }
     
-    private func hideMedal() {
-        medalNodes[Rank.Gold]?.removeAllActions()
-        medalNodes[Rank.Gold]?.hidden = true
+    fileprivate func hideMedal() {
+        medalNodes[Rank.gold]?.removeAllActions()
+        medalNodes[Rank.gold]?.isHidden = true
         
-        medalNodes[Rank.Silver]?.removeAllActions()
-        medalNodes[Rank.Silver]?.hidden = true
+        medalNodes[Rank.silver]?.removeAllActions()
+        medalNodes[Rank.silver]?.isHidden = true
         
-        medalNodes[Rank.Bronze]?.removeAllActions()
-        medalNodes[Rank.Bronze]?.hidden = true
+        medalNodes[Rank.bronze]?.removeAllActions()
+        medalNodes[Rank.bronze]?.isHidden = true
     }
 
     // MARK: 
@@ -797,7 +797,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    private func updateGameStatistics(planeType: PlaneType, medalType: Rank) {
+    fileprivate func updateGameStatistics(_ planeType: PlaneType, medalType: Rank) {
         GameStatistics.flightCount.increaseCountByOne()
         
         switch planeType {
@@ -812,18 +812,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         switch medalType {
-        case .Gold:
+        case .gold:
             GameStatistics.goldMedalCount.increaseCountByOne()
-        case .Silver:
+        case .silver:
             GameStatistics.silverMedalCount.increaseCountByOne()
-        case .Bronze:
+        case .bronze:
             GameStatistics.bronzeMedalCount.increaseCountByOne()
-        case .None:
+        case .none:
             break
         }
     }
     
-    private func reportToGameCenter(planeType: PlaneType, medalType: Rank, score: Int) {
+    fileprivate func reportToGameCenter(_ planeType: PlaneType, medalType: Rank, score: Int) {
         let achievements = AchievementHelper.sharedInstance.createAchievements(planeType, medalType: medalType)
         GameKitHelper.sharedInstance.reportAchievements(achievements)
         
@@ -835,7 +835,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let topThreeRecord = TopThreeRecords()
         let rank = topThreeRecord.getRankOfPoint(score)
         
-        if rank != .None {
+        if rank != .none {
             showMedal(rank)
 
             topThreeRecord.checkAndReplacePoint(planeEntity.planeType.rawValue, point: score)
@@ -850,23 +850,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: Camera
 
     /*
-     * SKScene's camera has a bug
+     * Fixed: SKScene's camera has a bug
      */
     func getCameraPosition() -> CGPoint {
-        return CGPoint(x: cameraNode.position.x, y: cameraNode.position.y + overlapAmount() / 2)
+         return cameraNode.position
+        //        return CGPoint(x: cameraNode.position.x, y: cameraNode.position.y + overlapAmount() / 2)
     }
     
-    func setCameraPosition(position: CGPoint) {
-        cameraNode.position = CGPoint(x: position.x, y: position.y - overlapAmount() / 2)
+    func setCameraPosition(_ position: CGPoint) {
+        //cameraNode.position = CGPoint(x: position.x, y: position.y - overlapAmount() / 2)
+        cameraNode.position = position
         
         visibleArea = CGRect(origin: CGPoint(x: cameraNode.position.x - displaySize.width / 2, y: cameraNode.position.y - displaySize.height / 2), size: displaySize)
     }
     
-    func convertPositionInCameraNodeFromScene(position: CGPoint) -> CGPoint {
-        return CGPoint(x: position.x, y: position.y + overlapAmount() / 2)
+    func convertPositionInCameraNodeFromScene(_ position: CGPoint) -> CGPoint {
+        //return CGPoint(x: position.x, y: position.y + overlapAmount() / 2)
+        return position
     }
     
-    private func updateCameraNode() {
+    fileprivate func updateCameraNode() {
         let planeNode = planeEntity.spriteComponent.node
         setCameraPosition(CGPoint(x: planeNode.position.x, y: size.height / 2))
     }
@@ -887,8 +890,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK:
     
-    func changeGameState(stateClass: AnyClass) {
-        gameState.enterState(stateClass)
+    func changeGameState(_ stateClass: AnyClass) {
+        gameState.enter(stateClass)
         
         // for tvOS
         let scene = (self as SKScene)
@@ -898,15 +901,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func pausePlay() {
-        backgroundLayer.paused = true
-        spriteLayer.paused = true
+        backgroundLayer.isPaused = true
+        spriteLayer.isPaused = true
         planeEntity.pause()
         physicsWorld.speed = 0.0
     }
     
     func resumePlay() {
-        backgroundLayer.paused = false
-        spriteLayer.paused = false
+        backgroundLayer.isPaused = false
+        spriteLayer.isPaused = false
         planeEntity.resume()
         physicsWorld.speed = 1.0
     }

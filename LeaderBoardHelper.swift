@@ -16,7 +16,7 @@ enum LeaderBoard: String {
     case GreenPlaneHighScore
     
     var gkScore: GKScore {
-        let bundleId = NSBundle.mainBundle().bundleIdentifier!
+        let bundleId = Bundle.main.bundleIdentifier!
         return GKScore(leaderboardIdentifier: "\(bundleId).\(self.rawValue)")
     }
 }
@@ -24,11 +24,11 @@ enum LeaderBoard: String {
 class LeaderBoardHelper {
     static let sharedInstance = LeaderBoardHelper()
     
-    private init() {
+    fileprivate init() {
         // for singleton pattern
     }
     
-    func createScore(planeType: PlaneType, score: Int) -> GKScore {
+    func createScore(_ planeType: PlaneType, score: Int) -> GKScore {
         var gkScore: GKScore!
         
         switch planeType {

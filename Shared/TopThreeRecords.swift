@@ -9,20 +9,20 @@
 import Foundation
 
 enum Rank: Int {
-    case Gold      = 3
-    case Silver    = 2
-    case Bronze    = 1
-    case None      = 0
+    case gold      = 3
+    case silver    = 2
+    case bronze    = 1
+    case none      = 0
     
     var imageFileName: String? {
         switch self {
-        case .Gold:
+        case .gold:
             return "gold"
-        case .Silver:
+        case .silver:
             return "silver"
-        case .Bronze:
+        case .bronze:
             return "bronze"
-        case .None:
+        case .none:
             return nil
         }
     }
@@ -33,8 +33,8 @@ class RecordItem: NSObject, NSCoding {
     var point: Int
 
     required init?(coder aDecoder: NSCoder) {
-        planeType = aDecoder.decodeObjectForKey("planeType") as! String
-        point = aDecoder.decodeIntegerForKey("point")
+        planeType = aDecoder.decodeObject(forKey: "planeType") as! String
+        point = aDecoder.decodeInteger(forKey: "point")
         
         super.init()
     }
@@ -46,9 +46,9 @@ class RecordItem: NSObject, NSCoding {
         super.init()
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(planeType, forKey: "planeType")
-        aCoder.encodeInteger(point, forKey: "point")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(planeType, forKey: "planeType")
+        aCoder.encode(point, forKey: "point")
     }
 }
 
@@ -59,22 +59,22 @@ class TopThreeRecords {
         load()
     }
     
-    private func dataFilePath() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    fileprivate func dataFilePath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         
-        return (paths[0] as NSString).stringByAppendingPathComponent(GameSetting.TopThreeRecordFileName)
+        return (paths[0] as NSString).appendingPathComponent(GameSetting.TopThreeRecordFileName)
     }
     
-    private func loadForIOS() {
+    fileprivate func loadForIOS() {
         let path = dataFilePath()
         
-        if NSFileManager.defaultManager().fileExistsAtPath(path) {
-            if let data = NSData(contentsOfFile: path) {
-                let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-                topThreeRecords = unarchiver.decodeObjectForKey("TopThreeRecords") as! [RecordItem]
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+                topThreeRecords = unarchiver.decodeObject(forKey: "TopThreeRecords") as! [RecordItem]
                 unarchiver.finishDecoding()
                 
-                topThreeRecords.sortInPlace() {
+                topThreeRecords.sort() {
                     $0.point > $1.point
                 }
             }
@@ -85,30 +85,30 @@ class TopThreeRecords {
                 topThreeRecords.append(item)
             }
             
-            topThreeRecords.sortInPlace() {
+            topThreeRecords.sort() {
                 $0.point > $1.point
             }
             saveForIOS()
         }
     }
     
-    private func saveForIOS() {
+    fileprivate func saveForIOS() {
         let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeObject(topThreeRecords, forKey: "TopThreeRecords")
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        archiver.encode(topThreeRecords, forKey: "TopThreeRecords")
         archiver.finishEncoding()
-        data.writeToFile(dataFilePath(), atomically: true)
+        data.write(toFile: dataFilePath(), atomically: true)
     }
     
-    private func loadForTvOS() {
-        let userDefault = NSUserDefaults.standardUserDefaults()
+    fileprivate func loadForTvOS() {
+        let userDefault = UserDefaults.standard
         let keyStrings = ["goldMedal", "silverMedal", "bronzeMedal"]
         let defaultPoints = [30, 20, 10]
         
-        if let _ = userDefault.stringForKey("goldMedalPlane") {
-            for (index, keyString) in keyStrings.enumerate() {
-                if let planeType = userDefault.stringForKey("\(keyString)Plane") {
-                    let point = userDefault.integerForKey("\(keyString)Point")
+        if let _ = userDefault.string(forKey: "goldMedalPlane") {
+            for (index, keyString) in keyStrings.enumerated() {
+                if let planeType = userDefault.string(forKey: "\(keyString)Plane") {
+                    let point = userDefault.integer(forKey: "\(keyString)Point")
                     let item = RecordItem(planeType: planeType, point: point)
                     
                     topThreeRecords.append(item)
@@ -119,7 +119,7 @@ class TopThreeRecords {
                 }
             }
             
-            topThreeRecords.sortInPlace() {
+            topThreeRecords.sort() {
                 $0.point > $1.point
             }
         } else {
@@ -129,24 +129,24 @@ class TopThreeRecords {
                 topThreeRecords.append(item)
             }
             
-            topThreeRecords.sortInPlace() {
+            topThreeRecords.sort() {
                 $0.point > $1.point
             }
             saveForTvOS()
         }
     }
     
-    private func saveForTvOS() {
-        let userDefault = NSUserDefaults.standardUserDefaults()
+    fileprivate func saveForTvOS() {
+        let userDefault = UserDefaults.standard
         let keyStrings = ["goldMedal", "silverMedal", "bronzeMedal"]
 
-        for (index, keyString) in keyStrings.enumerate() {
-            userDefault.setObject(topThreeRecords[index].planeType, forKey: "\(keyString)Plane")
-            userDefault.setInteger(topThreeRecords[index].point, forKey: "\(keyString)Point")
+        for (index, keyString) in keyStrings.enumerated() {
+            userDefault.set(topThreeRecords[index].planeType, forKey: "\(keyString)Plane")
+            userDefault.set(topThreeRecords[index].point, forKey: "\(keyString)Point")
         }
     }
     
-    private func load() {
+    fileprivate func load() {
         #if os(iOS)
             loadForIOS()
         #elseif os(tvOS)
@@ -154,7 +154,7 @@ class TopThreeRecords {
         #endif
     }
     
-    private func save() {
+    fileprivate func save() {
         #if os(iOS)
             saveForIOS()
         #elseif os(tvOS)
@@ -162,8 +162,8 @@ class TopThreeRecords {
         #endif
     }
 
-    func getRankOfPoint(point: Int) -> Rank {
-        var result: Rank = .Gold
+    func getRankOfPoint(_ point: Int) -> Rank {
+        var result: Rank = .gold
         
         for record in topThreeRecords {
             if record.point >= point {
@@ -174,10 +174,10 @@ class TopThreeRecords {
         return result
     }
     
-    func checkAndReplacePoint(planeType: String, point: Int) {
+    func checkAndReplacePoint(_ planeType: String, point: Int) {
         let item = RecordItem(planeType: planeType, point: point)
         topThreeRecords.append(item)
-        topThreeRecords.sortInPlace() {
+        topThreeRecords.sort() {
             $0.point > $1.point
         }
         

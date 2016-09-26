@@ -18,8 +18,8 @@ class FailGame: GKState {
         super.init()
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
-        scene.planeState.enterState(Crash.self)
+    override func didEnter(from previousState: GKState?) {
+        scene.planeState.enter(Crash.self)
         
         scene.checkGameScore()
         
@@ -27,7 +27,7 @@ class FailGame: GKState {
         scene.playGameOverMusic()
     }
     
-    override func willExitWithNextState(nextState: GKState) {
+    override func willExit(to nextState: GKState) {
         scene.hideGameOver()
     }
 }

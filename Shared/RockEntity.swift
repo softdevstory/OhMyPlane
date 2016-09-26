@@ -10,11 +10,11 @@ import SpriteKit
 import GameplayKit
 
 enum RockType: Int {
-    case Top        = 0
-    case Bottom
+    case top        = 0
+    case bottom
     
     static var all: [RockType] {
-        return [.Top, .Bottom]
+        return [.top, .bottom]
     }
 }
 
@@ -25,41 +25,41 @@ class RockEntityTexture {
 
     class func loadAllTextures() {
         for type in BackgroundType.allTypes {
-            getTexture(.Top, backgroundType: type)
-            getTexture(.Bottom, backgroundType: type)
+            getTexture(.top, backgroundType: type)
+            getTexture(.bottom, backgroundType: type)
         }
 
-        getPhysicsTexture(.Top)
-        getPhysicsTexture(.Bottom)
+        getPhysicsTexture(.top)
+        getPhysicsTexture(.bottom)
     }
     
-    class func getTexture(rockType: RockType, backgroundType: BackgroundType) -> SKTexture {
+    class func getTexture(_ rockType: RockType, backgroundType: BackgroundType) -> SKTexture {
         switch rockType {
-        case .Top:
+        case .top:
             return getTopTexture(backgroundType)
             
-        case .Bottom:
+        case .bottom:
             return getBottomTexture(backgroundType)
         }
     }
     
-    class func getPhysicsTexture(rockType: RockType) -> SKTexture {
+    class func getPhysicsTexture(_ rockType: RockType) -> SKTexture {
         if let texture = physicsTextures[rockType] {
             return texture
         }
         
         switch rockType {
-        case .Top:
-            physicsTextures[.Top] = SKTexture(imageNamed: "obstacle_top_physics")
+        case .top:
+            physicsTextures[.top] = SKTexture(imageNamed: "obstacle_top_physics")
             
-        case .Bottom:
-            physicsTextures[.Bottom] = SKTexture(imageNamed: "obstacle_bottom_physics")
+        case .bottom:
+            physicsTextures[.bottom] = SKTexture(imageNamed: "obstacle_bottom_physics")
         }
         
         return physicsTextures[rockType]!
     }
 
-    private class func getTopTexture(backgroundType: BackgroundType) -> SKTexture {
+    fileprivate class func getTopTexture(_ backgroundType: BackgroundType) -> SKTexture {
         if let texture = topTextures[backgroundType.rawValue] {
             return texture
         }
@@ -72,7 +72,7 @@ class RockEntityTexture {
         return texture
     }
     
-    private class func getBottomTexture(backgroundType: BackgroundType) -> SKTexture {
+    fileprivate class func getBottomTexture(_ backgroundType: BackgroundType) -> SKTexture {
         if let texture = bottomTextures[backgroundType.rawValue] {
             return texture
         }
@@ -111,12 +111,16 @@ class RockEntity: GKEntity {
         
         reset(backgroundType, rockType: rockType, atPosition: position)
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    private func initializeRockPhysicsBody() {
+    fileprivate func initializeRockPhysicsBody() {
         for rockType in RockType.all {
             let physicsBodyTexture = RockEntityTexture.getPhysicsTexture(rockType)
             let physicsBody = SKPhysicsBody(texture: physicsBodyTexture, size: physicsBodyTexture.size())
-            physicsBody.dynamic = false
+            physicsBody.isDynamic = false
             physicsBody.categoryBitMask = PhysicsCategory.Obstacle
             physicsBody.collisionBitMask = PhysicsCategory.Plane
             physicsBody.contactTestBitMask = PhysicsCategory.Plane
@@ -125,7 +129,7 @@ class RockEntity: GKEntity {
         }
     }
     
-    func reset(backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) {
+    func reset(_ backgroundType: BackgroundType, rockType: RockType, atPosition position: CGPoint) {
         let sprite = spriteComponent.node as SKSpriteNode
         
         sprite.zPosition = SpriteZPosition.RockObstacle

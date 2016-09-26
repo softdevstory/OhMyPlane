@@ -17,15 +17,15 @@ class ReadyGame: GKState {
         super.init()
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         scene.ready()
     }
     
-    override func willExitWithNextState(nextState: GKState) {
+    override func willExit(to nextState: GKState) {
         scene.hideReadyHud()
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
+    override func update(deltaTime seconds: TimeInterval) {
         scene.updateBackground()
     }
 }

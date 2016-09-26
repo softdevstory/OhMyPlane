@@ -45,7 +45,7 @@ class CreditScene: SKScene {
     
     var creditLabels: [SKLabelNode] = []
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         addChild(backgroundLayer)
         addChild(creditLayer)
         
@@ -60,7 +60,7 @@ class CreditScene: SKScene {
             scene.setupTVControls()
         }
         
-        creditLayer.runAction(SKAction.sequence([SKAction.waitForDuration(0.5), SKAction.runBlock() {
+        creditLayer.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.run() {
             self.loadCreditLabels()
             self.positionCreditLabels()
             } ]))
@@ -77,7 +77,7 @@ class CreditScene: SKScene {
     func doBack() {
         let scene = MainScene(size: GameSetting.SceneSize)
         scene.scaleMode = (self.scene?.scaleMode)!
-        let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
+        let transition = SKTransition.push(with: .up, duration: 0.6)
         view!.presentScene(scene, transition: transition)
         
         backSprite.texture = backTextures[0]
@@ -85,7 +85,7 @@ class CreditScene: SKScene {
         backPressed = false
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
         if let scene = scene as? TVControlsScene {
@@ -94,21 +94,21 @@ class CreditScene: SKScene {
         }
         
         let touch = touches.first
-        let location = touch?.locationInNode(backgroundLayer)
-        let node = backgroundLayer.nodeAtPoint(location!)
+        let location = touch?.location(in: backgroundLayer)
+        let node = backgroundLayer.atPoint(location!)
         
         if node == backSprite {
             touchDownBack()
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if backPressed {
             doBack()
         }
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if backPressed {
             backSprite.texture = backTextures[0]
             backSprite.size = (backSprite.texture?.size())!
@@ -166,18 +166,18 @@ class CreditScene: SKScene {
             position.y -= label.fontSize
         }
         
-        creditLayer.runAction(SKAction.moveBy(CGVectorMake(0, -position.y * 2 + overlapAmount()), duration: 32.0)) {
+        creditLayer.run(SKAction.move(by: CGVector(dx: 0, dy: -position.y * 2 + overlapAmount()), duration: 32.0), completion: {
             let achievement = AchievementHelper.sharedInstance.creditWatchAchievement()
             
             GameKitHelper.sharedInstance.reportAchievements([achievement])
-        }
+        }) 
     }
     
     func loadCreditLabels() {
         
         let title = SKLabelNode(fontNamed: "KenVector Future")
         title.text = "CREDIT"
-        title.fontColor = SKColor.redColor()
+        title.fontColor = SKColor.red
         title.fontSize = 200
         title.zPosition = SpriteZPosition.Overlay
 
@@ -187,7 +187,7 @@ class CreditScene: SKScene {
         for string in creditContent {
             let label = SKLabelNode(text: string)
             label.fontName = "AppleSDGothicNeo-Bold"
-            label.fontColor = SKColor.blueColor()
+            label.fontColor = SKColor.blue
             label.fontSize = 50
             label.zPosition = SpriteZPosition.Overlay
             

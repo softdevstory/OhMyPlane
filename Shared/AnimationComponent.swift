@@ -24,7 +24,7 @@ class AnimationComponent: GKComponent {
     
     var animations: [AnimationState: Animation]
     
-    private var currentAnimation: Animation?
+    fileprivate var currentAnimation: Animation?
     
     var requestedAnimationState: AnimationState?
     
@@ -34,8 +34,12 @@ class AnimationComponent: GKComponent {
         
         super.init()
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    private func runAnimationForAnimationState(animationState: AnimationState) {
+    fileprivate func runAnimationForAnimationState(_ animationState: AnimationState) {
         
         guard let animation = animations[animationState] else {
             print("Unknown animation for state \(animationState.rawValue)")
@@ -48,26 +52,26 @@ class AnimationComponent: GKComponent {
         }
 
         let actionKey = "Animation"
-        let timePerFrame = NSTimeInterval(1.0 / 30)
+        let timePerFrame = TimeInterval(1.0 / 30)
         
-        node.removeActionForKey(actionKey)
+        node.removeAction(forKey: actionKey)
         
         let texturesAction: SKAction
         if animation.repeatTexturesForever {
-            texturesAction = SKAction.repeatActionForever(
-                SKAction.animateWithTextures(animation.textures, timePerFrame: timePerFrame))
+            texturesAction = SKAction.repeatForever(
+                SKAction.animate(with: animation.textures, timePerFrame: timePerFrame))
         } else {
-            texturesAction = SKAction.animateWithTextures(animation.textures, timePerFrame: timePerFrame)
+            texturesAction = SKAction.animate(with: animation.textures, timePerFrame: timePerFrame)
         }
-        node.runAction(texturesAction, withKey: actionKey)
+        node.run(texturesAction, withKey: actionKey)
         
         currentAnimation = animation
     }
     
-    class func animationFromAtlas(atlasTexture: SKTextureAtlas, withImageIdentifier identifier: String, forAnimationState animationState: AnimationState, repeatTexturesForever: Bool) -> Animation {
+    class func animationFromAtlas(_ atlasTexture: SKTextureAtlas, withImageIdentifier identifier: String, forAnimationState animationState: AnimationState, repeatTexturesForever: Bool) -> Animation {
         let textures = atlasTexture.textureNames.filter {
             $0.hasPrefix("\(identifier)")
-            }.sort {
+            }.sorted {
                 $0 < $1
             }.map {
                 atlasTexture.textureNamed($0)
@@ -76,8 +80,8 @@ class AnimationComponent: GKComponent {
         return Animation(animationState: animationState, textures: textures, repeatTexturesForever: repeatTexturesForever)
     }
     
-    override func updateWithDeltaTime(seconds: NSTimeInterval) {
-        super.updateWithDeltaTime(seconds)
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
         
         if let animationState = requestedAnimationState {
             runAnimationForAnimationState(animationState)

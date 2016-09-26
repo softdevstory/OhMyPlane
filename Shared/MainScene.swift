@@ -75,7 +75,7 @@ class MainScene: SKScene {
     
     // MARK: Scene's job
 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
         addChild(backgroundLayer)
 
@@ -100,7 +100,7 @@ class MainScene: SKScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
         if let _ = scene as? TVControlsScene {
@@ -108,8 +108,8 @@ class MainScene: SKScene {
         }
         
         let touch = touches.first
-        let location = touch?.locationInNode(backgroundLayer)
-        let node = backgroundLayer.nodeAtPoint(location!)
+        let location = touch?.location(in: backgroundLayer)
+        let node = backgroundLayer.atPoint(location!)
         
         if node == startSprite {
             touchDownStart()
@@ -124,7 +124,7 @@ class MainScene: SKScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
         if let _ = scene as? TVControlsScene {
@@ -132,28 +132,28 @@ class MainScene: SKScene {
         }
 
         if startPressed {
-            let transition = SKTransition.fadeWithDuration(0.6)
+            let transition = SKTransition.fade(withDuration: 0.6)
             view!.presentScene(gameScene, transition: transition)
             
             touchUpStart()
         }
         
         if setupPressed {
-            let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
+            let transition = SKTransition.push(with: .down, duration: 0.6)
             view!.presentScene(creditScene, transition: transition)
 
             touchUpSetup()
         }
         
         if topRecordsPressed {
-            let transition = SKTransition.pushWithDirection(.Up, duration: 0.6)
+            let transition = SKTransition.push(with: .up, duration: 0.6)
             view!.presentScene(topRecordsScene, transition: transition)
 
             touchUpTopRecord()
         }
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if startPressed {
             touchUpStart()
         }

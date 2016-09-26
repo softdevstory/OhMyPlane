@@ -20,11 +20,11 @@ enum GameStatistics: String {
     case flightCount
     
     func getValue() -> Int {
-        return NSUserDefaults.standardUserDefaults().integerForKey(self.rawValue)
+        return UserDefaults.standard.integer(forKey: self.rawValue)
     }
     
-    private func setValue(value: Int) {
-        NSUserDefaults.standardUserDefaults().setInteger(value, forKey: self.rawValue)
+    fileprivate func setValue(_ value: Int) {
+        UserDefaults.standard.set(value, forKey: self.rawValue)
     }
     
     func increaseCountByOne() {

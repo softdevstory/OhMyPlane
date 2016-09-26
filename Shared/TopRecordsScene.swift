@@ -23,7 +23,7 @@ class TopRecordsScene: SKScene {
     
     var topThreeRecords = TopThreeRecords()
 
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         addChild(backgroundLayer)
 
         loadBackground()
@@ -108,7 +108,7 @@ class TopRecordsScene: SKScene {
     }
     
     func showGameCenterViewController() {
-        NSNotificationCenter.defaultCenter().postNotificationName(PresentGameCenterViewController, object: self)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: PresentGameCenterViewController), object: self)
         
         gameCenterSprite.texture = gameCenterTextures[0]
         gameCenterSprite.size = (gameCenterSprite.texture?.size())!
@@ -119,7 +119,7 @@ class TopRecordsScene: SKScene {
         
         let scene = MainScene(size: GameSetting.SceneSize)
         scene.scaleMode = (self.scene?.scaleMode)!
-        let transition = SKTransition.pushWithDirection(.Down, duration: 0.6)
+        let transition = SKTransition.push(with: .down, duration: 0.6)
         view!.presentScene(scene, transition: transition)
         
         backSprite.texture = backTextures[0]
@@ -127,7 +127,7 @@ class TopRecordsScene: SKScene {
         backPressed = false
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for tvOS
         let scene = (self as SKScene)
         if let scene = scene as? TVControlsScene {
@@ -136,8 +136,8 @@ class TopRecordsScene: SKScene {
         }
         
         let touch = touches.first
-        let location = touch?.locationInNode(backgroundLayer)
-        let node = backgroundLayer.nodeAtPoint(location!)
+        let location = touch?.location(in: backgroundLayer)
+        let node = backgroundLayer.atPoint(location!)
         
         if node == backSprite {
             touchDownBack()
@@ -146,7 +146,7 @@ class TopRecordsScene: SKScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if backPressed {
             doBack()
         }
@@ -156,7 +156,7 @@ class TopRecordsScene: SKScene {
         }
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if backPressed {
             backSprite.texture = backTextures[0]
             backSprite.size = (backSprite.texture?.size())!

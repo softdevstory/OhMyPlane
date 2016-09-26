@@ -37,7 +37,7 @@ class PlaneEntity: GKEntity {
         planeNode = spriteComponent.node
         
         planeNode.physicsBody = SKPhysicsBody(circleOfRadius: planeNode.size.height / 2.0)
-        planeNode.physicsBody?.dynamic = false
+        planeNode.physicsBody?.isDynamic = false
         planeNode.physicsBody?.allowsRotation = false
         planeNode.physicsBody?.categoryBitMask = PhysicsCategory.Plane
         planeNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle
@@ -49,8 +49,12 @@ class PlaneEntity: GKEntity {
         movementComponent = PlaneMovementComponent(node: planeNode)
         addComponent(movementComponent)
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    private func loadAnimations() -> [AnimationState: Animation] {
+    fileprivate func loadAnimations() -> [AnimationState: Animation] {
         let textureAtlas = SKTextureAtlas(named: "plane")
         var animations = [AnimationState: Animation]()
 
@@ -62,11 +66,11 @@ class PlaneEntity: GKEntity {
     // MARK:
     
     func enableFalling() {
-        planeNode.physicsBody?.dynamic = true
+        planeNode.physicsBody?.isDynamic = true
     }
     
     func disableFalling() {
-        planeNode.physicsBody?.dynamic = false
+        planeNode.physicsBody?.isDynamic = false
     }
     
     func showSmoke() {
@@ -85,19 +89,19 @@ class PlaneEntity: GKEntity {
     }
     
     func fly() {
-        planeNode.removeActionForKey("fly")
-        planeNode.runAction(SKAction.repeatActionForever(SKAction.moveByX(planeType.speed, y: 0, duration: 0.1)), withKey: "fly")
+        planeNode.removeAction(forKey: "fly")
+        planeNode.run(SKAction.repeatForever(SKAction.moveBy(x: planeType.speed, y: 0, duration: 0.1)), withKey: "fly")
     }
     
     func stopFlying() {
-        planeNode.removeActionForKey("fly")
+        planeNode.removeAction(forKey: "fly")
     }
 
     func impulse() {
         planeNode.physicsBody?.velocity = CGVector.zero
         planeNode.physicsBody?.applyImpulse(planeType.boostValue)
         
-        planeNode.runAction(SKAction.playSoundFileNamed("Clank.mp3", waitForCompletion: false))
+        planeNode.run(SKAction.playSoundFileNamed("Clank.mp3", waitForCompletion: false))
     }
     
     func explosion() {
@@ -120,30 +124,30 @@ class PlaneEntity: GKEntity {
         emitter.particleScale = 1.2
         emitter.particleScaleRange = 2.0
         emitter.particleScaleSpeed = -1.5
-        emitter.particleColor = SKColor.orangeColor()
+        emitter.particleColor = SKColor.orange
         emitter.particleColorBlendFactor = 1
-        emitter.particleBlendMode = SKBlendMode.Add
+        emitter.particleBlendMode = SKBlendMode.add
         emitter.yAcceleration = -2000.0
-        emitter.runAction(SKAction.sequence([SKAction.waitForDuration(2.0), SKAction.removeFromParent()]))
+        emitter.run(SKAction.sequence([SKAction.wait(forDuration: 2.0), SKAction.removeFromParent()]))
         
         planeNode.addChild(emitter)
         
-        planeNode.runAction(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
+        planeNode.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
     }
     
     func pause() {
         smokeEmitter?.speed = 0.0
-        smokeEmitter?.paused = true
+        smokeEmitter?.isPaused = true
 
         planeNode.speed = 0.0
-        planeNode.paused = true
+        planeNode.isPaused = true
     }
     
     func resume() {
         smokeEmitter?.speed = 1.0
-        smokeEmitter?.paused = false
+        smokeEmitter?.isPaused = false
         
         planeNode.speed = 1.0
-        planeNode.paused = false
+        planeNode.isPaused = false
     }
 }

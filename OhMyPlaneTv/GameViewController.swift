@@ -25,16 +25,16 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         
         skView.presentScene(scene)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: PresentAuthenticationViewController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: NSNotification.Name(rawValue: PresentAuthenticationViewController), object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: PresentGameCenterViewController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: NSNotification.Name(rawValue: PresentGameCenterViewController), object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         GameKitHelper.sharedInstance.authenticateLocalPlayer()
     }
 
@@ -43,42 +43,42 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         let skView = self.view as! SKView
         let scene = skView.scene!
 
         if !(scene is GameScene) {
             for press in presses {
-                if press.type == .Menu {
-                    super.pressesBegan(presses, withEvent: event)
+                if press.type == .menu {
+                    super.pressesBegan(presses, with: event)
                     return
                 }
             }
         }
         
-        scene.pressesBegan(presses, withEvent: event)
+        scene.pressesBegan(presses, with: event)
     }
     
-    override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         let skView = self.view as! SKView
         let scene = skView.scene!
         
         if !(scene is GameScene) {
             for press in presses {
-                if press.type == .Menu {
-                    super.pressesEnded(presses, withEvent: event)
+                if press.type == .menu {
+                    super.pressesEnded(presses, with: event)
                     return
                 }
             }
         }
 
-        scene.pressesEnded(presses, withEvent: event)
+        scene.pressesEnded(presses, with: event)
     }
     
     func showAuthenticationViewController() {
         let gameKitHelper = GameKitHelper.sharedInstance
         if let authenticationViewController = gameKitHelper.authenticationViewController {
-            presentViewController(authenticationViewController, animated: true, completion: nil)
+            present(authenticationViewController, animated: true, completion: nil)
         }
     }
     

@@ -18,7 +18,7 @@ class Normal: GKState {
         super.init()
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         /* physics dynamic false, flying, no smoke */
         planeEntity.disableFalling()
         planeEntity.fly()

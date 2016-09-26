@@ -26,23 +26,23 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .aspectFill
         
         skView.presentScene(scene)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: PresentAuthenticationViewController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.showAuthenticationViewController), name: NSNotification.Name(rawValue: PresentAuthenticationViewController), object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: PresentGameCenterViewController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.showGameCenterViewController), name: NSNotification.Name(rawValue: PresentGameCenterViewController), object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         GameKitHelper.sharedInstance.authenticateLocalPlayer()
     }
     
     func showAuthenticationViewController() {
         let gameKitHelper = GameKitHelper.sharedInstance
         if let authenticationViewController = gameKitHelper.authenticationViewController {
-            presentViewController(authenticationViewController, animated: true, completion: nil)
+            present(authenticationViewController, animated: true, completion: nil)
         }
     }
     
@@ -51,18 +51,18 @@ class GameViewController: UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
         } else {
-            return .All
+            return .all
         }
     }
 
@@ -71,7 +71,7 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

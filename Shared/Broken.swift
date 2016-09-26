@@ -18,7 +18,7 @@ class Broken: GKState {
         super.init()
     }
     
-    override func didEnterWithPreviousState(previousState: GKState?) {
+    override func didEnter(from previousState: GKState?) {
         /* physics dynamic true, flying, smoke on */
         planeEntity.enableFalling()
         planeEntity.fly()

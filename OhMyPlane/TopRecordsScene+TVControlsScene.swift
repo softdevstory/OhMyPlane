@@ -11,18 +11,18 @@ import SpriteKit
 private var activeNodes: [SKNode] = []
 private var currentNodeIndex = 0
 
-private let fadeOut = SKAction.fadeAlphaTo(0.5, duration: 0.5)
-private let fadeIn = SKAction.fadeAlphaTo(1.0, duration: 0.5)
+private let fadeOut = SKAction.fadeAlpha(to: 0.5, duration: 0.5)
+private let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
 
 extension TopRecordsScene: TVControlsScene {
     func setupTVControls() {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(MainScene.didSwipeOnRemote(_:)))
-        swipeLeft.direction = .Left
+        swipeLeft.direction = .left
         swipeLeft.delaysTouchesBegan = true
         view!.addGestureRecognizer(swipeLeft)
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(MainScene.didSwipeOnRemote(_:)))
-        swipeRight.direction = .Right
+        swipeRight.direction = .right
         swipeRight.delaysTouchesBegan = true
         view!.addGestureRecognizer(swipeRight)
         
@@ -42,9 +42,9 @@ extension TopRecordsScene: TVControlsScene {
         // nothing to do 
     }
     
-    func didSwipeOnRemote(swipe: UISwipeGestureRecognizer) {
+    func didSwipeOnRemote(_ swipe: UISwipeGestureRecognizer) {
         var newIndexToSelect = currentNodeIndex
-        if swipe.direction == .Right {
+        if swipe.direction == .right {
             newIndexToSelect += 1
         } else {
             newIndexToSelect -= 1
@@ -59,8 +59,8 @@ extension TopRecordsScene: TVControlsScene {
         selectNodeAtIndex(newIndexToSelect)
     }
     
-    func selectNodeAtIndex(index: Int) {
-        activeNodes[index].runAction(SKAction.repeatActionForever(SKAction.sequence([fadeOut, fadeIn])))
+    func selectNodeAtIndex(_ index: Int) {
+        activeNodes[index].run(SKAction.repeatForever(SKAction.sequence([fadeOut, fadeIn])))
         
         if currentNodeIndex < activeNodes.count && index != currentNodeIndex, let node = activeNodes[currentNodeIndex] as? SKSpriteNode {
             node.removeAllActions()
@@ -70,10 +70,10 @@ extension TopRecordsScene: TVControlsScene {
         currentNodeIndex = index
     }
     
-    override func pressesBegan(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
             switch press.type {
-            case .Select:
+            case .select:
                 let node = activeNodes[currentNodeIndex] as! SKSpriteNode
                 
                 switch node {
@@ -85,7 +85,7 @@ extension TopRecordsScene: TVControlsScene {
                     break
                 }
                 
-            case .Menu:
+            case .menu:
                 touchDownBack()
                 
             default:
@@ -94,7 +94,7 @@ extension TopRecordsScene: TVControlsScene {
         }
     }
     
-    override func pressesEnded(presses: Set<UIPress>, withEvent event: UIPressesEvent?) {
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         if backPressed {
             doBack()
         }

@@ -25,12 +25,12 @@ class RockEntityTexture {
 
     class func loadAllTextures() {
         for type in BackgroundType.allTypes {
-            getTexture(.top, backgroundType: type)
-            getTexture(.bottom, backgroundType: type)
+            _ = getTexture(.top, backgroundType: type)
+            _ = getTexture(.bottom, backgroundType: type)
         }
 
-        getPhysicsTexture(.top)
-        getPhysicsTexture(.bottom)
+        _ = getPhysicsTexture(.top)
+        _ = getPhysicsTexture(.bottom)
     }
     
     class func getTexture(_ rockType: RockType, backgroundType: BackgroundType) -> SKTexture {

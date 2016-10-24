@@ -47,14 +47,14 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         let scene = skView.scene!
 
-        if !(scene is GameScene) {
-            for press in presses {
-                if press.type == .menu {
-                    super.pressesBegan(presses, with: event)
-                    return
-                }
-            }
-        }
+//        if !(scene is GameScene) {
+//            for press in presses {
+//                if press.type == .menu {
+//                    super.pressesBegan(presses, with: event)
+//                    return
+//                }
+//            }
+//        }
         
         scene.pressesBegan(presses, with: event)
     }
@@ -63,14 +63,14 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         let scene = skView.scene!
         
-        if !(scene is GameScene) {
-            for press in presses {
-                if press.type == .menu {
-                    super.pressesEnded(presses, with: event)
-                    return
-                }
-            }
-        }
+//        if !(scene is GameScene) {
+//            for press in presses {
+//                if press.type == .menu {
+//                    super.pressesEnded(presses, with: event)
+//                    return
+//                }
+//            }
+//        }
 
         scene.pressesEnded(presses, with: event)
     }
